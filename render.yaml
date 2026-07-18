@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: azizul-hakim-omor-portfolio
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: THYMELEAF_CACHE
+        value: "true"
+

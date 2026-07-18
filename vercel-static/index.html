@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Azizul Hakim Omor — CSE student portfolio for AI, explainable machine learning, IoT, cybersecurity, microwave sensing and software development.">
+    <meta name="theme-color" content="#061523">
+    <title>Azizul Hakim Omor | AI Research & Software Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/style.css" th:href="@{/assets/css/style.css}">
+    <script defer src="/assets/js/app.js" th:src="@{/assets/js/app.js}"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="scroll-progress" aria-hidden="true"><span></span></div>
+<div class="cursor-glow" aria-hidden="true"></div>
+
+<header class="site-header" id="top">
+    <a class="brand" href="#home" aria-label="Azizul Hakim Omor home">
+        <span class="brand-mark">AH</span>
+        <span class="brand-copy"><strong>Azizul Hakim Omor</strong><small>Research · Software · Systems</small></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <a class="header-cv" href="/assets/downloads/Azizul_Hakim_Omor_CV_2026.pdf" target="_blank" rel="noreferrer">CV <span>↗</span></a>
+</header>
+
+<main id="main">
+    <section class="hero" id="home">
+        <canvas id="signal-canvas" aria-hidden="true"></canvas>
+        <div class="hero-grid shell">
+            <div class="hero-copy reveal">
+                <p class="status-line"><span></span> CSE STUDENT · DHAKA, BANGLADESH</p>
+                <h1>Hi, I&apos;m <em>Azizul</em><br>Hakim Omor.</h1>
+                <p class="typing-line">I build <span id="typing-text">reliable AI systems</span><i></i></p>
+                <p class="hero-summary">Exploring explainable machine learning, deep learning, agentic AI, IoT, cybersecurity, microwave sensing and practical software—through evidence, experiments and clean interfaces.</p>
+                <div class="hero-actions">
+                    <a class="button button-primary magnetic" href="#projects">Explore my work <span>↓</span></a>
+                    <a class="button button-ghost magnetic" href="/assets/downloads/Azizul_Hakim_Omor_CV_2026.pdf" target="_blank" rel="noreferrer">Download CV <span>↗</span></a>
+                </div>
+                <div class="social-row" aria-label="Social links">
+                    <a href="https://github.com/AzizulHakim00" target="_blank" rel="noreferrer"><span>GH</span>GitHub</a>
+                    <a href="https://codeforces.com/profile/heythere99" target="_blank" rel="noreferrer"><span>CF</span>Codeforces</a>
+                    <a href="https://www.linkedin.com/in/azizul-hakim-omor-5991b3410/" target="_blank" rel="noreferrer"><span>IN</span>LinkedIn</a>
+                    <a href="mailto:mdomor01815@gmail.com"><span>@</span>Email</a>
+                </div>
+            </div>
+
+            <div class="hero-visual reveal delay-1">
+                <div class="portrait-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="portrait-frame">
+                    <img src="/assets/images/portrait.jpg" alt="Azizul Hakim Omor" width="431" height="574">
+                    <div class="portrait-scan" aria-hidden="true"></div>
+                    <span class="portrait-label">AZIZUL / 2026</span>
+                </div>
+                <div class="hero-note note-one"><small>CORE</small><strong>AI · XAI</strong></div>
+                <div class="hero-note note-two"><small>BUILD</small><strong>JAVA · WEB</strong></div>
+            </div>
+        </div>
+        <div class="hero-marquee" aria-hidden="true">
+            <div>AI / ML <b>✦</b> EXPLAINABLE AI <b>✦</b> AGENTIC SYSTEMS <b>✦</b> IOT <b>✦</b> CYBERSECURITY <b>✦</b> MICROWAVE SENSING <b>✦</b> SOFTWARE DEVELOPMENT <b>✦</b></div>
+        </div>
+    </section>
+
+    <section class="section about" id="about">
+        <div class="shell">
+            <div class="section-heading reveal">
+                <p class="eyebrow"><span>01</span> ABOUT</p>
+                <h2>A student researcher who likes systems that can <em>show their work.</em></h2>
+            </div>
+            <div class="about-layout">
+                <div class="about-story reveal">
+                    <p class="lead">I am a Computer Science and Engineering student at Southeast University, building a foundation across intelligent models, connected applications and software engineering.</p>
+                    <p>My strongest interest is reliable and explainable AI: models that handle missing or shifted data, communicate uncertainty and support conclusions with reproducible evaluation. I also explore IoT, cybersecurity, microwave and metamaterial sensing, Android development and database-backed desktop systems.</p>
+                    <p>This portfolio reports student projects, working papers and research experiments honestly. It contains no tutor, teacher, employment or professional-experience claims—and no CGPA display.</p>
+                    <a class="text-link" href="#research">Read the research map <span>↗</span></a>
+                </div>
+                <div class="about-cards">
+                    <article class="reveal tilt-card"><span>01</span><div><h3>Student developer</h3><p>Java, C/C++, web, Android and database-backed coursework systems.</p></div></article>
+                    <article class="reveal tilt-card"><span>02</span><div><h3>AI research focus</h3><p>ML, DL, XAI, reliability, calibration, GAN, GNN and federated learning.</p></div></article>
+                    <article class="reveal tilt-card"><span>03</span><div><h3>Connected systems</h3><p>IoT, Firebase, cybersecurity, edge intelligence and sensor workflows.</p></div></article>
+                    <article class="reveal tilt-card"><span>04</span><div><h3>Problem solving</h3><p>Data structures, algorithms and competitive programming on Codeforces.</p></div></article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section skills" id="skills">
+        <div class="shell">
+            <div class="section-heading split-heading reveal">
+                <div><p class="eyebrow"><span>02</span> TECHNICAL TOOLKIT</p><h2>Skills organized by the systems they help me <em>build.</em></h2></div>
+                <p>No invented percentage scores—just the technologies currently represented in my study, projects and research archives.</p>
+            </div>
+            <div class="skills-grid">
+                <article class="skill-card reveal" data-accent="cyan">
+                    <div class="skill-icon">01</div><h3>AI, ML & Data</h3>
+                    <p>Machine learning, deep learning, explainable AI, agentic AI, GAN, GNN, federated learning, calibration and robustness.</p>
+                    <div class="skill-tags"><span>Python notebooks</span><span>Transformers</span><span>SHAP / LIME</span><span>Cross-validation</span><span>XAI</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="coral">
+                    <div class="skill-icon">02</div><h3>Programming</h3>
+                    <p>Core programming, algorithms and object-oriented software across classroom and personal projects.</p>
+                    <div class="skill-tags"><span>C</span><span>C++</span><span>Java</span><span>JavaScript</span><span>TypeScript</span><span>SQL</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="violet">
+                    <div class="skill-icon">03</div><h3>Web & Interface</h3>
+                    <p>Responsive front ends, component-based interfaces and full portfolio delivery.</p>
+                    <div class="skill-tags"><span>HTML</span><span>CSS</span><span>React</span><span>Bootstrap</span><span>Tailwind CSS</span><span>Thymeleaf</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="gold">
+                    <div class="skill-icon">04</div><h3>Database & Mobile</h3>
+                    <p>Data-driven desktop and Android applications, authentication and real-time cloud data.</p>
+                    <div class="skill-tags"><span>MySQL</span><span>SQLite</span><span>PostgreSQL</span><span>Firebase</span><span>Android Studio</span><span>JavaFX</span></div>
+                </article>
+                <article class="skill-card reveal security-skill" data-accent="green">
+                    <div class="skill-icon">05</div><h3>Penetration Testing & Cybersecurity</h3>
+                    <p>A core practice developed through authorized labs: reconnaissance, port and service enumeration, vulnerability validation, controlled exploitation, session handling and evidence-based reporting.</p>
+                    <div class="skill-tags"><span>Kali Linux</span><span>Nmap</span><span>Metasploit</span><span>SMB</span><span>Responsible testing</span><span>IoT security</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="blue">
+                    <div class="skill-icon">06</div><h3>RF & Sensing</h3>
+                    <p>Exploration of microwave, antenna, metamaterial and THz sensor simulations with ML interpretation.</p>
+                    <div class="skill-tags"><span>CST</span><span>Microwave</span><span>Antenna</span><span>Metamaterials</span><span>THz sensing</span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section education" id="education">
+        <div class="shell">
+            <div class="section-heading reveal"><p class="eyebrow"><span>03</span> EDUCATION</p><h2>Learning through foundations, projects and <em>research practice.</em></h2></div>
+            <div class="education-timeline">
+                <article class="education-item reveal"><div class="timeline-dot"></div><span class="education-year">2023 — PRESENT</span><div><h3>BSE in Computer Science & Engineering</h3><p>Southeast University · Dhaka, Bangladesh</p></div><small>UNDERGRADUATE</small></article>
+                <article class="education-item reveal"><div class="timeline-dot"></div><span class="education-year">2021</span><div><h3>Higher Secondary Certificate · Science</h3><p>Dhaka City College</p></div><small>COMPLETED</small></article>
+                <article class="education-item reveal"><div class="timeline-dot"></div><span class="education-year">COMPLETED</span><div><h3>Secondary School Certificate · Science</h3><p>Bozra M.L. High School</p></div><small>COMPLETED</small></article>
+            </div>
+            <a class="codeforces-panel reveal" href="https://codeforces.com/profile/heythere99" target="_blank" rel="noreferrer">
+                <span>COMPETITIVE PROGRAMMING</span><div><h3>heythere99</h3><p>Codeforces profile for algorithms and problem-solving practice.</p></div><b>Open profile ↗</b>
+            </a>
+        </div>
+    </section>
+
+    <section class="section projects" id="projects">
+        <div class="shell">
+            <div class="section-heading split-heading reveal">
+                <div><p class="eyebrow"><span>04</span> SELECTED PROJECTS</p><h2>Source-backed work across desktop, mobile and <em>intelligent systems.</em></h2></div>
+                <p>Use the filters to browse. Every card links to a supplied source archive, verified repository or honest coursework note.</p>
+            </div>
+            <div class="project-filters reveal" role="group" aria-label="Filter projects">
+                <button type="button" class="active" data-filter="all">All work</button>
+                <button type="button" data-filter="java">Java / Desktop</button>
+                <button type="button" data-filter="mobile">Android / Firebase</button>
+                <button type="button" data-filter="security">Cybersecurity</button>
+            </div>
+            <aside class="security-callout reveal">
+                <div><span>CORE SECURITY PRACTICE</span><h3>Penetration testing is a highlighted capability.</h3></div>
+                <p>Hands-on learning covers reconnaissance, service enumeration, controlled vulnerability validation, exploitation in authorized lab environments and clear evidence capture. Applied Penetration Testing assessment: <strong>94</strong>.</p>
+            </aside>
+            <div class="projects-grid">
+                <article class="project-card reveal" data-category="security">
+                    <figure class="project-gallery" data-gallery>
+                        <img class="active" src="/assets/images/projects/ice-cybersecurity/01.webp" alt="Metasploit target and port configuration in the ICE security lab">
+                        <img src="/assets/images/projects/ice-cybersecurity/02.webp" alt="Metasploit session output in the ICE security lab" loading="lazy">
+                        <img src="/assets/images/projects/ice-cybersecurity/03.webp" alt="Windows 7 target environment used in the authorized ICE lab" loading="lazy">
+                        <span>SECURITY LAB</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous ICE screenshot">←</button><b>1 / 3</b><button type="button" data-next aria-label="Next ICE screenshot">→</button></div>
+                    </figure>
+                    <div class="project-body"><p class="project-type">CYBERSECURITY · PENETRATION TESTING</p><h3>ICE Penetration-Testing Lab</h3><p>A controlled lab exercise documenting target discovery, SMB service enumeration, MS17-010 checking and exploitation workflow against a Windows 7 test environment. Presented as authorized security practice—not professional client work.</p><ul><li>Kali Linux</li><li>Metasploit</li><li>Nmap</li><li>SMB</li><li>MS17-010</li></ul><div class="project-links"><a href="/assets/downloads/ICE_Penetration_Testing_Lab_Report.pdf" target="_blank" rel="noreferrer">Open lab report ↗</a></div></div>
+                </article>
+                <article class="project-card reveal" data-category="java">
+                    <figure class="project-gallery" data-gallery>
+                        <img class="active" src="/assets/images/projects/assignment-hire/01.webp" alt="Assignment Writer Hire student registration screen">
+                        <img src="/assets/images/projects/assignment-hire/02.webp" alt="Assignment Writer Hire sign-in screen" loading="lazy"><img src="/assets/images/projects/assignment-hire/03.webp" alt="Assignment Writer Hire student dashboard" loading="lazy"><img src="/assets/images/projects/assignment-hire/04.webp" alt="Assignment Writer Hire request form" loading="lazy"><img src="/assets/images/projects/assignment-hire/05.webp" alt="Assignment Writer Hire writer-selection screen" loading="lazy"><img src="/assets/images/projects/assignment-hire/06.webp" alt="Assignment Writer Hire administrator dashboard" loading="lazy"><img src="/assets/images/projects/assignment-hire/07.webp" alt="Assignment Writer Hire writer-management screen" loading="lazy">
+                        <span>FEATURED</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous Assignment Writer Hire screenshot">←</button><b>1 / 7</b><button type="button" data-next aria-label="Next Assignment Writer Hire screenshot">→</button></div>
+                    </figure>
+                    <div class="project-body"><p class="project-type">JAVAFX · MYSQL</p><h3>Assignment Writer Hire</h3><p>Two-stakeholder student system with user registration, requests, writer selection, orders and history, plus an administrator dashboard for users, writers, requests and order status.</p><ul><li>Java 17</li><li>JavaFX</li><li>FXML</li><li>MySQL</li></ul><div class="project-links"><a href="/assets/downloads/Assignment_Writer_Hire_Source.zip">Source ZIP ↓</a><a href="https://github.com/AzizulHakim00" target="_blank" rel="noreferrer">GitHub profile ↗</a></div></div>
+                </article>
+                <article class="project-card reveal" data-category="java">
+                    <figure class="project-gallery" data-gallery>
+                        <img class="active" src="/assets/images/projects/real-madrid-gallery/01.webp" alt="Real Madrid Club Management dashboard"><img src="/assets/images/projects/real-madrid-gallery/02.webp" alt="Real Madrid player information and formation screen" loading="lazy"><img src="/assets/images/projects/real-madrid-gallery/03.webp" alt="Real Madrid formation editor" loading="lazy"><img src="/assets/images/projects/real-madrid-gallery/04.webp" alt="Real Madrid alternate formation screen" loading="lazy"><img src="/assets/images/projects/real-madrid-gallery/05.webp" alt="Real Madrid training and performance screen" loading="lazy"><img src="/assets/images/projects/real-madrid-gallery/06.webp" alt="Real Madrid transfer-market screen" loading="lazy">
+                        <span>REPOSITORY</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous Real Madrid screenshot">←</button><b>1 / 6</b><button type="button" data-next aria-label="Next Real Madrid screenshot">→</button></div>
+                    </figure>
+                    <div class="project-body"><p class="project-type">JAVAFX · MYSQL</p><h3>Real Madrid Club Management</h3><p>Desktop management workflow for players, matches, transfers, training sessions, formations and performance records, organized with JavaFX controllers, FXML and database access.</p><ul><li>Java</li><li>JavaFX</li><li>Maven</li><li>MySQL</li></ul><div class="project-links"><a href="https://github.com/AzizulHakim00/RealMadrid_Club_Management" target="_blank" rel="noreferrer">GitHub ↗</a><a href="/assets/downloads/Real_Madrid_Club_Management_Source.zip">Source ZIP ↓</a></div></div>
+                </article>
+                <article class="project-card reveal" data-category="mobile">
+                    <figure class="project-gallery" data-gallery><img class="active" src="/assets/images/projects/foodmobochain-gallery/01.webp" alt="FoodMoboChain home page"><img src="/assets/images/projects/foodmobochain-gallery/02.webp" alt="FoodMoboChain food catalogue" loading="lazy"><img src="/assets/images/projects/foodmobochain-gallery/03.webp" alt="FoodMoboChain sign-in page" loading="lazy"><span>MOBILE UI</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous FoodMoboChain screenshot">←</button><b>1 / 3</b><button type="button" data-next aria-label="Next FoodMoboChain screenshot">→</button></div></figure>
+                    <div class="project-body"><p class="project-type">ANDROID · FIREBASE</p><h3>FoodMoboChain</h3><p>Mobile food-service concept covering registration, authentication, restaurant discovery, food details, ordering and real-time cloud-backed workflows.</p><ul><li>Android</li><li>Java</li><li>Firebase</li><li>Mobile UI</li></ul><div class="project-links"><a href="/assets/downloads/FoodMoboChain_Source.zip">Source ZIP ↓</a><a href="/assets/downloads/FoodMoboChain_UI_Report.pdf" target="_blank">UI report ↗</a></div></div>
+                </article>
+                <article class="project-card reveal" data-category="java">
+                    <figure class="project-gallery" data-gallery><img class="active" src="/assets/images/projects/bank-management/01.webp" alt="Bank Management login screen"><img src="/assets/images/projects/bank-management/02.webp" alt="Bank Management client dashboard" loading="lazy"><img src="/assets/images/projects/bank-management/03.webp" alt="Bank Management transaction history" loading="lazy"><img src="/assets/images/projects/bank-management/04.webp" alt="Bank Management account details" loading="lazy"><img src="/assets/images/projects/bank-management/05.webp" alt="Bank Management create-client screen" loading="lazy"><img src="/assets/images/projects/bank-management/06.webp" alt="Bank Management client list" loading="lazy"><img src="/assets/images/projects/bank-management/07.webp" alt="Bank Management deposit screen" loading="lazy"><span>COURSE PROJECT</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous Bank Management screenshot">←</button><b>1 / 7</b><button type="button" data-next aria-label="Next Bank Management screenshot">→</button></div></figure>
+                    <div class="project-body"><p class="project-type">JAVAFX · SQLITE</p><h3>Bank Management</h3><p>Desktop banking coursework with administrator and client views, accounts, deposits, transactions and persistent SQLite data.</p><ul><li>Java 21</li><li>JavaFX</li><li>SQLite</li><li>Maven</li></ul><div class="project-links"><a href="/assets/downloads/bankMangament.zip">Source ZIP ↓</a></div></div>
+                </article>
+                <article class="project-card reveal" data-category="mobile">
+                    <figure class="project-gallery" data-gallery><img class="active" src="/assets/images/projects/firebase-crud-gallery/01.webp" alt="Firebase application home screen"><img src="/assets/images/projects/firebase-crud-gallery/02.webp" alt="Firebase application restaurant screen" loading="lazy"><img src="/assets/images/projects/firebase-crud-gallery/03.webp" alt="Firebase application food-details screen" loading="lazy"><img src="/assets/images/projects/firebase-crud-gallery/04.webp" alt="Firebase application order-summary screen" loading="lazy"><img src="/assets/images/projects/firebase-crud-gallery/05.webp" alt="Firebase application orders screen" loading="lazy"><span>FIREBASE PROJECT</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous Firebase screenshot">←</button><b>1 / 5</b><button type="button" data-next aria-label="Next Firebase screenshot">→</button></div></figure>
+                    <div class="project-body"><p class="project-type">ANDROID LEARNING PROJECT</p><h3>Firebase CRUD App</h3><p>Android coursework demonstrating Firebase Authentication and Realtime Database operations for course records, including add, edit and delete flows.</p><ul><li>Android</li><li>Java</li><li>Firebase Auth</li><li>Realtime DB</li></ul><div class="project-links"><a href="/assets/downloads/Firebase_CRUD_Android_Source.zip">Source ZIP ↓</a></div></div>
+                </article>
+                <article class="project-card reveal" data-category="java">
+                    <figure class="graphic-cover cover-fruit"><img src="/assets/images/projects/fruit-market.png" alt="Mango illustration from Fruit Market"><b>STORE / CART / PRODUCT UI</b></figure>
+                    <div class="project-body"><p class="project-type">JAVAFX UI</p><h3>Fruit Market</h3><p>A colorful JavaFX storefront interface with product cards, selection behavior, cart interactions and delivery-oriented visual components.</p><ul><li>Java</li><li>JavaFX</li><li>FXML</li><li>CSS</li></ul><div class="project-links"><a href="/assets/downloads/Fruit_Market_Source.zip">Source ZIP ↓</a></div></div>
+                </article>
+                <article class="project-card reveal upcoming-project" data-category="java">
+                    <figure><img src="/assets/images/projects/movie-management.jpg" alt="Movie Management System home screen asset"><span>COURSEWORK</span></figure>
+                    <div class="project-body"><p class="project-type">UPCOMING CASE STUDY · COURSEWORK</p><h3>Movie Management System</h3><p>Collaborative coursework archive received. A complete visual case study will be added later without making a sole-authorship claim.</p><ul><li>Java</li><li>Desktop UI</li><li>Database</li><li>Coursework</li></ul><div class="project-links"><a href="/assets/downloads/Movie_Management_Coursework_Archive.zip">Coursework ZIP ↓</a></div></div>
+                </article>
+                <article class="project-card reveal upcoming-project" data-category="java">
+                    <figure class="generated-cover cover-cafe"><div class="blueprint-nodes" aria-hidden="true"><i></i><i></i><i></i></div><strong>CAFÉ / INVENTORY / ORDERS</strong><small>GENERATED BLUEPRINT VISUAL</small><span>UPCOMING</span></figure>
+                    <div class="project-body"><p class="project-type">UPCOMING CASE STUDY · JAVAFX</p><h3>Café Shop Management</h3><p>Project archive received. A verified screenshot set and full visual case study will be added in a later update.</p><ul><li>JavaFX</li><li>FXML</li><li>SQL</li><li>Reporting</li></ul><div class="project-links"><a href="/assets/downloads/Cafe_Shop_Management_Source.zip">Source ZIP ↓</a></div></div>
+                </article>
+            </div>
+            <p class="link-integrity-note reveal"><strong>Link accuracy:</strong> Real Madrid uses its verified repository URL. Assignment Writer Hire links to the verified GitHub profile until the exact repository URL is supplied. No other project card displays a GitHub link.</p>
+        </div>
+    </section>
+
+    <section class="section research" id="research">
+        <div class="research-backdrop" aria-hidden="true"></div>
+        <div class="shell">
+            <div class="section-heading research-heading reveal">
+                <p class="eyebrow"><span>05</span> RESEARCH & WORKING PAPERS</p>
+                <h2>Ideas tested with explicit assumptions, evaluation plans and <em>honest status labels.</em></h2>
+                <p>Nothing below is described as published or accepted unless evidence says so. Drafts, notebooks and coursework datasets remain clearly marked.</p>
+            </div>
+            <article class="research-feature reveal" id="thyro-rift">
+                <div class="research-feature-copy"><span class="status-badge active">PENDING FOR ACCEPTANCE</span><p class="project-type">RELIABLE CLINICAL AI · ABSTRACT</p><h3>Thyro-RIFT</h3><p>Thyro-RIFT is a missingness-aware and reliability-informed feature transformer for structured thyroid-disease prediction using clinical and laboratory records. It combines missingness masks, uncertainty indicators, clinical-group embeddings, reliability-guided transformer encoding, corrupted-input training, multi-seed prediction, validation-selected thresholds and probability calibration. The framework is evaluated across six thyroid benchmark endpoints using official held-out tests, cross-validation, baseline comparison, ablation analysis, robustness testing and retrospective external/domain validation.</p><div class="research-points"><span>Missingness-aware</span><span>Reliability-guided attention</span><span>Calibration</span><span>External validation</span></div><div class="project-links"><a href="https://github.com/AzizulHakim00/Thyro-RIFT" target="_blank" rel="noreferrer">GitHub repository ↗</a></div></div>
+                <div class="research-feature-art"><img src="/assets/images/projects/ai-xai-research.webp" alt="Abstract explainable AI pipeline artwork"><span>MODEL / RELIABILITY / EVIDENCE</span></div>
+            </article>
+            <div class="research-grid">
+                <article class="research-card research-card-wide reveal" id="dual-band"><figure class="research-gallery" data-gallery><img class="active" src="/assets/images/research/dual-band/01.webp" alt="Floquet-port CST simulation setup for the dual-band sensor"><img src="/assets/images/research/dual-band/02.webp" alt="S-parameter response and soil sample experiment" loading="lazy"><img src="/assets/images/research/dual-band/03.webp" alt="Electric-field distribution of the metamaterial sensor" loading="lazy"><img src="/assets/images/research/dual-band/04.webp" alt="Surface-current distribution of the metamaterial sensor" loading="lazy"><img src="/assets/images/research/dual-band/05.webp" alt="Dimensioned dual-band metamaterial unit-cell geometry" loading="lazy"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous dual-band image">←</button><b>1 / 5</b><button type="button" data-next aria-label="Next dual-band image">→</button></div></figure><span class="status-badge active">PENDING FOR ACCEPTANCE</span><p class="project-type">MICROWAVE · METAMATERIAL · ML · ABSTRACT</p><h3>Dual-Band Metamaterial Sensor</h3><p>This work presents a dual-band single-negative metamaterial sensor for microwave soil-moisture sensing using CST full-wave simulation. The unit cell combines a modified rectangular resonator frame, four corner spiral resonators, and a central split circular resonator loaded by a vertical strip line. Sandy and loamy soils are studied in a Floquet-port sandwich configuration. Two moisture-dependent resonance bands appear at 2.480 GHz and 5.055 GHz, with linear calibration sensitivities of 11.82 and 14.92 MHz per percentage point for sandy soil and 16.94 and 19.60 MHz per percentage point for loamy soil. All fitted calibration models achieve R² above 0.98. Field maps and an equivalent LC topology explain the frequency shifts, while a preliminary machine-learning analysis demonstrates automated interpretation of the extracted resonance features.</p><div class="project-links"><a href="https://github.com/AzizulHakim00/Dual-Band-Single-Negative-Metamaterial-Sensor-for" target="_blank" rel="noreferrer">GitHub repository ↗</a></div></article>
+                <article class="research-card research-card-wide reveal" id="dhaka-street-plastic"><figure class="research-gallery" data-gallery><img class="active" src="/assets/images/research/dhaka-street-plastic/01-directory.webp" alt="Recommended DhakaStreetPlastic dataset directory structure"><img src="/assets/images/research/dhaka-street-plastic/02-sunny.webp" alt="Sunny-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/03-cloudy.webp" alt="Cloudy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/04-rainy.webp" alt="Rainy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/05-night.webp" alt="Night-time dataset samples" loading="lazy"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous dataset image">←</button><b>1 / 5</b><button type="button" data-next aria-label="Next dataset image">→</button></div></figure><span class="status-badge team">DATASET REPORT</span><p class="project-type">URBAN COMPUTER VISION · LOCAL DATASET</p><h3>DhakaStreetPlastic</h3><p>A collaborative street-level dataset and technical report for detecting plastic and polythene litter across sunny, cloudy, rainy and night conditions in Dhaka. The supplied DOCX has been converted into a verified 25-page PDF, and all five supplied dataset figures are included here.</p><div class="project-links"><a href="/assets/downloads/DhakaStreetPlastic_Final_Report.pdf" target="_blank" rel="noreferrer">Open PDF report ↗</a></div></article>
+                <article class="research-card upcoming-research reveal" id="edgethz-cal"><figure class="research-graphic"><strong>EdgeTHz-Cal</strong><span>THZ / IOT / EDGE INTELLIGENCE</span></figure><span class="status-badge concept">UPCOMING</span><p class="project-type">DETAILS WILL BE ADDED LATER</p><h3>EdgeTHz-Cal</h3><p>Upcoming research case. Abstract and repository link will be added later.</p></article>
+                <article class="research-card upcoming-research reveal" id="mirage"><figure class="research-graphic alt"><strong>MIRAGE</strong><span>ROBUST / TABULAR / REPRODUCIBLE</span></figure><span class="status-badge concept">UPCOMING</span><p class="project-type">DETAILS WILL BE ADDED LATER</p><h3>MIRAGE</h3><p>Upcoming research case. Abstract and repository link will be added later.</p></article>
+                <article class="research-card upcoming-research reveal" id="bag-pronet-rq"><figure class="research-graphic plastic"><strong>BAG-ProNet-RQ</strong><span>AI / RELIABILITY / QUALITY</span></figure><span class="status-badge concept">UPCOMING</span><p class="project-type">DETAILS WILL BE ADDED LATER</p><h3>BAG-ProNet-RQ</h3><p>Upcoming research case. Abstract and repository link will be added later.</p></article>
+            </div>
+            <p class="research-status-note reveal"><strong>Status note:</strong> “Pending for acceptance” does not mean published or accepted. Upcoming entries intentionally contain no abstract or repository link until those materials are ready.</p>
+        </div>
+    </section>
+
+    <section class="section certificates" id="certificates">
+        <div class="shell">
+            <div class="section-heading reveal"><p class="eyebrow"><span>06</span> CERTIFICATES</p><h2>Uploaded evidence for cybersecurity <em>learning.</em></h2></div>
+            <div class="certificate-grid">
+                <article class="certificate-card reveal">
+                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/cpte.png" aria-label="Enlarge CPTE certificate"><img src="/assets/images/certificates/cpte.png" alt="Mile2 CPTE certificate for Azizul Hakim Omor"><span>VIEW ↗</span></button>
+                    <div><p class="project-type">MILE2 CYBERSECURITY CERTIFICATIONS</p><h3>C)PTE: Certified Penetration Testing Engineer</h3><dl><div><dt>Issued</dt><dd>06 September 2026</dd></div><div><dt>Valid through</dt><dd>06 August 2029</dd></div><div><dt>Certificate ID</dt><dd>30039-178-102-0834</dd></div></dl><a class="button button-dark" href="/assets/downloads/CPTE_Certificate_Azizul_Hakim_Omor.pdf" target="_blank">Open certificate <span>↗</span></a></div>
+                </article>
+                <article class="certificate-card reveal">
+                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/applied-penetration-testing.png" aria-label="Enlarge applied penetration testing certificate"><img src="/assets/images/certificates/applied-penetration-testing.png" alt="Applied Penetration Testing assessment certificate for Azizul Hakim Omor"><span>VIEW ↗</span></button>
+                    <div><p class="project-type">NATIONAL CYBER SECURITY AGENCY TRAINING ASSESSMENT</p><h3>Applied Penetration Testing Engineer: Hands-on</h3><dl><div><dt>Assessment date</dt><dd>19 May 2026</dd></div><div><dt>Score</dt><dd>94</dd></div><div><dt>Certificate ID</dt><dd>4940</dd></div></dl><p class="certificate-note">This verified score is highlighted alongside authorized penetration-testing lab practice.</p><a class="button button-dark" href="/assets/downloads/Applied_Penetration_Testing_Certificate.pdf" target="_blank">Open certificate <span>↗</span></a></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact">
+        <div class="shell contact-layout">
+            <div class="contact-copy reveal">
+                <p class="eyebrow"><span>07</span> CONTACT</p>
+                <h2>Have a research idea or software problem? <em>Let&apos;s talk.</em></h2>
+                <p>I am open to thoughtful student collaboration, research discussion and junior software opportunities.</p>
+                <a class="contact-email" href="mailto:mdomor01815@gmail.com">mdomor01815@gmail.com <span>↗</span></a>
+                <div class="contact-socials">
+                    <a href="https://github.com/AzizulHakim00" target="_blank" rel="noreferrer">GitHub ↗</a>
+                    <a href="https://www.linkedin.com/in/azizul-hakim-omor-5991b3410/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+                    <a href="https://www.instagram.com/azizul_hakim_omor__/" target="_blank" rel="noreferrer">Instagram ↗</a>
+                    <a href="https://www.facebook.com/md.omor.7946" target="_blank" rel="noreferrer">Facebook ↗</a>
+                    <a href="https://codeforces.com/profile/heythere99" target="_blank" rel="noreferrer">Codeforces ↗</a>
+                </div>
+            </div>
+            <form class="contact-form reveal" id="contact-form" novalidate>
+                <div class="form-row"><label><span>Your name</span><input type="text" name="name" autocomplete="name" required maxlength="80" placeholder="Name"></label><label><span>Your email</span><input type="email" name="email" autocomplete="email" required maxlength="120" placeholder="Email"></label></div>
+                <label><span>Subject</span><input type="text" name="subject" required maxlength="120" placeholder="What would you like to discuss?"></label>
+                <label><span>Message</span><textarea name="message" required maxlength="2000" rows="6" placeholder="Tell me about the idea or project."></textarea></label>
+                <div class="form-footer"><p id="form-status" role="status">The form opens your email app after validation.</p><button class="button button-primary magnetic" type="submit">Prepare message <span>↗</span></button></div>
+            </form>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="shell footer-grid">
+        <a class="footer-mark" href="#home">AH</a>
+        <div><strong>Azizul Hakim Omor</strong><p>CSE student · AI/XAI research · software and connected systems</p></div>
+        <nav aria-label="Footer navigation"><a href="#about">About</a><a href="#projects">Projects</a><a href="#research">Research</a><a href="#contact">Contact</a></nav>
+        <div class="footer-meta"><span>Dhaka, Bangladesh</span><span>© <b id="year">2026</b> Azizul Hakim Omor</span></div>
+    </div>
+</footer>
+
+<dialog class="lightbox" id="lightbox"><button type="button" aria-label="Close certificate">×</button><img src="" alt="Certificate preview"></dialog>
+<a class="back-to-top" href="#home" aria-label="Back to top">↑</a>
+</body>
+</html>
