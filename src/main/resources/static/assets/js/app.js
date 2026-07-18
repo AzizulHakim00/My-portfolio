@@ -277,4 +277,9 @@
             else draw();
         });
     }
+
+    const projectDetailsScript = document.createElement("script");
+    projectDetailsScript.src = "/assets/js/project-details.js?v=20260719-project-details";
+    projectDetailsScript.defer = true;
+    document.head.appendChild(projectDetailsScript);
 })();
