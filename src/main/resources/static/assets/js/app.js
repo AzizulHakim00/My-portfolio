@@ -64,11 +64,11 @@
 
     const typedText = document.querySelector("#typing-text");
     const phrases = [
-        "reliable AI systems",
-        "explainable ML experiments",
-        "agentic workflows",
-        "IoT and edge ideas",
-        "Java and Android software",
+        "explainable AI systems",
+        "reliable ML experiments",
+        "secure software systems",
+        "penetration-testing labs",
+        "agentic and IoT workflows",
         "microwave sensing research"
     ];
     if (typedText && !reducedMotion) {

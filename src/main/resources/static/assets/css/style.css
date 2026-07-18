@@ -211,6 +211,7 @@ button { color: inherit; }
 @keyframes blueprintDrift { to { background-position: 56px 28px; } }
 @keyframes generatedScan { 50% { top: 82%; } }
 .upcoming-project { border-style: dashed; }
+.ice-final-card { border-color: rgba(8,126,130,.38); box-shadow: 0 18px 48px rgba(8,126,130,.12); }
 .link-integrity-note, .research-status-note { margin: 24px 0 0; padding: 18px 20px; border-left: 3px solid var(--cyan-dark); background: var(--paper-blue); color: var(--muted); font-size: 14px; line-height: 1.65; }
 .link-integrity-note strong, .research-status-note strong { color: var(--ink); }
 .graphic-cover { position: relative; display: grid; place-items: center; align-content: center; gap: 18px; padding: 30px; background: var(--navy-2); color: var(--white); }
@@ -242,6 +243,7 @@ button { color: inherit; }
 @keyframes slowZoom { to { transform: scale(1.07) translateX(-1%); } }
 .research-feature-art::after { content: ""; position: absolute; inset: 0; background: linear-gradient(120deg, rgba(6,21,35,.1), rgba(6,21,35,.46)); }
 .research-feature-art span { position: absolute; z-index: 3; right: 20px; bottom: 20px; padding: 8px 10px; border-radius: 5px; background: var(--coral); color: var(--navy); font-size: 9px; font-weight: 800; letter-spacing: .1em; }
+.research-feature-art.research-gallery > span { top: 20px; bottom: auto; }
 .research-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; margin-top: 18px; }
 .research-card { display: flex; flex-direction: column; min-height: 650px; padding: 27px; border: 1px solid rgba(255,255,255,.13); border-radius: 18px; background: rgba(255,255,255,.04); transition: transform .3s, border-color .3s, background .3s; }
 .research-card:hover { border-color: rgba(32,200,196,.6); background: rgba(255,255,255,.065); transform: translateY(-7px); }
@@ -250,6 +252,9 @@ button { color: inherit; }
 .research-card h3 { margin: 12px 0 15px; font: 700 31px/1.04 var(--display); }
 .research-card > p:not(.project-type) { margin: 0; color: #b7c6cd; font-size: 15px; line-height: 1.76; }
 .research-card .project-links { margin-top: auto; }
+.primary-research-card { min-height: 760px; border-color: rgba(32,200,196,.26); background: linear-gradient(155deg, rgba(255,255,255,.065), rgba(255,255,255,.025)); }
+.primary-research-card h3 { color: var(--cyan); }
+.primary-research-card figure { position: relative; }
 .research-card-wide { grid-column: 1 / -1; min-height: 0; }
 .research-card-wide figure { position: relative; height: clamp(270px, 36vw, 470px); }
 .research-card-wide h3 { font-size: clamp(34px,4.5vw,55px); }
@@ -359,7 +364,7 @@ button { color: inherit; }
     .security-callout { gap: 18px; padding: 26px 22px; }.security-callout p { font-size: 14px; }
     .project-card { min-height: 560px; }.project-card figure { height: 215px; }.project-body { padding: 23px 20px; }.project-body h3 { font-size: 28px; }.project-body > p:not(.project-type) { font-size: 15px; }
     .research-feature-copy { padding: 30px 24px; }.research-feature h3 { font-size: 51px; }.research-feature-art { min-height: 300px; }
-    .research-card { min-height: 590px; padding: 20px; }.research-card figure { height: 210px; }.research-card-wide { min-height: 0; }.research-card-wide figure { height: 240px; }.research-card > p:not(.project-type) { font-size: 15px; }
+    .research-card { min-height: 590px; padding: 20px; }.research-card figure { height: 210px; }.research-card-wide, .primary-research-card { min-height: 0; }.research-card-wide figure { height: 240px; }.research-card > p:not(.project-type) { font-size: 15px; }
     .certificate-image { min-height: 300px; padding: 18px; }.certificate-card > div { padding: 30px 24px; }.certificate-card dl > div { grid-template-columns: 1fr; gap: 2px; }
     .form-row { grid-template-columns: 1fr; gap: 0; }.contact-form { padding: 24px 18px; }.form-footer { align-items: stretch; flex-direction: column; }.form-footer .button { width: 100%; }
     .footer-grid { grid-template-columns: 1fr; }.footer-grid nav { grid-column: 1; flex-wrap: wrap; }.footer-meta { grid-column: 1; }
