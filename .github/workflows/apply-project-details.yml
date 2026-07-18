@@ -1,0 +1,46 @@
+name: Apply portfolio project details
+
+on:
+  push:
+    branches:
+      - agent/project-details-ice-visual
+    paths:
+      - .github/workflows/apply-project-details.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore app and load project details
+        shell: bash
+        run: |
+          git fetch origin main
+          git show origin/main:src/main/resources/static/assets/js/app.js > src/main/resources/static/assets/js/app.js
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('src/main/resources/static/assets/js/app.js')
+          text = path.read_text(encoding='utf-8')
+          marker = '\n})();'
+          loader = '''\n\n    const projectDetailsScript = document.createElement("script");\n    projectDetailsScript.src = "/assets/js/project-details.js?v=20260719-project-details";\n    projectDetailsScript.defer = true;\n    document.head.appendChild(projectDetailsScript);'''
+          position = text.rfind(marker)
+          if position < 0:
+              raise SystemExit('Could not find app closure')
+          path.write_text(text[:position] + loader + text[position:], encoding='utf-8')
+          PY
+          node --check src/main/resources/static/assets/js/app.js
+          node --check src/main/resources/static/assets/js/project-details.js
+          rm .github/workflows/apply-project-details.yml
+      - name: Commit safe loader
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/main/resources/static/assets/js/app.js .github/workflows/apply-project-details.yml
+          git commit -m "Load project details safely"
+          git push
