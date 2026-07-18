@@ -60,6 +60,8 @@ Vercel does not run the long-lived Spring Boot JVM application. This project the
 2. Choose **Other** as the framework preset.
 3. Deploy with the included `vercel.json`.
 
+The `main` branch is connected to the Vercel production project. Every new push to `main` triggers an automatic production redeployment, while pushes to other branches create preview deployments.
+
 The Spring Boot and static Vercel editions use FormSubmit's standard HTML POST flow. This avoids browser cross-origin AJAX failures and redirects visitors back to the portfolio after submission.
 
 ## Contact-form activation
