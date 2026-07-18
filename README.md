@@ -6,13 +6,14 @@ A complete responsive portfolio built with Spring Boot 4.1, Java 17, Thymeleaf, 
 
 - Hero with animated network canvas, typing roles, portrait and clear explainable-AI/cybersecurity positioning
 - About, technical toolkit and education
-- Filterable project gallery with screenshots, three direct repository links and main-profile links for remaining projects
+- Filterable project gallery with screenshots, four direct repository links and main-profile links for remaining projects
+- TaskFlow full-stack Django case study with six supplied screenshots, its Render deployment and verified GitHub repository
 - Featured Dual-Band research layout, compact Thyro-RIFT and DhakaStreetPlastic cards, and upcoming-work placeholders
 - DhakaStreetPlastic dataset gallery with the report link reserved for a later update
 - ICE penetration-testing lab as the final project after Fruit Market
 - Certificate gallery and full-size document lightbox
 - Email, GitHub, LinkedIn, Codeforces, Instagram and Facebook links
-- Validated contact form with direct email handoff
+- Validated contact form with direct in-page email delivery
 - Responsive mobile navigation and reduced-motion accessibility
 
 The site intentionally contains no tutor, teacher, teaching, employment, professional-experience or CGPA claims.
@@ -59,7 +60,18 @@ Vercel does not run the long-lived Spring Boot JVM application. This project the
 2. Choose **Other** as the framework preset.
 3. Deploy with the included `vercel.json`.
 
-On the static Vercel edition, the contact form falls back to the visitor's email app. On Spring Boot, the same form validates through `/api/contact` before opening email.
+The Spring Boot and static Vercel editions use FormSubmit's standard HTML POST flow. This avoids browser cross-origin AJAX failures and redirects visitors back to the portfolio after submission.
+
+## Contact-form activation
+
+The contact form submits directly through FormSubmit and does not require the visitor to configure an email application.
+
+1. Deploy the portfolio.
+2. Send one test message through the contact form.
+3. Open `mdomor01815@gmail.com` and confirm the FormSubmit activation email.
+4. Submit the test again. Future messages will arrive in that Gmail inbox.
+
+If the activation message is not visible, check the Spam and Promotions folders.
 
 ## Content accuracy
 
@@ -71,7 +83,7 @@ Research drafts are not described as accepted publications. Coursework/reference
 
 - Project source ZIPs, coursework archives, UI reports, lab reports and the DhakaStreetPlastic full report are not included in deployable assets.
 - Project screenshots and concise case-study descriptions remain visible.
-- Real Madrid, Assignment Writer Hire and ICE Lab use direct repository links; remaining cards use the main GitHub profile until individual repositories are uploaded.
+- TaskFlow, Real Madrid, Assignment Writer Hire and ICE Lab use direct repository links; TaskFlow also links to its live Render application. Remaining cards use the main GitHub profile until individual repositories are uploaded.
 - The corrected CV PDF and certificate PDFs remain public portfolio evidence. The editable CV DOCX is not published.
 
 ## Main source files

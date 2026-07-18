@@ -299,6 +299,8 @@ button { color: inherit; }
 .contact-form input, .contact-form textarea { width: 100%; padding: 13px 14px; border: 1px solid #d6e1e4; border-radius: 8px; outline: none; background: #fbfdfd; color: var(--ink); font-size: 14px; transition: border-color .2s, box-shadow .2s; }.contact-form textarea { resize: vertical; min-height: 150px; }
 .contact-form input:focus, .contact-form textarea:focus { border-color: var(--cyan-dark); box-shadow: 0 0 0 4px rgba(32,200,196,.1); }
 .contact-form [aria-invalid="true"] { border-color: #c63c31; box-shadow: 0 0 0 4px rgba(198,60,49,.08); }
+.contact-form .form-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.contact-form button:disabled { cursor: wait; opacity: .58; transform: none !important; }
 .form-footer { display: flex; gap: 25px; align-items: center; justify-content: space-between; margin-top: 8px; }.form-footer p { max-width: 310px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.5; }.form-footer p.success { color: var(--cyan-dark); }.form-footer p.error { color: #b33a31; }
 
 .site-footer { padding: 54px 0; background: var(--navy); color: var(--white); }

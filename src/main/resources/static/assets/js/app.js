@@ -174,39 +174,45 @@
 
     const form = document.querySelector("#contact-form");
     const formStatus = document.querySelector("#form-status");
-    const openEmail = (data) => {
-        const subject = encodeURIComponent(data.subject);
-        const body = encodeURIComponent(`From: ${data.name} <${data.email}>\n\n${data.message}`);
-        window.location.href = `mailto:mdomor01815@gmail.com?subject=${subject}&body=${body}`;
-    };
-    form?.addEventListener("submit", async (event) => {
-        event.preventDefault();
+    const contactParams = new URLSearchParams(window.location.search);
+    if (formStatus && contactParams.get("contact") === "sent") {
+        formStatus.textContent = "Message sent successfully. Thank you—I will reply by email.";
+        formStatus.className = "success";
+        contactParams.delete("contact");
+        const cleanQuery = contactParams.toString();
+        window.history.replaceState({}, "", `${window.location.pathname}${cleanQuery ? `?${cleanQuery}` : ""}#contact`);
+    }
+
+    form?.addEventListener("submit", (event) => {
         const fields = [...form.querySelectorAll("input, textarea")];
         fields.forEach((field) => field.setAttribute("aria-invalid", String(!field.checkValidity())));
         if (!form.checkValidity()) {
+            event.preventDefault();
             formStatus.textContent = "Please complete every field with a valid email address.";
             formStatus.className = "error";
             form.querySelector(":invalid")?.focus();
             return;
         }
         const data = Object.fromEntries(new FormData(form).entries());
-        formStatus.textContent = "Preparing your message…";
-        formStatus.className = "";
-        try {
-            const response = await fetch("/api/contact", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            });
-            if (!response.ok) throw new Error("Contact endpoint unavailable");
-            const result = await response.json();
-            formStatus.textContent = result.message;
-            formStatus.className = "success";
-        } catch {
-            formStatus.textContent = "Opening your email app so the message can be sent directly.";
-            formStatus.className = "success";
+        if (data._honey) {
+            event.preventDefault();
+            return;
         }
-        window.setTimeout(() => openEmail(data), 350);
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        const subjectField = form.querySelector('[name="_subject"]');
+        const nextField = form.querySelector('[name="_next"]');
+        if (subjectField) subjectField.value = `Portfolio message: ${data.subject}`;
+        if (nextField) {
+            const returnUrl = new URL(window.location.href);
+            returnUrl.searchParams.set("contact", "sent");
+            returnUrl.hash = "contact";
+            nextField.value = returnUrl.toString();
+        }
+
+        formStatus.textContent = "Sending your message…";
+        formStatus.className = "";
+        submitButton?.setAttribute("disabled", "");
     });
     form?.querySelectorAll("input, textarea").forEach((field) => field.addEventListener("input", () => field.removeAttribute("aria-invalid")));
 
