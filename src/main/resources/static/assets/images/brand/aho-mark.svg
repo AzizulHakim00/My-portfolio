@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="220" viewBox="0 0 520 220" role="img" aria-labelledby="title desc">
+  <title id="title">AHO logo mark</title>
+  <desc id="desc">Azizul Hakim Omor AHO technology monogram.</desc>
+  <defs>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#20c8e8"/><stop offset="1" stop-color="#10a8dc"/></linearGradient>
+    <linearGradient id="coral" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff8170"/><stop offset="1" stop-color="#ff6259"/></linearGradient>
+  </defs>
+  <rect width="520" height="220" rx="18" fill="#fff"/>
+  <g transform="translate(20 16)">
+    <path d="M16 174 86 20h28l70 154h-25l-17-38H57l-17 38Z" fill="#06254d"/>
+    <path d="M16 174 86 20h22L39 174Z" fill="url(#cyan)"/>
+    <path d="M68 116h63l11 22H58Z" fill="#fff"/>
+    <path d="M64 164 86 122" fill="none" stroke="url(#coral)" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="63" cy="165" r="8" fill="#fff" stroke="#ff7467" stroke-width="5"/>
+    <path d="M186 23h24v68h93V23h24v151h-24v-61h-93v61h-24Z" fill="#06254d"/>
+    <path d="M210 102h82" fill="none" stroke="url(#cyan)" stroke-width="13"/>
+    <circle cx="293" cy="102" r="13" fill="#fff" stroke="#20bde7" stroke-width="7"/>
+    <path d="m363 24 20-20h77l21 20v134l-21 20h-77l-20-20Z" fill="#06254d"/>
+    <path d="m384 34 12-12h50l13 12v106l-13 12h-50l-12-12Z" fill="#fff"/>
+    <path d="m399 48 8-8h29l9 8v80l-9 9h-18l-17-18V70" fill="none" stroke="url(#coral)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="401" cy="71" r="8" fill="#fff" stroke="#ff7467" stroke-width="5"/>
+  </g>
+</svg>
