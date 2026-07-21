@@ -36,6 +36,7 @@ jobs:
           node --check src/main/resources/static/assets/js/upgrade.js
           node --check src/main/resources/static/assets/js/v3-foundation.js
           node --check src/main/resources/static/assets/js/v3-live.js
+          node --check src/main/resources/static/assets/js/v3-research.js
           node --check src/main/resources/static/assets/js/v3-contact.js
           node --check src/main/resources/static/assets/js/case-study-data.js
           node --check src/main/resources/static/assets/js/case-study.js
