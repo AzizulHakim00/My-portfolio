@@ -1,20 +1,22 @@
-# Azizul Hakim Omor — Updated Spring Boot Portfolio
+# Azizul Hakim Omor — Spring Boot Portfolio
 
-A complete responsive portfolio built with Spring Boot 4.1, Java 17, Thymeleaf, HTML, CSS and JavaScript. This update preserves the current Kinetic Blueprint portfolio's design, content, galleries and interactions while removing project-source and report downloads.
+A responsive research and software portfolio built with Spring Boot 4.1, Java 17, Thymeleaf, HTML, CSS and JavaScript. The repository also includes a visually matching static Vercel deployment.
 
 ## Included sections
 
-- Hero with animated network canvas, typing roles, portrait and clear explainable-AI/cybersecurity positioning
+- Cinematic hero entrance with animated network canvas, typing roles and portrait system
+- Scroll-linked section headings and reduced-motion accessibility
 - About, technical toolkit and education
-- Filterable project gallery with screenshots, four direct repository links and main-profile links for remaining projects
-- TaskFlow full-stack Django case study with six supplied screenshots, its Render deployment and verified GitHub repository
-- Featured Dual-Band research layout, compact Thyro-RIFT and DhakaStreetPlastic cards, and upcoming-work placeholders
-- DhakaStreetPlastic dataset gallery with the report link reserved for a later update
-- ICE penetration-testing lab as the final project after Fruit Market
-- Certificate gallery and full-size document lightbox
+- Filterable featured-project gallery with pointer spotlights and smooth layout transitions
+- Collapsible project archive for smaller coursework projects
+- Detailed project dialogs with screenshots, technology stacks and verified links
+- TaskFlow full-stack Django case study with its Render deployment and repository
+- Featured Dual-Band research, Thyro-RIFT and DhakaStreetPlastic entries
+- Expandable research abstracts and honest status labels
+- ICE penetration-testing lab and cybersecurity certificates
 - Email, GitHub, LinkedIn, Codeforces, Instagram and Facebook links
-- Validated contact form with direct in-page email delivery
-- Responsive mobile navigation and reduced-motion accessibility
+- Validated contact form using FormSubmit
+- Responsive mobile navigation, lazy image loading and reduced-motion support
 
 The site intentionally contains no tutor, teacher, teaching, employment, professional-experience or CGPA claims.
 
@@ -54,19 +56,17 @@ The same Dockerfile can be used on Railway, Fly.io or another JVM/Docker host.
 
 ### Vercel
 
-Vercel does not run the long-lived Spring Boot JVM application. This project therefore includes `vercel-static/index.html` and `vercel.json`, which deploy a visually identical static edition on Vercel while preserving the genuine Spring Boot source for a JVM host.
+Vercel does not run the long-lived Spring Boot JVM application. This project therefore includes `vercel-static/index.html` and `vercel.json`, which deploy a matching static edition on Vercel while preserving the genuine Spring Boot source for a JVM host.
 
 1. Import the repository into Vercel.
 2. Choose **Other** as the framework preset.
 3. Deploy with the included `vercel.json`.
 
-The `main` branch is connected to the Vercel production project. Every new push to `main` triggers an automatic production redeployment, while pushes to other branches create preview deployments.
+The `main` branch is connected to the Vercel production project. Every push to `main` triggers a production redeployment, while pushes to other branches create preview deployments.
 
 The Spring Boot and static Vercel editions use FormSubmit's standard HTML POST flow. This avoids browser cross-origin AJAX failures and redirects visitors back to the portfolio after submission.
 
 ## Contact-form activation
-
-The contact form submits directly through FormSubmit and does not require the visitor to configure an email application.
 
 1. Deploy the portfolio.
 2. Send one test message through the contact form.
@@ -81,11 +81,13 @@ The supplied CV included teaching, tutoring, assistant-lecturer, experience and 
 
 Research drafts are not described as accepted publications. Coursework/reference archives with uncertain or different authorship are labeled accordingly. See `CONTENT_AUDIT.md` for the source-by-source audit.
 
+The CPTE issue date shown in the source material is future-dated relative to July 21, 2026. The deployed interface hides that date and marks it as pending verification until the certificate date is confirmed.
+
 ## Public-download policy
 
 - Project source ZIPs, coursework archives, UI reports, lab reports and the DhakaStreetPlastic full report are not included in deployable assets.
 - Project screenshots and concise case-study descriptions remain visible.
-- TaskFlow, Real Madrid, Assignment Writer Hire and ICE Lab use direct repository links; TaskFlow also links to its live Render application. Remaining cards use the main GitHub profile until individual repositories are uploaded.
+- TaskFlow, Real Madrid, Assignment Writer Hire and ICE Lab use direct repository links; TaskFlow also links to its live Render application.
 - The corrected CV PDF and certificate PDFs remain public portfolio evidence. The editable CV DOCX is not published.
 
 ## Main source files
@@ -94,4 +96,6 @@ Research drafts are not described as accepted publications. Coursework/reference
 - `src/main/java/com/azizulportfolio/portfolio/controller/PortfolioController.java`
 - `src/main/resources/templates/index.html`
 - `src/main/resources/static/assets/css/style.css`
+- `src/main/resources/static/assets/css/upgrade.css`
 - `src/main/resources/static/assets/js/app.js`
+- `src/main/resources/static/assets/js/upgrade.js`
