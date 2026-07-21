@@ -1,0 +1,63 @@
+name: Portfolio Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check src/main/resources/static/assets/js/app.js
+          node --check src/main/resources/static/assets/js/project-details.js
+          node --check src/main/resources/static/assets/js/upgrade.js
+          node --check src/main/resources/static/assets/js/v3-foundation.js
+          node --check src/main/resources/static/assets/js/v3-live.js
+          node --check src/main/resources/static/assets/js/v3-contact.js
+          node --check src/main/resources/static/assets/js/case-study-data.js
+          node --check src/main/resources/static/assets/js/case-study.js
+
+      - name: Run Spring Boot tests
+        run: ./gradlew clean test
+
+  lighthouse:
+    if: github.event_name != 'pull_request'
+    needs: build-and-syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Lighthouse CI
+        run: npm install --global @lhci/cli@0.15.x
+
+      - name: Audit deployed portfolio
+        run: lhci autorun
