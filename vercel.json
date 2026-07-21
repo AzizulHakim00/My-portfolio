@@ -2,13 +2,15 @@
   "version": 2,
   "builds": [
     { "src": "vercel-static/**", "use": "@vercel/static" },
-    { "src": "src/main/resources/static/assets/**", "use": "@vercel/static" }
+    { "src": "src/main/resources/static/**", "use": "@vercel/static" },
+    { "src": "src/main/resources/templates/index.html", "use": "@vercel/static" }
   ],
   "routes": [
     { "src": "/robots.txt", "dest": "/vercel-static/robots.txt" },
     { "src": "/sitemap.xml", "dest": "/vercel-static/sitemap.xml" },
     { "src": "/site.webmanifest", "dest": "/vercel-static/site.webmanifest" },
     { "src": "/assets/(.*)", "dest": "/src/main/resources/static/assets/$1" },
-    { "src": "/(.*)", "dest": "/vercel-static/index.html" }
+    { "src": "/projects/(.*)", "dest": "/src/main/resources/static/projects/index.html" },
+    { "src": "/(.*)", "dest": "/src/main/resources/templates/index.html" }
   ]
 }
