@@ -21,8 +21,23 @@
     return;
   }
 
+  const setHead = (selector, tag, attributes) => {
+    let element = document.head.querySelector(selector);
+    if (!element) { element = document.createElement(tag); document.head.appendChild(element); }
+    Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
+  };
+  const canonicalUrl = `${location.origin}/projects/${slug}`;
+  const previewUrl = `${location.origin}${data.images[0]}`;
   document.title = `${data.title} Case Study | Azizul Hakim Omor`;
   document.querySelector('meta[name="description"]')?.setAttribute("content", data.summary);
+  setHead('link[rel="canonical"]', "link", { rel: "canonical", href: canonicalUrl });
+  setHead('meta[property="og:type"]', "meta", { property: "og:type", content: "article" });
+  setHead('meta[property="og:title"]', "meta", { property: "og:title", content: document.title });
+  setHead('meta[property="og:description"]', "meta", { property: "og:description", content: data.summary });
+  setHead('meta[property="og:url"]', "meta", { property: "og:url", content: canonicalUrl });
+  setHead('meta[property="og:image"]', "meta", { property: "og:image", content: previewUrl });
+  setHead('meta[name="twitter:card"]', "meta", { name: "twitter:card", content: "summary_large_image" });
+
   document.querySelector('[data-eyebrow]').textContent = data.eyebrow;
   document.querySelector('[data-title]').textContent = data.title;
   document.querySelector('[data-summary]').textContent = data.summary;
