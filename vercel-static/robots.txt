@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/sitemap.xml

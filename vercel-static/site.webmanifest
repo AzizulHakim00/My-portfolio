@@ -1,0 +1,10 @@
+{
+  "name": "Azizul Hakim Omor Portfolio",
+  "short_name": "Azizul Portfolio",
+  "description": "AI, XAI, cybersecurity, IoT, RF sensing and software portfolio.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#061523",
+  "theme_color": "#061523",
+  "icons": []
+}
