@@ -13,12 +13,16 @@
     if (document.querySelector(`script[src^="${src.split("?")[0]}"]`)) return;
     const script = document.createElement("script");
     script.src = src;
-    script.defer = true;
+    script.async = false;
     document.head.appendChild(script);
   };
 
   loadStyle("/assets/css/upgrade.css?v=20260721-motion");
+  loadStyle("/assets/css/v3.css?v=20260721-v3");
   loadScript("/assets/js/upgrade.js?v=20260721-motion");
+  loadScript("/assets/js/v3-foundation.js?v=20260721-v3");
+  loadScript("/assets/js/v3-live.js?v=20260721-v3");
+  loadScript("/assets/js/v3-contact.js?v=20260721-v3");
 
   const cards = [...document.querySelectorAll(".project-card[data-category]")];
   if (!cards.length) return;
@@ -105,7 +109,7 @@
     const button = document.createElement("button");
     button.type = "button";
     button.className = "project-view-details";
-    button.textContent = "View case study ↗";
+    button.textContent = "Quick view ↗";
     button.addEventListener("click", () => open(card, button));
     links.prepend(button);
   });
