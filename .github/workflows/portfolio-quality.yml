@@ -33,6 +33,7 @@ jobs:
         run: |
           node --check src/main/resources/static/assets/js/app.js
           node --check src/main/resources/static/assets/js/project-details.js
+          node --check src/main/resources/static/assets/js/runtime-projects.js
           node --check src/main/resources/static/assets/js/upgrade.js
           node --check src/main/resources/static/assets/js/v3-foundation.js
           node --check src/main/resources/static/assets/js/v3-live.js

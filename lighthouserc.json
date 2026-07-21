@@ -3,8 +3,9 @@
     "collect": {
       "url": [
         "https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/",
-        "https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/taskflow",
-        "https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/ice-pentest-lab"
+        "https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/busbd-intelligence",
+        "https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/neon-bay",
+        "https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/dvwa-security-casebook"
       ],
       "numberOfRuns": 1
     },

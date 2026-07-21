@@ -15,6 +15,38 @@ window.PORTFOLIO_CASE_STUDIES = {
     result: "The deployed application demonstrates the complete account-to-task workflow across desktop and mobile layouts.",
     next: ["Add team workspaces and invitations","Introduce notifications and recurring tasks","Add automated tests and activity history"]
   },
+  "busbd-intelligence": {
+    eyebrow: "SPRING BOOT · REACT · ENTERPRISE TRAVEL PLATFORM",
+    title: "BusBD Intelligence",
+    summary: "A deployed bus-booking and travel-intelligence platform with persistent bookings, protected seat selection, passenger workflows, QR verification and live route intelligence.",
+    tags: ["Java 21", "Spring Boot", "React", "PostgreSQL", "Redis", "Flyway"],
+    repo: "https://github.com/AzizulHakim00/BusBD-Intelligence",
+    live: "https://busbd-intelligence.onrender.com/",
+    images: ["/assets/images/projects/busbd-intelligence/01-search-hero.svg","/assets/images/projects/busbd-intelligence/02-live-tracking.svg"],
+    problem: "Bangladesh intercity passengers need one workflow for finding routes, choosing seats, keeping temporary seat claims safe and retaining verifiable booking records.",
+    role: "Built the product direction and integrated a React interface with a Spring Boot backend, PostgreSQL persistence, Flyway migrations and Redis-compatible seat locking.",
+    architecture: ["Passenger browser", "React application", "Spring Boot APIs", "Booking & seat-lock services", "PostgreSQL", "Redis-compatible key value", "QR verification"],
+    features: ["Passenger registration and profiles","Multiple boarding and dropping points","Advanced seat layouts and passenger details","Persistent bookings and idempotency protection","Mock payment, signed QR verification, cancellation and refunds","Render deployment with database and key-value services"],
+    challenge: "The central engineering challenge was protecting seat availability across concurrent booking attempts while keeping the user flow understandable.",
+    result: "The deployed platform demonstrates the complete search-to-verification flow with persistent data and deployment-ready environment profiles.",
+    next: ["Connect production payment providers","Add operator fleet telemetry and real GPS feeds","Add demand forecasting and route optimization"]
+  },
+  "neon-bay": {
+    eyebrow: "THREE.JS · ORIGINAL BROWSER 3D GAME",
+    title: "Neon Bay",
+    summary: "An original open-city browser game with connected missions, vehicle handling, combat, tactical enemies, police pursuit, saving, weather and desktop/mobile controls.",
+    tags: ["Three.js", "JavaScript", "Vite", "WebGL", "Game AI"],
+    repo: "https://github.com/AzizulHakim00/Neon-Bay",
+    live: "https://neon-bay-gamma.vercel.app/",
+    images: ["/assets/images/projects/neon-bay/neon-bay-ocean-drive.svg","/assets/images/projects/neon-bay/neon-bay-driving-physics.svg","/assets/images/projects/neon-bay/neon-bay-shotgun-combat.svg"],
+    problem: "A browser game needs to coordinate a 3D city, missions, vehicles, combat, AI and persistence while remaining playable without a native installation.",
+    role: "Designed the game concept, modular JavaScript systems, mission flow, player and vehicle behavior, combat AI, interface and production deployment.",
+    architecture: ["Browser", "Vite entry", "Three.js scene", "Player & vehicle modules", "Mission and cinematic systems", "Combat AI", "Versioned save state"],
+    features: ["Five connected Chapter One jobs","Articulated player and three distinct vehicles","Pistol and shotgun weapon systems","Enemy alert, search, cover and attack states","Police pursuit, shops, weather and saving","Desktop and touch controls"],
+    challenge: "The main challenge was keeping movement, driving, combat, mission triggers and AI state changes synchronized in one real-time browser loop.",
+    result: "Version 1.1 is a deployed, tested vertical slice with original release visuals and a complete five-mission chapter.",
+    next: ["Add more districts and interiors","Expand mission and dialogue content","Improve animation, sound and performance profiling"]
+  },
   "assignment-writer-hire": {
     eyebrow: "JAVAFX · MYSQL · TWO-STAKEHOLDER DESKTOP SYSTEM",
     title: "Assignment Writer Hire",
@@ -45,19 +77,35 @@ window.PORTFOLIO_CASE_STUDIES = {
     result: "Six documented screens demonstrate the core club-management workflow and persistent data direction.",
     next: ["Add match analytics charts","Introduce permissions for staff roles","Add exportable reports and test coverage"]
   },
-  "ice-pentest-lab": {
-    eyebrow: "AUTHORIZED CYBERSECURITY LAB · EVIDENCE-DRIVEN REPORTING",
-    title: "ICE Penetration-Testing Lab",
-    summary: "A controlled Windows 7 laboratory exercise documenting reconnaissance, SMB enumeration, MS17-010 validation, controlled exploitation and evidence capture.",
-    tags: ["Kali Linux", "Nmap", "Metasploit", "SMB", "MS17-010"],
-    repo: "https://github.com/AzizulHakim00/Cyber-Security---Project",
-    images: ["/assets/images/projects/ice-cybersecurity/00-command-dashboard.svg","/assets/images/projects/ice-cybersecurity/01.webp","/assets/images/projects/ice-cybersecurity/02.webp","/assets/images/projects/ice-cybersecurity/03.webp"],
-    problem: "The lab demonstrates how to validate a known vulnerability methodically without presenting the exercise as professional client work or uncontrolled exploitation.",
-    role: "Documented target discovery, service enumeration, vulnerability verification, exploitation steps and evidence from the authorized environment.",
-    architecture: ["Kali Linux", "Reconnaissance", "SMB enumeration", "Vulnerability validation", "Controlled exploitation", "Evidence report"],
-    features: ["Target and port discovery","SMB service inspection","MS17-010 checking","Controlled Metasploit workflow","Session verification and screenshots","Responsible scope and evidence notes"],
-    challenge: "The key challenge was separating observed evidence from assumptions and preserving a reproducible, authorized sequence of checks.",
-    result: "The case study communicates both the technical workflow and the ethical boundaries of the lab.",
-    next: ["Add remediation verification","Map findings to risk and mitigation","Create a sanitized executive-summary report"]
+  "foodmobochain-firebase": {
+    eyebrow: "ANDROID · FIREBASE · MULTI-ROLE MARKETPLACE",
+    title: "FoodMoboChain Firebase",
+    summary: "A Java/XML Android marketplace MVP using Firebase Authentication, Realtime Database, App Check and server-enforced Security Rules for protected multi-role workflows.",
+    tags: ["Android", "Java", "Firebase Auth", "Realtime Database", "Security Rules", "App Check"],
+    repo: "https://github.com/AzizulHakim00/FoodMoboChain_Firebase",
+    images: ["/assets/images/projects/foodmobochain-gallery/01.webp","/assets/images/projects/foodmobochain-gallery/02.webp","/assets/images/projects/foodmobochain-gallery/03.webp"],
+    problem: "A marketplace with buyers, vendors, students and administrators needs role-aware data access without trusting validation in the Android client alone.",
+    role: "Built the Android interface and Firebase data model, then defined Security Rules for identity, verified email, vendor approval, official prices, order ownership and allowed state transitions.",
+    architecture: ["Android Java/XML client", "Firebase Authentication", "App Check", "Realtime Database", "Security Rules", "Role-specific workflows"],
+    features: ["Email authentication and verification","Menu CRUD and category search","Vendor-split protected orders","Controlled delivery-state progression","Rentals, reviews, newsfeed and moderation","Spark-plan-compatible deployment model"],
+    challenge: "The key challenge was enforcing business rules at the database boundary so a modified client could not bypass official prices, ownership or workflow transitions.",
+    result: "The repository delivers a production-oriented MVP for controlled pilots without requiring Firebase Blaze services.",
+    next: ["Add a trusted payment backend","Add private document storage and audit trails","Run larger pilot and usability testing"]
+  },
+  "dvwa-security-casebook": {
+    eyebrow: "AUTHORIZED CYBERSECURITY LAB · EVIDENCE-LED CASEBOOK",
+    title: "DVWA Security Casebook",
+    summary: "A complete presentation and evidence layer for ten controlled DVWA vulnerability modules, with 25 payload records, 38 screenshots and defensive guidance.",
+    tags: ["DVWA", "Burp Suite", "SQL Injection", "XSS", "CSRF", "Web Security"],
+    repo: "https://github.com/AzizulHakim00/dvwa-security-casebook",
+    live: "https://azizulhakim00.github.io/dvwa-security-casebook/",
+    images: ["/assets/images/projects/dvwa-casebook/01-hero-terminal.svg","/assets/images/projects/dvwa-casebook/02-module-ledger.svg"],
+    problem: "Security-lab evidence becomes difficult to review when payloads, screenshots, security levels and remediation notes are scattered across unrelated files.",
+    role: "Organized the controlled-lab material into a searchable casebook, removed unrelated personal content and added consistent module explanations, evidence browsing and print-ready output.",
+    architecture: ["Static casebook", "Module data model", "Search & severity filters", "Evidence galleries", "Fullscreen viewer", "Print-to-PDF output"],
+    features: ["Ten vulnerability modules","Twenty-five payload and command records","Thirty-eight evidence screenshots","Low, medium and high observations","Burp Intruder response-length workflow","Defensive recommendations for each module"],
+    challenge: "The central challenge was presenting complete technical evidence clearly while preserving the ethical boundary of an isolated, deliberately vulnerable training environment.",
+    result: "The deployed casebook provides a responsive, searchable and print-ready review experience for the full supplied laboratory record.",
+    next: ["Add formal OWASP mapping","Add sanitized executive summaries","Add remediation verification evidence"]
   }
 };

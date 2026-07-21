@@ -2,7 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
   <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/taskflow</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/busbd-intelligence</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/neon-bay</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/assignment-writer-hire</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/real-madrid-management</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/ice-pentest-lab</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/foodmobochain-firebase</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://my-portfolio-nine-opal-kxj5ttgspi.vercel.app/projects/dvwa-security-casebook</loc><lastmod>2026-07-21</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>

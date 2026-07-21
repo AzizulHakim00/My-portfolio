@@ -29,7 +29,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class PortfolioController {
 
     private static final Set<String> CASE_STUDIES = Set.of(
-            "taskflow", "assignment-writer-hire", "real-madrid-management", "ice-pentest-lab"
+            "taskflow",
+            "busbd-intelligence",
+            "neon-bay",
+            "assignment-writer-hire",
+            "real-madrid-management",
+            "foodmobochain-firebase",
+            "dvwa-security-casebook"
     );
     private static final long RATE_WINDOW_MS = 60L * 60L * 1000L;
     private static final int RATE_LIMIT = 5;

@@ -16,14 +16,31 @@ The homepage uses the cleaner pre-V3 visual system:
 
 The dashboard-style terminal, statistics blocks, capability map, live repository dashboard, advanced search panel and research progress dashboard are intentionally not loaded on the homepage.
 
+## Featured project update
+
+The current featured portfolio adds:
+
+- **BusBD Intelligence** — deployed Spring Boot, React, PostgreSQL and Redis-compatible travel platform
+- **Neon Bay** — deployed Three.js browser-based 3D action game
+- **FoodMoboChain Firebase** — Android marketplace MVP with Firebase Authentication, Realtime Database, Security Rules and App Check
+- **DVWA Security Casebook** — deployed, evidence-led controlled web-security casebook
+
+The older ICE penetration-testing project is no longer presented in the portfolio.
+
+## Dedicated project case studies
+
+- `/projects/taskflow`
+- `/projects/busbd-intelligence`
+- `/projects/neon-bay`
+- `/projects/assignment-writer-hire`
+- `/projects/real-madrid-management`
+- `/projects/foodmobochain-firebase`
+- `/projects/dvwa-security-casebook`
+
+Each case study includes architecture, screenshots, challenges, results and planned improvements.
+
 ## Preserved engineering upgrades
 
-- Four dedicated data-driven project case studies:
-  - `/projects/taskflow`
-  - `/projects/assignment-writer-hire`
-  - `/projects/real-madrid-management`
-  - `/projects/ice-pentest-lab`
-- Project architecture, screenshots, challenges, results and planned improvements
 - Spring mail contact endpoint with validation, honeypot protection and rate limiting
 - FormSubmit support for the static Vercel deployment
 - Canonical metadata, structured Person data, sitemap, robots file and web manifest
@@ -105,7 +122,7 @@ Research drafts are not described as accepted publications. Coursework or refere
 
 - Project source ZIPs, coursework archives and private reports are not included in deployable assets.
 - Project screenshots and concise case-study descriptions remain visible.
-- TaskFlow, Real Madrid, Assignment Writer Hire and ICE Lab use direct repository links.
+- Featured projects use verified repository and live-deployment links where available.
 - The corrected CV PDF and certificate PDFs remain public portfolio evidence.
 
 ## Main source files
