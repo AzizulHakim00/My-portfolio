@@ -1,40 +1,44 @@
-# Azizul Hakim Omor — Spring Boot Portfolio
+# Azizul Hakim Omor — Portfolio V3
 
-A responsive research and software portfolio built with Spring Boot 4.1, Java 17, Thymeleaf, HTML, CSS and JavaScript. The repository also includes a visually matching static Vercel deployment.
+A responsive research, software and cybersecurity portfolio built with Spring Boot 4.1, Java 17, Thymeleaf, HTML, CSS and JavaScript. The same homepage source is served by both Spring Boot and Vercel, preventing deployment copies from drifting apart.
 
-## Included sections
+## Portfolio V3 highlights
 
-- Cinematic hero entrance with animated network canvas, typing roles and portrait system
-- Scroll-linked section headings and reduced-motion accessibility
-- About, technical toolkit and education
-- Filterable featured-project gallery with pointer spotlights and smooth layout transitions
-- Collapsible project archive for smaller coursework projects
-- Detailed project dialogs with screenshots, technology stacks and verified links
-- TaskFlow full-stack Django case study with its Render deployment and repository
-- Featured Dual-Band research, Thyro-RIFT and DhakaStreetPlastic entries
-- Expandable research abstracts and honest status labels
-- ICE penetration-testing lab and cybersecurity certificates
-- Email, GitHub, LinkedIn, Codeforces, Instagram and Facebook links
-- Validated contact form using FormSubmit
-- Responsive mobile navigation, lazy image loading and reduced-motion support
+- Cinematic hero entrance, network canvas, typing roles and technical terminal panel
+- Persistent light/dark theme with reduced-motion accessibility
+- Interactive capability map connecting skills to project and research evidence
+- Advanced project search and filters for web, Java, mobile, security and database work
+- Four dedicated data-driven case studies with clean URLs:
+  - `/projects/taskflow`
+  - `/projects/assignment-writer-hire`
+  - `/projects/real-madrid-management`
+  - `/projects/ice-pentest-lab`
+- Project architecture diagrams, screenshots, engineering challenges, results and next steps
+- Live GitHub repository cards with safe fallbacks when API limits are reached
+- Live Codeforces rating, solved-problem estimate and common tags from the public API
+- Research workflow visualization and expandable research abstracts
+- Spring mail contact endpoint with validation, honeypot protection and per-address rate limiting
+- Automatic FormSubmit fallback for the static Vercel deployment
+- Canonical metadata, structured Person data, sitemap, robots file and web manifest
+- GitHub Actions checks for JavaScript syntax, Spring tests and Lighthouse quality thresholds
 
-The site intentionally contains no tutor, teacher, teaching, employment, professional-experience or CGPA claims.
+The portfolio intentionally contains no tutor, teacher, teaching, employment, professional-experience or CGPA claims.
 
 ## Run locally
 
-Requirements: Java 17 or newer. The Gradle wrapper downloads the matching Gradle distribution and dependencies on the first run.
+Requirements: Java 17 or newer.
 
 ```bash
 ./gradlew bootRun
 ```
-
-Open `http://localhost:8080`.
 
 On Windows:
 
 ```powershell
 .\gradlew.bat bootRun
 ```
+
+Open `http://localhost:8080`.
 
 ## Build the production JAR
 
@@ -43,59 +47,73 @@ On Windows:
 java -jar build/libs/azizul-hakim-omor-portfolio-1.0.0.jar
 ```
 
-## Deploy the genuine Spring Boot application
+## Contact email configuration
 
-### Render
+The Spring application can send email through SMTP. Keep credentials in hosting environment variables, never in GitHub.
 
-1. Push the project to GitHub.
-2. In Render, create a new Blueprint and select the repository.
-3. Render reads `render.yaml` and builds the supplied `Dockerfile`.
-4. The health check is available at `/health`.
+```text
+PORTFOLIO_CONTACT_ENABLED=true
+PORTFOLIO_CONTACT_RECIPIENT=mdomor01815@gmail.com
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USERNAME=your-smtp-user
+SMTP_PASSWORD=your-smtp-password
+SMTP_AUTH=true
+SMTP_STARTTLS=true
+```
 
-The same Dockerfile can be used on Railway, Fly.io or another JVM/Docker host.
+When these values are missing or the Spring endpoint is unavailable, the browser automatically uses the hosted FormSubmit flow. FormSubmit must be activated once from the recipient inbox.
+
+## Deployment
+
+### Render or another JVM host
+
+1. Push the repository to GitHub.
+2. Create the service using the included Docker/Render configuration.
+3. Add the optional SMTP variables in the host dashboard.
+4. Use `/health` for the health check.
 
 ### Vercel
 
-Vercel does not run the long-lived Spring Boot JVM application. This project therefore includes `vercel-static/index.html` and `vercel.json`, which deploy a matching static edition on Vercel while preserving the genuine Spring Boot source for a JVM host.
+Vercel serves the Thymeleaf homepage file as static HTML and serves the same static assets and case-study page used by Spring Boot. The `main` branch is connected to production, so pushes to `main` trigger a new deployment.
 
-1. Import the repository into Vercel.
-2. Choose **Other** as the framework preset.
-3. Deploy with the included `vercel.json`.
+The routing is defined in `vercel.json`. There is no longer a duplicated `vercel-static/index.html` homepage.
 
-The `main` branch is connected to the Vercel production project. Every push to `main` triggers a production redeployment, while pushes to other branches create preview deployments.
+## Automated quality checks
 
-The Spring Boot and static Vercel editions use FormSubmit's standard HTML POST flow. This avoids browser cross-origin AJAX failures and redirects visitors back to the portfolio after submission.
+The `Portfolio Quality` workflow runs:
 
-## Contact-form activation
+- Node syntax checks for the main JavaScript modules
+- `./gradlew clean test`
+- Lighthouse CI against the production homepage and selected case studies after a main-branch push
 
-1. Deploy the portfolio.
-2. Send one test message through the contact form.
-3. Open `mdomor01815@gmail.com` and confirm the FormSubmit activation email.
-4. Submit the test again. Future messages will arrive in that Gmail inbox.
-
-If the activation message is not visible, check the Spam and Promotions folders.
+The thresholds are stored in `lighthouserc.json`.
 
 ## Content accuracy
 
-The supplied CV included teaching, tutoring, assistant-lecturer, experience and CGPA claims that the owner explicitly said were false or should be hidden. The portfolio uses the corrected CV in `src/main/resources/static/assets/downloads/Azizul_Hakim_Omor_CV_2026.pdf` instead.
-
-Research drafts are not described as accepted publications. Coursework/reference archives with uncertain or different authorship are labeled accordingly. See `CONTENT_AUDIT.md` for the source-by-source audit.
-
-The CPTE issue date shown in the source material is future-dated relative to July 21, 2026. The deployed interface hides that date and marks it as pending verification until the certificate date is confirmed.
+Research drafts are not described as accepted publications. Coursework/reference archives with uncertain or different authorship remain labeled accordingly. The future-dated CPTE issue date is hidden in the deployed interface until the source date is confirmed.
 
 ## Public-download policy
 
-- Project source ZIPs, coursework archives, UI reports, lab reports and the DhakaStreetPlastic full report are not included in deployable assets.
+- Project source ZIPs, coursework archives and private reports are not included in deployable assets.
 - Project screenshots and concise case-study descriptions remain visible.
-- TaskFlow, Real Madrid, Assignment Writer Hire and ICE Lab use direct repository links; TaskFlow also links to its live Render application.
-- The corrected CV PDF and certificate PDFs remain public portfolio evidence. The editable CV DOCX is not published.
+- TaskFlow, Real Madrid, Assignment Writer Hire and ICE Lab use direct repository links.
+- The corrected CV PDF and certificate PDFs remain public portfolio evidence.
 
 ## Main source files
 
 - `src/main/java/com/azizulportfolio/portfolio/PortfolioApplication.java`
 - `src/main/java/com/azizulportfolio/portfolio/controller/PortfolioController.java`
 - `src/main/resources/templates/index.html`
+- `src/main/resources/static/projects/index.html`
 - `src/main/resources/static/assets/css/style.css`
 - `src/main/resources/static/assets/css/upgrade.css`
+- `src/main/resources/static/assets/css/v3.css`
+- `src/main/resources/static/assets/css/case-study.css`
 - `src/main/resources/static/assets/js/app.js`
-- `src/main/resources/static/assets/js/upgrade.js`
+- `src/main/resources/static/assets/js/project-details.js`
+- `src/main/resources/static/assets/js/v3-foundation.js`
+- `src/main/resources/static/assets/js/v3-live.js`
+- `src/main/resources/static/assets/js/v3-contact.js`
+- `src/main/resources/static/assets/js/case-study-data.js`
+- `src/main/resources/static/assets/js/case-study.js`
