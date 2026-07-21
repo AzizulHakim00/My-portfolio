@@ -1,26 +1,34 @@
-# Azizul Hakim Omor — Portfolio V3
+# Azizul Hakim Omor — Research & Software Portfolio
 
-A responsive research, software and cybersecurity portfolio built with Spring Boot 4.1, Java 17, Thymeleaf, HTML, CSS and JavaScript. The same homepage source is served by both Spring Boot and Vercel, preventing deployment copies from drifting apart.
+A responsive research, software and cybersecurity portfolio built with Spring Boot 4.1, Java 17, Thymeleaf, HTML, CSS and JavaScript. Spring Boot and Vercel serve the same homepage source, preventing deployment copies from drifting apart.
 
-## Portfolio V3 highlights
+## Current design direction
 
-- Cinematic hero entrance, network canvas, typing roles and technical terminal panel
-- Persistent light/dark theme with reduced-motion accessibility
-- Interactive capability map connecting skills to project and research evidence
-- Advanced project search and filters for web, Java, mobile, security and database work
-- Four dedicated data-driven case studies with clean URLs:
+The homepage uses the cleaner pre-V3 visual system:
+
+- Cinematic but restrained hero entrance
+- Animated network canvas and typing roles
+- Spacious project, research and certificate sections
+- Subtle pointer spotlights and scroll reveals
+- Collapsible archive for smaller coursework projects
+- Quick-view project dialogs
+- Responsive navigation and reduced-motion accessibility
+
+The dashboard-style terminal, statistics blocks, capability map, live repository dashboard, advanced search panel and research progress dashboard are intentionally not loaded on the homepage.
+
+## Preserved engineering upgrades
+
+- Four dedicated data-driven project case studies:
   - `/projects/taskflow`
   - `/projects/assignment-writer-hire`
   - `/projects/real-madrid-management`
   - `/projects/ice-pentest-lab`
-- Project architecture diagrams, screenshots, engineering challenges, results and next steps
-- Live GitHub repository cards with safe fallbacks when API limits are reached
-- Live Codeforces rating, solved-problem estimate and common tags from the public API
-- Research workflow visualization and expandable research abstracts
-- Spring mail contact endpoint with validation, honeypot protection and per-address rate limiting
-- Automatic FormSubmit fallback for the static Vercel deployment
+- Project architecture, screenshots, challenges, results and planned improvements
+- Spring mail contact endpoint with validation, honeypot protection and rate limiting
+- FormSubmit support for the static Vercel deployment
 - Canonical metadata, structured Person data, sitemap, robots file and web manifest
 - GitHub Actions checks for JavaScript syntax, Spring tests and Lighthouse quality thresholds
+- One shared homepage source for Spring Boot and Vercel
 
 The portfolio intentionally contains no tutor, teacher, teaching, employment, professional-experience or CGPA claims.
 
@@ -62,7 +70,7 @@ SMTP_AUTH=true
 SMTP_STARTTLS=true
 ```
 
-When these values are missing or the Spring endpoint is unavailable, the browser automatically uses the hosted FormSubmit flow. FormSubmit must be activated once from the recipient inbox.
+When the Spring endpoint is not configured, the public Vercel contact form continues to use FormSubmit.
 
 ## Deployment
 
@@ -75,23 +83,23 @@ When these values are missing or the Spring endpoint is unavailable, the browser
 
 ### Vercel
 
-Vercel serves the Thymeleaf homepage file as static HTML and serves the same static assets and case-study page used by Spring Boot. The `main` branch is connected to production, so pushes to `main` trigger a new deployment.
+Vercel serves the Thymeleaf homepage as static HTML and uses the same assets and case-study renderer as Spring Boot. The `main` branch is connected to production, so pushes to `main` trigger a new deployment.
 
-The routing is defined in `vercel.json`. There is no longer a duplicated `vercel-static/index.html` homepage.
+Routing is defined in `vercel.json`. There is no duplicated Vercel homepage file.
 
 ## Automated quality checks
 
 The `Portfolio Quality` workflow runs:
 
-- Node syntax checks for the main JavaScript modules
+- Node syntax checks for the JavaScript modules
 - `./gradlew clean test`
-- Lighthouse CI against the production homepage and selected case studies after a main-branch push
+- Lighthouse CI after a main-branch deployment
 
 The thresholds are stored in `lighthouserc.json`.
 
 ## Content accuracy
 
-Research drafts are not described as accepted publications. Coursework/reference archives with uncertain or different authorship remain labeled accordingly. The future-dated CPTE issue date is hidden in the deployed interface until the source date is confirmed.
+Research drafts are not described as accepted publications. Coursework or reference archives with uncertain authorship remain labeled accordingly. The future-dated CPTE issue date is hidden until the source date is confirmed.
 
 ## Public-download policy
 
@@ -108,12 +116,9 @@ Research drafts are not described as accepted publications. Coursework/reference
 - `src/main/resources/static/projects/index.html`
 - `src/main/resources/static/assets/css/style.css`
 - `src/main/resources/static/assets/css/upgrade.css`
-- `src/main/resources/static/assets/css/v3.css`
 - `src/main/resources/static/assets/css/case-study.css`
 - `src/main/resources/static/assets/js/app.js`
 - `src/main/resources/static/assets/js/project-details.js`
-- `src/main/resources/static/assets/js/v3-foundation.js`
-- `src/main/resources/static/assets/js/v3-live.js`
-- `src/main/resources/static/assets/js/v3-contact.js`
+- `src/main/resources/static/assets/js/upgrade.js`
 - `src/main/resources/static/assets/js/case-study-data.js`
 - `src/main/resources/static/assets/js/case-study.js`
