@@ -11,6 +11,7 @@ import java.util.Deque;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class PortfolioController {
     private static final long RATE_WINDOW_MS = 60L * 60L * 1000L;
     private static final int RATE_LIMIT = 5;
 
-    private final JavaMailSender mailSender;
+    private final ObjectProvider<JavaMailSender> mailSenderProvider;
     private final Map<String, Deque<Long>> contactAttempts = new ConcurrentHashMap<>();
 
     @Value("${portfolio.contact.enabled:false}")
@@ -42,8 +43,8 @@ public class PortfolioController {
     @Value("${portfolio.contact.recipient:mdomor01815@gmail.com}")
     private String contactRecipient;
 
-    public PortfolioController(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
+    public PortfolioController(ObjectProvider<JavaMailSender> mailSenderProvider) {
+        this.mailSenderProvider = mailSenderProvider;
     }
 
     @GetMapping("/")
@@ -71,7 +72,8 @@ public class PortfolioController {
         if (message.honey() != null && !message.honey().isBlank()) {
             return ResponseEntity.ok(new ContactResponse("Message received.", true));
         }
-        if (!contactEnabled) {
+        JavaMailSender mailSender = mailSenderProvider.getIfAvailable();
+        if (!contactEnabled || mailSender == null) {
             return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
                     .body(new ContactResponse("Server email is not configured; use the hosted form fallback.", false));
         }
