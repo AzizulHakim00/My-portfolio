@@ -42,7 +42,18 @@ jobs:
           node --check src/main/resources/static/assets/js/case-study.js
 
       - name: Run Spring Boot tests
-        run: ./gradlew clean test
+        shell: bash
+        run: |
+          set +e
+          ./gradlew clean test --console=plain > gradle-test.log 2>&1
+          code=$?
+          if [ "$code" -ne 0 ]; then
+            echo "::group::Gradle failure summary"
+            grep -n -E -A35 -B12 "FAILURE:|What went wrong:|error:|Exception|Could not resolve|Could not compile" gradle-test.log | tail -n 180 || tail -n 180 gradle-test.log
+            echo "::endgroup::"
+            exit "$code"
+          fi
+          tail -n 40 gradle-test.log
 
   lighthouse:
     if: github.event_name != 'pull_request'
