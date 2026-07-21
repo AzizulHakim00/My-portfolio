@@ -27,6 +27,27 @@
     addMeta('meta[property="og:url"]', { property: "og:url", content: pageUrl });
     addMeta('meta[property="og:image"]', { property: "og:image", content: previewUrl });
     addMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
+    addMeta('link[rel="manifest"]', { tag: "link", rel: "manifest", href: "/site.webmanifest" });
+
+    if (!document.head.querySelector('script[data-portfolio-schema]')) {
+        const schema = document.createElement("script");
+        schema.type = "application/ld+json";
+        schema.dataset.portfolioSchema = "true";
+        schema.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Azizul Hakim Omor",
+            url: pageUrl,
+            email: "mailto:mdomor01815@gmail.com",
+            homeLocation: { "@type": "Place", name: "Dhaka, Bangladesh" },
+            sameAs: [
+                "https://github.com/AzizulHakim00",
+                "https://www.linkedin.com/in/azizul-hakim-omor-5991b3410/",
+                "https://codeforces.com/profile/heythere99"
+            ]
+        });
+        document.head.appendChild(schema);
+    }
 
     body.classList.add("motion-upgrade-ready");
     requestAnimationFrame(() => requestAnimationFrame(() => body.classList.add("motion-upgrade-play")));
@@ -80,7 +101,6 @@
 
     const archiveNames = new Set([
         "Bank Management",
-        "Firebase CRUD App",
         "Movie Management System",
         "Café Shop Management",
         "Fruit Market"
