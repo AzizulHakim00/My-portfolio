@@ -57,4 +57,11 @@
       live.innerHTML = `<div><strong>${profile.rating ?? "Unrated"}</strong><span>Current rating</span></div><div><strong>${profile.maxRating ?? "—"}</strong><span>Maximum rating</span></div><div><strong>${solved.size}</strong><span>Problems solved*</span></div><p>${topTags.map((tag) => `<b>${tag}</b>`).join("")}</p><small>*Calculated from the latest submissions returned by the public API.</small>`;
     }).catch(() => { live.innerHTML = "<span>Live profile data is temporarily unavailable. Open Codeforces for the current record.</span>"; });
   }
+
+  if (!document.querySelector('script[src^="/assets/js/v3-research.js"]')) {
+    const script = document.createElement("script");
+    script.src = "/assets/js/v3-research.js?v=20260721-v3";
+    script.async = false;
+    document.head.appendChild(script);
+  }
 })();
