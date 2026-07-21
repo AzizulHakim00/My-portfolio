@@ -13,16 +13,13 @@
     if (document.querySelector(`script[src^="${src.split("?")[0]}"]`)) return;
     const script = document.createElement("script");
     script.src = src;
-    script.async = false;
+    script.defer = true;
     document.head.appendChild(script);
   };
 
+  // Keep the clean pre-V3 homepage presentation and its subtle motion system.
   loadStyle("/assets/css/upgrade.css?v=20260721-motion");
-  loadStyle("/assets/css/v3.css?v=20260721-v3");
   loadScript("/assets/js/upgrade.js?v=20260721-motion");
-  loadScript("/assets/js/v3-foundation.js?v=20260721-v3");
-  loadScript("/assets/js/v3-live.js?v=20260721-v3");
-  loadScript("/assets/js/v3-contact.js?v=20260721-v3");
 
   const cards = [...document.querySelectorAll(".project-card[data-category]")];
   if (!cards.length) return;
@@ -56,6 +53,13 @@
     "Café Shop Management": ["Inventory and order-management direction", "JavaFX and FXML structure", "SQL-backed reporting scope", "Upcoming verified case study"],
     "Fruit Market": ["Product cards and storefront layout", "Selection and cart interactions", "Delivery-oriented visual components", "JavaFX, FXML and CSS interface"],
     "ICE Penetration-Testing Lab": ["Authorized Windows 7 test environment", "Nmap reconnaissance and SMB enumeration", "MS17-010 validation and controlled Metasploit workflow", "Meterpreter checks and evidence-driven reporting"]
+  };
+
+  const caseStudies = {
+    "TaskFlow": "/projects/taskflow",
+    "Assignment Writer Hire": "/projects/assignment-writer-hire",
+    "Real Madrid Club Management": "/projects/real-madrid-management",
+    "ICE Penetration-Testing Lab": "/projects/ice-pentest-lab"
   };
 
   const show = (requested) => {
@@ -104,8 +108,19 @@
       cover.className = "active";
       gallery?.prepend(cover);
     }
+
     const links = card.querySelector(".project-links");
     if (!links) return;
+
+    const caseStudyUrl = caseStudies[name];
+    if (caseStudyUrl && !links.querySelector(".project-case-study-link")) {
+      const caseStudyLink = document.createElement("a");
+      caseStudyLink.className = "project-case-study-link";
+      caseStudyLink.href = caseStudyUrl;
+      caseStudyLink.textContent = "Full case study ↗";
+      links.prepend(caseStudyLink);
+    }
+
     const button = document.createElement("button");
     button.type = "button";
     button.className = "project-view-details";
