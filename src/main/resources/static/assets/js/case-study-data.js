@@ -1,0 +1,63 @@
+window.PORTFOLIO_CASE_STUDIES = {
+  taskflow: {
+    eyebrow: "DJANGO · FULL-STACK WEB APPLICATION",
+    title: "TaskFlow",
+    summary: "A deployed task-management platform with authentication, user-scoped workspaces, task lifecycle controls, search, filtering and account management.",
+    tags: ["Python", "Django", "Authentication", "Responsive UI", "Database"],
+    repo: "https://github.com/AzizulHakim00/task-management-django",
+    live: "https://taskflow-django-dx0h.onrender.com",
+    images: ["/assets/images/projects/taskflow-gallery/01.webp","/assets/images/projects/taskflow-gallery/04.webp","/assets/images/projects/taskflow-gallery/05.webp","/assets/images/projects/taskflow-gallery/06.webp"],
+    problem: "Students and small teams need a clear place to create, prioritize and track tasks without mixing one user's records with another user's workspace.",
+    role: "Designed the responsive interface, authentication flow, user-scoped task logic, profile management and deployment workflow.",
+    architecture: ["Browser", "Django templates", "Views & authentication", "Task services", "Database"],
+    features: ["Registration, login and password management","User-scoped dashboard and task ownership","Priority, status, due-date, search and filtering","Profile editing and responsive layouts","Production deployment on Render"],
+    challenge: "The central technical challenge was keeping every task operation scoped to the authenticated user while preserving simple search and filtering behavior.",
+    result: "The deployed application demonstrates the complete account-to-task workflow across desktop and mobile layouts.",
+    next: ["Add team workspaces and invitations","Introduce notifications and recurring tasks","Add automated tests and activity history"]
+  },
+  "assignment-writer-hire": {
+    eyebrow: "JAVAFX · MYSQL · TWO-STAKEHOLDER DESKTOP SYSTEM",
+    title: "Assignment Writer Hire",
+    summary: "A desktop workflow for students to submit requests and select writers, with an administrator interface for managing users, writers, requests and order states.",
+    tags: ["Java 17", "JavaFX", "FXML", "MySQL", "Maven"],
+    repo: "https://github.com/AzizulHakim00/Assigment_writer_hire",
+    images: ["/assets/images/projects/assignment-hire/01.webp","/assets/images/projects/assignment-hire/03.webp","/assets/images/projects/assignment-hire/04.webp","/assets/images/projects/assignment-hire/06.webp"],
+    problem: "A multi-role desktop system needs separate student and administrator workflows while keeping requests, writers and order states consistent in one database.",
+    role: "Implemented JavaFX screens, FXML controllers, navigation, validation and MySQL-backed stakeholder workflows.",
+    architecture: ["Student UI", "JavaFX controllers", "Service logic", "JDBC / DAO", "MySQL", "Admin UI"],
+    features: ["Student registration and sign-in","Assignment request and writer selection","Order and request history","Administrator user and writer management","Order-state and request administration"],
+    challenge: "The main challenge was coordinating state between several FXML screens without duplicating database and navigation logic.",
+    result: "The system provides a complete demonstration flow for both stakeholders and persists the major records in MySQL.",
+    next: ["Move credentials to environment variables","Add role-based authorization checks","Add automated DAO and controller tests"]
+  },
+  "real-madrid-management": {
+    eyebrow: "JAVAFX · MYSQL · CLUB OPERATIONS",
+    title: "Real Madrid Club Management",
+    summary: "A desktop club-management system for players, matches, transfers, formations, training sessions and performance records.",
+    tags: ["Java", "JavaFX", "FXML", "MySQL", "Maven"],
+    repo: "https://github.com/AzizulHakim00/RealMadrid_Club_Management",
+    images: ["/assets/images/projects/real-madrid-gallery/01.webp","/assets/images/projects/real-madrid-gallery/02.webp","/assets/images/projects/real-madrid-gallery/03.webp","/assets/images/projects/real-madrid-gallery/06.webp"],
+    problem: "Club information is spread across different operational areas, so the project explores a unified desktop workflow for managing squad and performance data.",
+    role: "Built the JavaFX interface structure, FXML controllers, formation editing, data access and management screens.",
+    architecture: ["Dashboard", "FXML views", "Controllers", "Domain services", "MySQL", "Reports"],
+    features: ["Player and squad records","Match and training management","Formation editor","Transfer-market workflow","Performance tracking screens"],
+    challenge: "The most complex interface problem was representing formations and editable player placement while keeping database records synchronized.",
+    result: "Six documented screens demonstrate the core club-management workflow and persistent data direction.",
+    next: ["Add match analytics charts","Introduce permissions for staff roles","Add exportable reports and test coverage"]
+  },
+  "ice-pentest-lab": {
+    eyebrow: "AUTHORIZED CYBERSECURITY LAB · EVIDENCE-DRIVEN REPORTING",
+    title: "ICE Penetration-Testing Lab",
+    summary: "A controlled Windows 7 laboratory exercise documenting reconnaissance, SMB enumeration, MS17-010 validation, controlled exploitation and evidence capture.",
+    tags: ["Kali Linux", "Nmap", "Metasploit", "SMB", "MS17-010"],
+    repo: "https://github.com/AzizulHakim00/Cyber-Security---Project",
+    images: ["/assets/images/projects/ice-cybersecurity/00-command-dashboard.svg","/assets/images/projects/ice-cybersecurity/01.webp","/assets/images/projects/ice-cybersecurity/02.webp","/assets/images/projects/ice-cybersecurity/03.webp"],
+    problem: "The lab demonstrates how to validate a known vulnerability methodically without presenting the exercise as professional client work or uncontrolled exploitation.",
+    role: "Documented target discovery, service enumeration, vulnerability verification, exploitation steps and evidence from the authorized environment.",
+    architecture: ["Kali Linux", "Reconnaissance", "SMB enumeration", "Vulnerability validation", "Controlled exploitation", "Evidence report"],
+    features: ["Target and port discovery","SMB service inspection","MS17-010 checking","Controlled Metasploit workflow","Session verification and screenshots","Responsible scope and evidence notes"],
+    challenge: "The key challenge was separating observed evidence from assumptions and preserving a reproducible, authorized sequence of checks.",
+    result: "The case study communicates both the technical workflow and the ethical boundaries of the lab.",
+    next: ["Add remediation verification","Map findings to risk and mitigation","Create a sanitized executive-summary report"]
+  }
+};
