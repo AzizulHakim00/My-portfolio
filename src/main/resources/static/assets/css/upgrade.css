@@ -61,13 +61,18 @@ body.motion-upgrade-ready.motion-upgrade-play .hero-visual { transition-delay: .
 .project-card::before {
     content: "";
     position: absolute;
-    z-index: -1;
-    inset: -1px;
+    z-index: 0;
+    inset: 0;
     border-radius: inherit;
     pointer-events: none;
     background: radial-gradient(440px circle at var(--spot-x) var(--spot-y), rgba(32, 200, 196, .18), transparent 42%);
     opacity: 0;
     transition: opacity .25s ease;
+}
+
+.project-card > * {
+    position: relative;
+    z-index: 1;
 }
 
 .project-card.spotlight-active::before,
@@ -156,6 +161,10 @@ body.motion-upgrade-ready.motion-upgrade-play .hero-visual { transition-delay: .
 .projects-grid.archive-open .project-card.portfolio-archive-card {
     display: flex;
     animation: archive-card-in .5s var(--motion-ease) both;
+}
+
+.projects-grid.archive-open .project-card.portfolio-archive-card.hidden {
+    display: none;
 }
 
 @keyframes archive-card-in {
