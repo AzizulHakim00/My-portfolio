@@ -1,12 +1,29 @@
 (() => {
   "use strict";
+
+  const loadStyle = (href) => {
+    if (document.querySelector(`link[href^="${href.split("?")[0]}"]`)) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  };
+
+  const loadScript = (src) => {
+    if (document.querySelector(`script[src^="${src.split("?")[0]}"]`)) return;
+    const script = document.createElement("script");
+    script.src = src;
+    script.defer = true;
+    document.head.appendChild(script);
+  };
+
+  loadStyle("/assets/css/upgrade.css?v=20260721-motion");
+  loadScript("/assets/js/upgrade.js?v=20260721-motion");
+
   const cards = [...document.querySelectorAll(".project-card[data-category]")];
   if (!cards.length) return;
 
-  const style = document.createElement("link");
-  style.rel = "stylesheet";
-  style.href = "/assets/css/project-details.css?v=20260719";
-  document.head.appendChild(style);
+  loadStyle("/assets/css/project-details.css?v=20260719");
 
   const modal = document.createElement("dialog");
   modal.className = "project-details-modal";
@@ -88,7 +105,7 @@
     const button = document.createElement("button");
     button.type = "button";
     button.className = "project-view-details";
-    button.textContent = "View details ↗";
+    button.textContent = "View case study ↗";
     button.addEventListener("click", () => open(card, button));
     links.prepend(button);
   });
