@@ -1,58 +1,44 @@
 (() => {
   "use strict";
 
-  const loadStyle = (href) => {
+  const addStyle = (href) => {
     if (document.querySelector(`link[href^="${href.split("?")[0]}"]`)) return;
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = href;
-    document.head.appendChild(link);
+    const node = document.createElement("link");
+    node.rel = "stylesheet";
+    node.href = href;
+    document.head.appendChild(node);
   };
-
-  const loadScript = (src) => {
+  const addScript = (src) => {
     if (document.querySelector(`script[src^="${src.split("?")[0]}"]`)) return;
-    const script = document.createElement("script");
-    script.src = src;
-    script.defer = true;
-    document.head.appendChild(script);
+    const node = document.createElement("script");
+    node.src = src;
+    node.async = false;
+    document.head.appendChild(node);
   };
 
-  loadStyle("/assets/css/upgrade.css?v=20260721-motion");
-  loadScript("/assets/js/upgrade.js?v=20260721-motion");
+  addStyle("/assets/css/upgrade.css?v=20260721-motion");
+  addScript("/assets/js/upgrade.js?v=20260721-motion");
 
   const grid = document.querySelector(".projects-grid");
   if (!grid) return;
+  const findCard = (name) => [...grid.querySelectorAll(".project-card")]
+    .find((card) => card.querySelector(".project-body h3")?.textContent.trim() === name);
 
-  const cardByTitle = (title) => [...grid.querySelectorAll(".project-card")]
-    .find((card) => card.querySelector(".project-body h3")?.textContent.trim() === title);
-
-  const createProjectCard = ({ category, title, type, description, technologies, images, badge, links }) => {
-    const article = document.createElement("article");
-    article.className = "project-card reveal visible";
-    article.dataset.category = category;
-    article.innerHTML = `
-      <figure class="project-gallery" data-gallery>
-        ${images.map((image, index) => `<img${index === 0 ? ' class="active"' : ''} src="${image.src}" alt="${image.alt}"${index === 0 ? '' : ' loading="lazy"'}>`).join("")}
-        <span>${badge}</span>
-        <div class="gallery-controls"><button type="button" data-prev aria-label="Previous ${title} screenshot">←</button><b>1 / ${images.length}</b><button type="button" data-next aria-label="Next ${title} screenshot">→</button></div>
-      </figure>
-      <div class="project-body">
-        <p class="project-type">${type}</p>
-        <h3>${title}</h3>
-        <p>${description}</p>
-        <ul>${technologies.map((technology) => `<li>${technology}</li>`).join("")}</ul>
-        <div class="project-links">${links.map((link) => `<a href="${link.href}"${link.external ? ' target="_blank" rel="noreferrer"' : ''}>${link.label}</a>`).join("")}</div>
-      </div>`;
-    return article;
+  const makeCard = ({ category, title, type, description, tech, images, badge, links }) => {
+    const card = document.createElement("article");
+    card.className = "project-card reveal visible";
+    card.dataset.category = category;
+    card.innerHTML = `<figure class="project-gallery" data-gallery>${images.map((item, index) => `<img${index ? "" : ' class="active"'} src="${item.src}" alt="${item.alt}"${index ? ' loading="lazy"' : ""}>`).join("")}<span>${badge}</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous ${title} screenshot">←</button><b>1 / ${images.length}</b><button type="button" data-next aria-label="Next ${title} screenshot">→</button></div></figure><div class="project-body"><p class="project-type">${type}</p><h3>${title}</h3><p>${description}</p><ul>${tech.map((item) => `<li>${item}</li>`).join("")}</ul><div class="project-links">${links.map((item) => `<a href="${item.href}"${item.external ? ' target="_blank" rel="noreferrer"' : ""}>${item.label}</a>`).join("")}</div></div>`;
+    return card;
   };
 
-  if (!cardByTitle("BusBD Intelligence")) {
-    const busCard = createProjectCard({
+  if (!findCard("BusBD Intelligence")) {
+    const card = makeCard({
       category: "web",
       title: "BusBD Intelligence",
       type: "SPRING BOOT · REACT · POSTGRESQL · REDIS",
       description: "An enterprise bus-booking and travel-intelligence platform with passenger profiles, advanced seat layouts, persistent bookings, Redis-compatible seat locking, mock payments, signed QR verification, cancellation, refunds and live route intelligence.",
-      technologies: ["Java 21", "Spring Boot", "React", "PostgreSQL", "Redis"],
+      tech: ["Java 21", "Spring Boot", "React", "PostgreSQL", "Redis"],
       images: [
         { src: "/assets/images/projects/busbd-intelligence/01-search-hero.svg", alt: "BusBD Intelligence deployed search and booking homepage" },
         { src: "/assets/images/projects/busbd-intelligence/02-live-tracking.svg", alt: "BusBD Intelligence live tracking and AI arrival prediction interface" }
@@ -63,16 +49,16 @@
         { href: "https://github.com/AzizulHakim00/BusBD-Intelligence", label: "GitHub repository ↗", external: true }
       ]
     });
-    cardByTitle("TaskFlow")?.insertAdjacentElement("afterend", busCard);
+    findCard("TaskFlow")?.insertAdjacentElement("afterend", card);
   }
 
-  if (!cardByTitle("Neon Bay")) {
-    const neonCard = createProjectCard({
+  if (!findCard("Neon Bay")) {
+    const card = makeCard({
       category: "web",
       title: "Neon Bay",
       type: "THREE.JS · VITE · BROWSER 3D GAME",
       description: "An original browser-based 3D open-city action game with five connected missions, driving, combat, police pursuit, shops, saving, dynamic weather, desktop and mobile controls, modular AI and distinct vehicle handling.",
-      technologies: ["Three.js", "JavaScript", "Vite", "Game AI", "WebGL"],
+      tech: ["Three.js", "JavaScript", "Vite", "Game AI", "WebGL"],
       images: [
         { src: "/assets/images/projects/neon-bay/neon-bay-ocean-drive.svg", alt: "Neon Bay Ocean Drive promotional game visual" },
         { src: "/assets/images/projects/neon-bay/neon-bay-driving-physics.svg", alt: "Neon Bay driving physics promotional visual" },
@@ -84,29 +70,27 @@
         { href: "https://github.com/AzizulHakim00/Neon-Bay", label: "GitHub repository ↗", external: true }
       ]
     });
-    cardByTitle("BusBD Intelligence")?.insertAdjacentElement("afterend", neonCard);
+    findCard("BusBD Intelligence")?.insertAdjacentElement("afterend", card);
   }
 
-  const foodCard = cardByTitle("FoodMoboChain");
-  if (foodCard) {
-    foodCard.querySelector(".project-type").textContent = "ANDROID · FIREBASE · SECURE MARKETPLACE";
-    foodCard.querySelector("h3").textContent = "FoodMoboChain Firebase";
-    const description = foodCard.querySelector(".project-body > p:not(.project-type)");
-    if (description) description.textContent = "A Java/XML Android marketplace MVP with buyer, vendor, student and administrator roles, Firebase Authentication, Realtime Database, server-enforced Security Rules, protected ordering, rentals, reviews, moderation and App Check.";
-    foodCard.querySelector("ul")?.replaceChildren(...["Android", "Java", "Firebase Auth", "Realtime DB", "Security Rules"].map((text) => Object.assign(document.createElement("li"), { textContent: text })));
-    const links = foodCard.querySelector(".project-links");
-    if (links) links.innerHTML = '<a href="https://github.com/AzizulHakim00/FoodMoboChain_Firebase" target="_blank" rel="noreferrer">GitHub repository ↗</a>';
-    foodCard.querySelector("figure > span").textContent = "FIREBASE MARKETPLACE";
+  const food = findCard("FoodMoboChain");
+  if (food) {
+    food.querySelector(".project-type").textContent = "ANDROID · FIREBASE · SECURE MARKETPLACE";
+    food.querySelector("h3").textContent = "FoodMoboChain Firebase";
+    food.querySelector(".project-body > p:not(.project-type)").textContent = "A Java/XML Android marketplace MVP with buyer, vendor, student and administrator roles, Firebase Authentication, Realtime Database, server-enforced Security Rules, protected ordering, rentals, reviews, moderation and App Check.";
+    food.querySelector("ul")?.replaceChildren(...["Android", "Java", "Firebase Auth", "Realtime DB", "Security Rules"].map((text) => Object.assign(document.createElement("li"), { textContent: text })));
+    food.querySelector(".project-links").innerHTML = '<a href="https://github.com/AzizulHakim00/FoodMoboChain_Firebase" target="_blank" rel="noreferrer">GitHub repository ↗</a>';
+    food.querySelector("figure > span").textContent = "FIREBASE MARKETPLACE";
   }
 
-  const iceCard = cardByTitle("ICE Penetration-Testing Lab");
-  if (iceCard) {
-    const dvwaCard = createProjectCard({
+  const ice = findCard("ICE Penetration-Testing Lab");
+  if (ice) {
+    ice.replaceWith(makeCard({
       category: "security",
       title: "DVWA Security Casebook",
       type: "CYBERSECURITY · WEB APPLICATION SECURITY",
       description: "An evidence-led, controlled DVWA penetration-testing casebook covering ten vulnerability modules, 25 payload and command records, 38 lab-evidence screenshots, security-level observations and developer-focused remediation guidance.",
-      technologies: ["DVWA", "Burp Suite", "SQL Injection", "XSS", "CSRF", "Remediation"],
+      tech: ["DVWA", "Burp Suite", "SQL Injection", "XSS", "CSRF", "Remediation"],
       images: [
         { src: "/assets/images/projects/dvwa-casebook/01-hero-terminal.svg", alt: "DVWA Security Casebook evidence-led assessment overview" },
         { src: "/assets/images/projects/dvwa-casebook/02-module-ledger.svg", alt: "DVWA Security Casebook vulnerability module ledger" }
@@ -116,15 +100,13 @@
         { href: "https://azizulhakim00.github.io/dvwa-security-casebook/", label: "Live casebook ↗", external: true },
         { href: "https://github.com/AzizulHakim00/dvwa-security-casebook", label: "GitHub repository ↗", external: true }
       ]
-    });
-    iceCard.replaceWith(dvwaCard);
+    }));
   }
 
+  addScript("/assets/js/runtime-projects.js?v=20260721-projects");
+  addStyle("/assets/css/project-details.css?v=20260719");
+
   const cards = [...document.querySelectorAll(".project-card[data-category]")];
-  if (!cards.length) return;
-
-  loadStyle("/assets/css/project-details.css?v=20260719");
-
   const modal = document.createElement("dialog");
   modal.className = "project-details-modal";
   modal.innerHTML = `<button class="project-details-close" type="button" aria-label="Close project details">×</button><div class="project-details-layout"><section class="project-details-visual"><div class="project-details-stage"><img alt=""></div><div class="project-details-gallery-controls"><button type="button" data-prev aria-label="Previous screenshot">←</button><b>1 / 1</b><button type="button" data-next aria-label="Next screenshot">→</button></div><div class="project-details-thumbs"></div></section><section class="project-details-copy"><p class="project-type" data-type></p><h2 data-title></h2><p class="project-details-description" data-description></p><div class="project-details-section"><h3>Technology stack</h3><ul data-tech></ul></div><div class="project-details-section"><h3>Project highlights</h3><ul data-highlights></ul></div><div class="project-details-actions" data-actions></div></section></div>`;
@@ -136,27 +118,26 @@
   const counter = q(".project-details-gallery-controls b");
   const previous = q("[data-prev]");
   const next = q("[data-next]");
-  const title = q("[data-title]");
+  const modalTitle = q("[data-title]");
   let images = [];
-  let index = 0;
+  let imageIndex = 0;
   let returnFocus = null;
 
-  const highlightsByProject = {
+  const highlights = {
     "TaskFlow": ["Registration, authentication and user-scoped dashboards", "Tasks with priority, status, due dates, search and filtering", "Profile editing and password management", "Deployed full-stack Django application"],
-    "BusBD Intelligence": ["Passenger registration, profiles and multi-point journeys", "Persistent booking records and Redis-compatible seat locking", "Advanced seat layouts, passenger details and mock payment", "Signed QR verification, cancellations and refunds", "Deployed Spring Boot and React platform"],
-    "Neon Bay": ["Five connected story missions", "Vehicle-specific speed, grip, steering and drift behavior", "Pistol and shotgun combat with tactical enemy states", "Police pursuit, weather, saving and mobile controls", "Tested Vite production deployment"],
+    "BusBD Intelligence": ["Passenger registration, profiles and multi-point journeys", "Persistent bookings and Redis-compatible seat locking", "Advanced seat layouts, mock payment and signed QR verification", "Cancellation, refund and deployment-ready environment profiles"],
+    "Neon Bay": ["Five connected story missions", "Vehicle-specific handling and articulated player movement", "Pistol and shotgun combat with tactical enemy states", "Police pursuit, weather, saving and mobile controls"],
     "Assignment Writer Hire": ["Student and administrator stakeholder workflows", "Requests, writer selection, orders and history", "Administration screens for users and writers", "JavaFX, FXML and MySQL architecture"],
     "Real Madrid Club Management": ["Players, matches, transfers and training management", "Formation editing and performance records", "FXML controllers and database persistence", "Six documented working screens"],
-    "FoodMoboChain Firebase": ["Buyer, vendor, student and administrator roles", "Firebase Authentication and Realtime Database", "Server-enforced Security Rules and App Check", "Protected orders, rentals, reviews and moderation", "Spark-plan-compatible Android MVP"],
+    "FoodMoboChain Firebase": ["Buyer, vendor, student and administrator roles", "Firebase Authentication, Realtime Database and App Check", "Server-enforced prices, ownership and status transitions", "Orders, rentals, reviews, newsfeed and moderation"],
     "Bank Management": ["Administrator and client dashboards", "Accounts, deposits and transaction records", "Persistent SQLite data", "JavaFX coursework system"],
     "Firebase CRUD App": ["Firebase Authentication", "Realtime Database create, update and delete operations", "Restaurant, food and order screens", "Android learning project"],
     "Movie Management System": ["Collaborative coursework archive", "Desktop management and database direction", "Authorship presented honestly", "Full case study planned after verified evidence"],
     "Café Shop Management": ["Inventory and order-management direction", "JavaFX and FXML structure", "SQL-backed reporting scope", "Upcoming verified case study"],
     "Fruit Market": ["Product cards and storefront layout", "Selection and cart interactions", "Delivery-oriented visual components", "JavaFX, FXML and CSS interface"],
-    "DVWA Security Casebook": ["Ten controlled-lab vulnerability modules", "Twenty-five payload and command records", "Thirty-eight indexed evidence screenshots", "Burp Suite and browser-based testing workflows", "Defensive recommendations for every module"]
+    "DVWA Security Casebook": ["Ten controlled-lab vulnerability modules", "Twenty-five payload and command records", "Thirty-eight indexed evidence screenshots", "Search, severity filters, fullscreen evidence and remediation guidance"]
   };
-
-  const caseStudies = {
+  const studies = {
     "TaskFlow": "/projects/taskflow",
     "BusBD Intelligence": "/projects/busbd-intelligence",
     "Neon Bay": "/projects/neon-bay",
@@ -167,13 +148,13 @@
   };
 
   const show = (requested) => {
-    index = (requested + images.length) % images.length;
-    stage.src = images[index].src;
-    stage.alt = images[index].alt || `${title.textContent} screenshot ${index + 1}`;
-    counter.textContent = `${index + 1} / ${images.length}`;
+    imageIndex = (requested + images.length) % images.length;
+    stage.src = images[imageIndex].src;
+    stage.alt = images[imageIndex].alt || `${modalTitle.textContent} screenshot ${imageIndex + 1}`;
+    counter.textContent = `${imageIndex + 1} / ${images.length}`;
     previous.hidden = images.length < 2;
     next.hidden = images.length < 2;
-    [...thumbs.children].forEach((button, i) => button.classList.toggle("active", i === index));
+    [...thumbs.children].forEach((button, index) => button.classList.toggle("active", index === imageIndex));
   };
 
   const open = (card, trigger) => {
@@ -187,13 +168,13 @@
     if (!images.length) images = [{ src: "/assets/images/projects/project-fallback.svg", alt: `${name} project visual` }];
 
     q("[data-type]").textContent = type;
-    title.textContent = name;
+    modalTitle.textContent = name;
     q("[data-description]").textContent = description;
     q("[data-tech]").replaceChildren(...technologies.map((text) => Object.assign(document.createElement("li"), { textContent: text })));
-    q("[data-highlights]").replaceChildren(...(highlightsByProject[name] || ["Portfolio project summary", `${images.length} project visual${images.length === 1 ? "" : "s"}`, "Available source and deployment links are shown below"]).map((text) => Object.assign(document.createElement("li"), { textContent: text })));
+    q("[data-highlights]").replaceChildren(...(highlights[name] || ["Portfolio project summary", `${images.length} project visuals`, "Verified links are shown below"]).map((text) => Object.assign(document.createElement("li"), { textContent: text })));
     q("[data-actions]").replaceChildren(...links.map((link) => { const clone = link.cloneNode(true); clone.className = "project-details-action"; return clone; }));
-    thumbs.replaceChildren(...images.map((data, i) => { const button = document.createElement("button"); button.type = "button"; button.setAttribute("aria-label", `Show screenshot ${i + 1}`); const image = document.createElement("img"); image.src = data.src; image.alt = ""; button.appendChild(image); button.addEventListener("click", () => show(i)); return button; }));
-    index = 0;
+    thumbs.replaceChildren(...images.map((data, index) => { const button = document.createElement("button"); button.type = "button"; button.setAttribute("aria-label", `Show screenshot ${index + 1}`); const image = document.createElement("img"); image.src = data.src; image.alt = ""; button.appendChild(image); button.addEventListener("click", () => show(index)); return button; }));
+    imageIndex = 0;
     show(0);
     modal.showModal();
     document.body.classList.add("project-details-open");
@@ -204,16 +185,13 @@
     const name = card.querySelector(".project-body h3")?.textContent.trim();
     const links = card.querySelector(".project-links");
     if (!links) return;
-
-    const caseStudyUrl = caseStudies[name];
-    if (caseStudyUrl && !links.querySelector(".project-case-study-link")) {
-      const caseStudyLink = document.createElement("a");
-      caseStudyLink.className = "project-case-study-link";
-      caseStudyLink.href = caseStudyUrl;
-      caseStudyLink.textContent = "Full case study ↗";
-      links.prepend(caseStudyLink);
+    if (studies[name]) {
+      const link = document.createElement("a");
+      link.className = "project-case-study-link";
+      link.href = studies[name];
+      link.textContent = "Full case study ↗";
+      links.prepend(link);
     }
-
     const button = document.createElement("button");
     button.type = "button";
     button.className = "project-view-details";
@@ -222,11 +200,11 @@
     links.prepend(button);
   });
 
-  previous.addEventListener("click", () => show(index - 1));
-  next.addEventListener("click", () => show(index + 1));
+  previous.addEventListener("click", () => show(imageIndex - 1));
+  next.addEventListener("click", () => show(imageIndex + 1));
   const close = () => { modal.close(); document.body.classList.remove("project-details-open"); returnFocus?.focus(); };
   q(".project-details-close").addEventListener("click", close);
   modal.addEventListener("click", (event) => { if (event.target === modal) close(); });
   modal.addEventListener("cancel", (event) => { event.preventDefault(); close(); });
-  document.addEventListener("keydown", (event) => { if (!modal.open) return; if (event.key === "ArrowLeft") show(index - 1); if (event.key === "ArrowRight") show(index + 1); });
+  document.addEventListener("keydown", (event) => { if (!modal.open) return; if (event.key === "ArrowLeft") show(imageIndex - 1); if (event.key === "ArrowRight") show(imageIndex + 1); });
 })();
