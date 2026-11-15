@@ -42,7 +42,7 @@
             homeLocation: { "@type": "Place", name: "Dhaka, Bangladesh" },
             sameAs: [
                 "https://github.com/AzizulHakim00",
-                "https://www.linkedin.com/in/azizul-hakim-omor-5991b3410/",
+                "https://www.linkedin.com/in/azizul-hakim-omor-343132423/",
                 "https://codeforces.com/profile/heythere99"
             ]
         });
