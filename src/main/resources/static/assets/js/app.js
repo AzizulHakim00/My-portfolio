@@ -11,6 +11,50 @@
     const sections = [...document.querySelectorAll("main section[id]")];
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    // Play the cinematic AHO intro once per browser tab session.
+    const ahoIntro = document.querySelector("#aho-intro");
+    if (ahoIntro) {
+        let introAlreadySeen = false;
+        try {
+            introAlreadySeen = window.sessionStorage.getItem("aho-intro-seen") === "1";
+        } catch (_) {
+            // Storage may be unavailable in private or restricted browsing contexts.
+        }
+
+        if (introAlreadySeen || reducedMotion) {
+            ahoIntro.remove();
+        } else {
+            document.body.classList.add("aho-intro-open");
+            let introFinished = false;
+            let introTimer;
+
+            const dismissAhoIntro = () => {
+                if (introFinished) return;
+                introFinished = true;
+                window.clearTimeout(introTimer);
+                try {
+                    window.sessionStorage.setItem("aho-intro-seen", "1");
+                } catch (_) {
+                    // The intro still works when session storage is blocked.
+                }
+                document.body.classList.remove("aho-intro-open");
+                ahoIntro.classList.add("is-leaving");
+                window.removeEventListener("keydown", handleIntroKeydown);
+                window.setTimeout(() => ahoIntro.remove(), 950);
+            };
+
+            const handleIntroKeydown = (event) => {
+                if (event.key === "Escape") dismissAhoIntro();
+            };
+
+            ahoIntro.querySelectorAll("[data-aho-intro-enter]").forEach((button) => {
+                button.addEventListener("click", dismissAhoIntro);
+            });
+            window.addEventListener("keydown", handleIntroKeydown);
+            introTimer = window.setTimeout(dismissAhoIntro, 10500);
+        }
+    }
+
     const closeMenu = () => {
         nav?.classList.remove("open");
         document.body.classList.remove("menu-open");
