@@ -35,6 +35,8 @@ public class PortfolioController {
             "assignment-writer-hire",
             "real-madrid-management",
             "foodmobochain-firebase",
+            "jersey-see",
+            "food-mobo-chain",
             "dvwa-security-casebook"
     );
     private static final long RATE_WINDOW_MS = 60L * 60L * 1000L;

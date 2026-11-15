@@ -10,7 +10,7 @@ The homepage uses the cleaner pre-V3 visual system:
 - Animated network canvas and typing roles
 - Spacious project, research and certificate sections
 - Subtle pointer spotlights and scroll reveals
-- Collapsible archive for smaller coursework projects
+- Screenshot galleries and quick views for featured projects
 - Quick-view project dialogs
 - Responsive navigation and reduced-motion accessibility
 
@@ -22,6 +22,8 @@ The current featured portfolio adds:
 
 - **BusBD Intelligence** — deployed Spring Boot, React, PostgreSQL and Redis-compatible travel platform
 - **Neon Bay** — deployed Three.js browser-based 3D action game
+- **JerseySee** — Spring Boot football merchandise store with size-specific stock and staff order tools
+- **Food Mobo Chain** — Spring Boot and MongoDB food ordering web app with a Render staging demo
 - **FoodMoboChain Firebase** — Android marketplace MVP with Firebase Authentication, Realtime Database, Security Rules and App Check
 - **DVWA Security Casebook** — deployed, evidence-led controlled web-security casebook
 
@@ -35,6 +37,8 @@ The older ICE penetration-testing project is no longer presented in the portfoli
 - `/projects/assignment-writer-hire`
 - `/projects/real-madrid-management`
 - `/projects/foodmobochain-firebase`
+- `/projects/jersey-see`
+- `/projects/food-mobo-chain`
 - `/projects/dvwa-security-casebook`
 
 Each case study includes architecture, screenshots, challenges, results and planned improvements.
@@ -116,7 +120,7 @@ The thresholds are stored in `lighthouserc.json`.
 
 ## Content accuracy
 
-Research drafts are not described as accepted publications. Coursework or reference archives with uncertain authorship remain labeled accordingly. The future-dated CPTE issue date is hidden until the source date is confirmed.
+The research section records author order, venue, and the documented status of each conference submission. Presentation certificates are available for MARSCON 2026 and IEEE WIECON-ECE 2026.
 
 ## Public-download policy
 

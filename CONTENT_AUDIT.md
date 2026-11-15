@@ -1,6 +1,6 @@
 # Portfolio Content Audit
 
-This audit records how every supplied portfolio-related archive was handled.
+This audit records how earlier portfolio-related archives were handled. The November 2026 refresh removed public project source ZIPs and replaced archive cards with current project galleries, including Maze Bank. Conference records now use the status supplied for each entry, and three presentation certificates are included.
 
 ## Reference and previous portfolio
 
@@ -19,7 +19,7 @@ This audit records how every supplied portfolio-related archive was handled.
 
 ## Certificates
 
-- `certificate(1).pdf`: included as the Applied Penetration Testing assessment certificate, corrected score 94, certificate ID 4940.
+- `certificate(1).pdf`: included as the Applied Penetration Testing assessment certificate, score 100, certificate ID 4940.
 - `Vendor certificate_Azziul(1).pdf`: the newly supplied copy is truncated/corrupt. A valid earlier supplied CPTE certificate and preview are included instead.
 
 ## Software projects
@@ -33,8 +33,8 @@ This audit records how every supplied portfolio-related archive was handled.
 
 ## Research and working papers
 
-- `Thyro-RIFT(1).zip`: represented by a concise abstract and the verified GitHub repository only. Status is `Pending for acceptance`; no manuscript PDF or downloadable source archive is published by the portfolio.
-- `Dual-Band Single Negative Metamaterial Sensor for(1).zip`: represented by a concise abstract and the verified GitHub repository only. Status is `Pending for acceptance`; no manuscript PDF or downloadable source archive is published by the portfolio.
+- `Thyro-RIFT(1).zip`: represented by a concise abstract and the verified GitHub repository only. Current conference status is shown in the research section. No manuscript PDF or downloadable source archive is published by the portfolio.
+- `Dual-Band Single Negative Metamaterial Sensor for(1).zip`: represented by a concise abstract and the verified GitHub repository only. Current conference status is shown in the research section. No manuscript PDF or downloadable source archive is published by the portfolio.
 - `EdgeTHzCal_Submission_Draft.zip`: listed as `Upcoming`. No abstract, manuscript, repository or download is exposed yet.
 - `Mirage(1).zip`: listed as `Upcoming`. No abstract, notebook, repository or download is exposed yet.
 - `banckcrupt(1).zip`: BAG-ProNet-RQ is listed as `Upcoming`. No abstract, repository or download is exposed yet.

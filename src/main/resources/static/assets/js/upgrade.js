@@ -99,34 +99,6 @@
         }
     });
 
-    const archiveNames = new Set([
-        "Bank Management",
-        "Movie Management System",
-        "Café Shop Management",
-        "Fruit Market"
-    ]);
-    const projectGrid = document.querySelector(".projects-grid");
-    const archiveCards = cards.filter((card) => archiveNames.has(card.querySelector(".project-body h3")?.textContent.trim()));
-    archiveCards.forEach((card) => card.classList.add("portfolio-archive-card"));
-
-    if (projectGrid && archiveCards.length) {
-        const wrap = document.createElement("div");
-        wrap.className = "archive-toggle-wrap";
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "archive-toggle";
-        button.setAttribute("aria-expanded", "false");
-        button.textContent = `Show project archive (${archiveCards.length})`;
-        button.addEventListener("click", () => {
-            const open = !projectGrid.classList.contains("archive-open");
-            projectGrid.classList.toggle("archive-open", open);
-            button.setAttribute("aria-expanded", String(open));
-            button.textContent = open ? "Hide project archive" : `Show project archive (${archiveCards.length})`;
-        });
-        wrap.appendChild(button);
-        projectGrid.insertAdjacentElement("afterend", wrap);
-    }
-
     document.querySelectorAll(".research-feature-copy > p:not(.project-type), .primary-research-card > p:not(.project-type)").forEach((paragraph) => {
         if (paragraph.textContent.trim().length < 430) return;
         paragraph.classList.add("clamp-copy");
@@ -139,17 +111,6 @@
             button.textContent = expanded ? "Show less" : "Read full abstract";
         });
         paragraph.insertAdjacentElement("afterend", button);
-    });
-
-    document.querySelectorAll(".certificate-card dl > div").forEach((row) => {
-        const label = row.querySelector("dt")?.textContent.trim().toLowerCase();
-        const value = row.querySelector("dd");
-        if (label !== "issued" || !value || value.textContent.trim() !== "06 September 2026") return;
-        value.textContent = "Pending date verification";
-        const note = document.createElement("span");
-        note.className = "date-verification-note";
-        note.textContent = "Future-dated source hidden until confirmed";
-        row.appendChild(note);
     });
 
     document.querySelectorAll("img").forEach((image, index) => {
