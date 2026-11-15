@@ -814,292 +814,93 @@ button { color: inherit; }
 }
 
 body.aho-intro-open { overflow: hidden; }
+
 .aho-intro:not([open]) { display: none; }
 .aho-intro::backdrop { background: transparent; }
 .aho-intro {
     position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
     width: 100%;
     height: 100%;
     max-width: none;
     max-height: none;
     margin: 0;
     padding: 0;
+    overflow: hidden;
     border: 0;
-    z-index: 2000;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-    background: #020709;
+    background: radial-gradient(ellipse at 50% 48%, #0b3025 0%, #071716 42%, #020709 80%);
     color: #edfdf7;
-    opacity: 1;
-    visibility: visible;
-    isolation: isolate;
-    transition: opacity .9s ease, visibility .9s ease;
+    transition: opacity .45s ease;
 }
-.aho-intro.is-leaving {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-.aho-intro__backdrop {
-    position: absolute;
-    z-index: -3;
-    inset: -12%;
-    background:
-        radial-gradient(ellipse at 50% 49%, rgba(0, 117, 76, .26), transparent 32%),
-        radial-gradient(ellipse at 50% 100%, rgba(0, 35, 30, .65), transparent 54%),
-        linear-gradient(180deg, #03080d 0%, #061813 54%, #020709 100%);
-    animation: aho-storm-drift 12s ease-in-out infinite alternate;
-}
-.aho-intro__backdrop::before,
-.aho-intro__backdrop::after {
-    position: absolute;
-    content: "";
-    inset: 0;
-    pointer-events: none;
-}
-.aho-intro__backdrop::before {
-    background:
-        linear-gradient(115deg, transparent 46%, rgba(120, 255, 205, .12) 47%, transparent 48%),
-        linear-gradient(72deg, transparent 61%, rgba(0, 236, 150, .09) 62%, transparent 63%),
-        repeating-linear-gradient(0deg, transparent 0 54px, rgba(115, 255, 211, .025) 55px, transparent 56px);
-    opacity: .45;
-    animation: aho-cloud-shift 9s ease-in-out infinite alternate;
-}
-.aho-intro__backdrop::after {
-    background: radial-gradient(ellipse at 50% 48%, transparent 16%, rgba(0, 0, 0, .55) 82%);
-}
-.aho-intro__portal {
-    position: absolute;
-    width: min(76vw, 690px);
-    aspect-ratio: 1;
-    border: 1px solid rgba(31, 241, 164, .38);
-    border-radius: 50%;
-    opacity: 0;
-    transform: scale(.22) rotate(-48deg);
-    box-shadow: 0 0 32px rgba(0, 255, 164, .12), inset 0 0 45px rgba(0, 255, 164, .08);
-    animation: aho-portal-open 2.6s .45s cubic-bezier(.16, .78, .2, 1) forwards, aho-portal-spin 28s 3.1s linear infinite;
-}
-.aho-intro__portal::before,
-.aho-intro__portal::after {
-    position: absolute;
-    content: "";
-    border: 1px solid rgba(41, 247, 172, .25);
-    border-radius: 50%;
-}
-.aho-intro__portal::before {
-    inset: 8%;
-    border-style: dashed;
-    border-width: 1px;
-    animation: aho-portal-spin 18s linear infinite reverse;
-}
-.aho-intro__portal::after {
-    inset: 20%;
-    border-color: rgba(190, 255, 231, .16);
-    box-shadow: 0 0 35px rgba(0, 255, 164, .08);
-}
-.aho-intro__portal span {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 13px;
-    height: 13px;
-    margin: -6px;
-    border: 1px solid #baffdf;
-    border-radius: 50%;
-    background: #14efa0;
-    box-shadow: 0 0 18px #0aff9b, 0 0 44px rgba(0, 255, 153, .55);
-}
-.aho-intro__portal span:nth-child(1) { transform: translateY(-49%); }
-.aho-intro__portal span:nth-child(2) { transform: translateX(49%); }
-.aho-intro__portal span:nth-child(3) { transform: translateY(49%); }
-.aho-intro__beam {
-    position: absolute;
-    top: 7%;
-    bottom: 7%;
-    left: 50%;
-    width: 2px;
-    background: linear-gradient(180deg, transparent, rgba(41, 255, 173, .2) 18%, #adffe0 49%, rgba(0, 255, 151, .5) 53%, transparent);
-    box-shadow: 0 0 16px rgba(0, 255, 153, .8), 0 0 45px rgba(0, 255, 153, .34);
-    opacity: 0;
-    transform: scaleY(.02);
-    transform-origin: center;
-    animation: aho-beam-strike 1.35s 1.55s ease-out forwards;
-}
-.aho-intro__shards {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-}
-.aho-intro__shards i {
-    position: absolute;
-    top: calc(50% + var(--y));
-    left: calc(50% + var(--x));
-    width: 13px;
-    height: 42px;
-    clip-path: polygon(50% 0, 100% 100%, 0 78%);
-    background: linear-gradient(135deg, #f4fff9, #718e87 45%, #102b27 78%, #17d994);
-    opacity: 0;
-    filter: drop-shadow(0 0 8px rgba(0, 255, 153, .45));
-    transform: translate(-50%, -50%) rotate(var(--r)) scale(.3);
-    animation: aho-shard-gather 1.25s calc(2.05s + var(--delay)) cubic-bezier(.15, .82, .2, 1) forwards;
-}
-.aho-intro__shards i:nth-child(1) { --x: -245px; --y: -142px; --r: 48deg; --delay: 0s; }
-.aho-intro__shards i:nth-child(2) { --x: 218px; --y: -168px; --r: -42deg; --delay: .08s; }
-.aho-intro__shards i:nth-child(3) { --x: -265px; --y: 82px; --r: 72deg; --delay: .16s; }
-.aho-intro__shards i:nth-child(4) { --x: 246px; --y: 105px; --r: -65deg; --delay: .04s; }
-.aho-intro__shards i:nth-child(5) { --x: -95px; --y: -220px; --r: 15deg; --delay: .2s; }
-.aho-intro__shards i:nth-child(6) { --x: 108px; --y: 218px; --r: -18deg; --delay: .12s; }
-.aho-intro__shards i:nth-child(7) { --x: 15px; --y: -245px; --r: 35deg; --delay: .24s; }
-.aho-intro__shards i:nth-child(8) { --x: -25px; --y: 245px; --r: -32deg; --delay: .1s; }
-.aho-intro__shards i:nth-child(9) { --x: 290px; --y: -12px; --r: 62deg; --delay: .18s; }
-.aho-intro__shards i:nth-child(10) { --x: -292px; --y: -12px; --r: -60deg; --delay: .06s; }
+.aho-intro.is-leaving { opacity: 0; pointer-events: none; }
 
-.aho-intro__content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    width: min(92vw, 650px);
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.aho-intro__kicker {
-    margin: 0 0 7px;
-    color: #9dbbb0;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .32em;
-    opacity: 0;
-    animation: aho-fade-in .7s .55s ease forwards;
-}
-.aho-intro__kicker span { color: #20efa4; padding-inline: 7px; }
-.aho-intro__emblem {
-    display: block;
-    width: min(44vw, 360px);
-    height: auto;
-    opacity: 0;
-    transform: translateY(20px) scale(.62);
-    filter: drop-shadow(0 0 0 rgba(0, 255, 153, 0));
-    animation: aho-emblem-forge 1.45s 3.05s cubic-bezier(.16, .82, .18, 1) forwards;
-}
-.aho-intro__tagline {
-    width: min(90vw, 430px);
-    margin: 3px 0 0;
-    overflow: hidden;
-    color: #c7e7d9;
-    font-size: clamp(9px, 1.25vw, 12px);
-    font-weight: 700;
-    letter-spacing: .24em;
-    line-height: 1.8;
-    white-space: nowrap;
-    clip-path: inset(0 100% 0 0);
-    animation: aho-type-reveal 1.4s 5.1s steps(34, end) forwards;
-}
-.aho-intro__tagline span { color: #24e99f; padding-inline: 4px; }
-.aho-intro__enter {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    min-width: 218px;
-    margin-top: 25px;
-    padding: 13px 18px;
-    border: 1px solid rgba(46, 255, 174, .8);
-    border-radius: 3px;
-    background: linear-gradient(110deg, rgba(0, 255, 153, .16), rgba(0, 30, 23, .68));
-    box-shadow: 0 0 18px rgba(0, 255, 153, .12), inset 0 0 18px rgba(0, 255, 153, .08);
-    color: #eafff6;
+.aho-intro__showcase {
+    display: grid;
+    justify-items: center;
+    gap: 14px;
+    width: min(92vw, 610px, calc((100dvh - 140px) * 1.123));
+    padding: 0;
+    border: 0;
+    border-radius: 12px;
+    background: transparent;
+    color: inherit;
     cursor: pointer;
-    font: 800 11px/1 var(--display);
-    letter-spacing: .18em;
-    opacity: 0;
-    transform: translateY(12px);
-    animation: aho-button-arrive .65s 6.35s ease forwards;
-    transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
 }
-.aho-intro__enter:hover {
-    background: rgba(0, 255, 153, .23);
-    box-shadow: 0 0 28px rgba(0, 255, 153, .28);
-    transform: translateY(-2px);
+.aho-intro__screen {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 384 / 342;
+    overflow: hidden;
+    border: 1px solid rgba(96, 255, 186, .25);
+    border-radius: 12px;
+    background: #051110;
+    box-shadow: 0 20px 54px rgba(0, 0, 0, .55), 0 0 38px rgba(24, 221, 150, .12);
 }
-.aho-intro__enter:focus-visible { opacity: 1; animation: none; transform: none; }
-.aho-intro__enter span { color: #5dffbc; font-size: 15px; }
+.aho-intro__frames {
+    position: absolute;
+    inset: 0 0 auto;
+    width: 100%;
+    height: auto;
+    visibility: hidden;
+}
+.aho-intro.is-playing .aho-intro__frames {
+    visibility: visible;
+    animation: aho-rebuild-frames 9.6s steps(12, jump-none) both;
+}
+@keyframes aho-rebuild-frames {
+    to { transform: translateY(-91.6666667%); }
+}
+.aho-intro__skip, .aho-intro__enter {
+    display: inline-grid;
+    grid-auto-flow: column;
+    place-content: center;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 1px solid rgba(156, 255, 211, .35);
+    border-radius: 6px;
+    background: #091b17;
+    color: #e5faf0;
+    font: 700 13px var(--display);
+    cursor: pointer;
+}
+.aho-intro__enter { border-color: rgba(92, 255, 166, .65); }
+.aho-intro__enter span { color: #5dffbc; }
 .aho-intro__skip {
     position: absolute;
-    z-index: 3;
-    top: 25px;
-    right: 30px;
-    min-height: 42px;
-    padding: 9px 12px;
-    border: 1px solid rgba(184, 255, 224, .24);
-    border-radius: 3px;
-    background: rgba(2, 12, 10, .45);
-    color: #9cb7ac;
-    cursor: pointer;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: .17em;
-    transition: color .2s, border-color .2s;
+    z-index: 1;
+    top: max(14px, env(safe-area-inset-top));
+    right: max(14px, env(safe-area-inset-right));
 }
-.aho-intro__skip:hover { border-color: #25eaa0; color: #eafff6; }
-.aho-intro__foot {
-    position: absolute;
-    right: 30px;
-    bottom: 23px;
-    left: 30px;
-    margin: 0;
-    color: #617a70;
-    font-size: 9px;
-    letter-spacing: .22em;
-    text-align: center;
-}
-.aho-intro__foot span { color: #27eaa2; padding-inline: 6px; }
-
-@keyframes aho-storm-drift {
-    from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
-    to { transform: translate3d(1.5%, 1%, 0) scale(1.05); }
-}
-@keyframes aho-cloud-shift {
-    from { transform: translateX(-2%) skewY(-1deg); opacity: .25; }
-    to { transform: translateX(2%) skewY(1deg); opacity: .65; }
-}
-@keyframes aho-portal-open {
-    0% { opacity: 0; transform: scale(.22) rotate(-48deg); }
-    65% { opacity: 1; transform: scale(1.06) rotate(8deg); }
-    100% { opacity: .82; transform: scale(1) rotate(0); }
-}
-@keyframes aho-portal-spin { to { transform: rotate(360deg); } }
-@keyframes aho-beam-strike {
-    0% { opacity: 0; transform: scaleY(.02); }
-    20% { opacity: 1; }
-    65% { opacity: .8; transform: scaleY(1); }
-    100% { opacity: .28; transform: scaleY(.8); }
-}
-@keyframes aho-shard-gather {
-    0% { opacity: 0; }
-    18% { opacity: .95; }
-    100% { top: 50%; left: 50%; opacity: 0; transform: translate(-50%, -50%) rotate(0) scale(.16); }
-}
-@keyframes aho-emblem-forge {
-    0% { opacity: 0; transform: translateY(20px) scale(.62); filter: drop-shadow(0 0 0 rgba(0,255,153,0)); }
-    65% { opacity: 1; transform: translateY(-4px) scale(1.06); filter: drop-shadow(0 0 28px rgba(0,255,153,.7)); }
-    100% { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 0 18px rgba(0,255,153,.34)); }
-}
-@keyframes aho-type-reveal { to { clip-path: inset(0 0 0 0); } }
-@keyframes aho-fade-in { to { opacity: 1; } }
-@keyframes aho-button-arrive { to { opacity: 1; transform: translateY(0); } }
+.aho-intro__skip:hover, .aho-intro__showcase:hover .aho-intro__enter { border-color: #5dffbc; }
+.aho-intro :focus-visible { outline: 2px solid #5dffbc; outline-offset: 4px; }
 
 @media (max-width: 600px) {
     .brand { gap: 9px; }
     .brand-mark { flex-basis: 44px; width: 44px; height: 44px; }
     .brand-copy strong { font-size: 13px; }
-    .aho-intro__portal { width: 94vw; }
-    .aho-intro__emblem { width: min(72vw, 320px); }
-    .aho-intro__kicker { font-size: 8px; letter-spacing: .22em; }
-    .aho-intro__tagline { font-size: 8px; letter-spacing: .13em; }
-    .aho-intro__skip { top: 16px; right: 15px; }
-    .aho-intro__foot { bottom: 15px; font-size: 8px; }
-    .aho-intro__shards i { width: 9px; height: 30px; }
 }
