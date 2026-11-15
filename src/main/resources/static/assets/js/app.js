@@ -9,6 +9,7 @@
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = [...document.querySelectorAll(".site-nav a")];
     const sections = [...document.querySelectorAll("main section[id]")];
+    const intro = document.querySelector("#aho-intro");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const closeMenu = () => {
@@ -77,9 +78,12 @@
         let characterIndex = phrases[0].length;
         let deleting = true;
         const type = () => {
+            if (intro?.open) {
+                intro.addEventListener("close", () => window.setTimeout(type, 1600), { once: true });
+                return;
+            }
             const phrase = phrases[phraseIndex];
             characterIndex += deleting ? -1 : 1;
-            typedText.textContent = phrase.slice(0, characterIndex);
             let delay = deleting ? 38 : 64;
             if (!deleting && characterIndex === phrase.length) {
                 deleting = true;
@@ -87,11 +91,13 @@
             } else if (deleting && characterIndex === 0) {
                 deleting = false;
                 phraseIndex = (phraseIndex + 1) % phrases.length;
-                delay = 280;
+                characterIndex = 1;
+                delay = 120;
             }
+            typedText.textContent = phrases[phraseIndex].slice(0, characterIndex);
             window.setTimeout(type, delay);
         };
-        window.setTimeout(type, 900);
+        window.setTimeout(type, 1800);
     }
 
     const projectSection = document.querySelector("#projects");
@@ -255,60 +261,114 @@
     const canvas = document.querySelector("#signal-canvas");
     if (canvas instanceof HTMLCanvasElement && !reducedMotion) {
         const context = canvas.getContext("2d");
-        let particles = [];
-        let frame = 0;
-        const resizeCanvas = () => {
-            const ratio = Math.min(window.devicePixelRatio || 1, 2);
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = Math.floor(rect.width * ratio);
-            canvas.height = Math.floor(rect.height * ratio);
-            context.setTransform(ratio, 0, 0, ratio, 0, 0);
-            const count = Math.min(70, Math.max(28, Math.floor(rect.width / 22)));
-            particles = Array.from({ length: count }, () => ({
-                x: Math.random() * rect.width,
-                y: Math.random() * rect.height,
-                vx: (Math.random() - .5) * .28,
-                vy: (Math.random() - .5) * .28,
-                r: Math.random() * 1.5 + .6
-            }));
-        };
-        const draw = () => {
-            const width = canvas.clientWidth;
-            const height = canvas.clientHeight;
-            context.clearRect(0, 0, width, height);
-            particles.forEach((particle, index) => {
-                particle.x += particle.vx;
-                particle.y += particle.vy;
-                if (particle.x < 0 || particle.x > width) particle.vx *= -1;
-                if (particle.y < 0 || particle.y > height) particle.vy *= -1;
-                context.beginPath();
-                context.fillStyle = index % 8 === 0 ? "rgba(255,127,92,.8)" : "rgba(32,200,196,.68)";
-                context.arc(particle.x, particle.y, particle.r, 0, Math.PI * 2);
-                context.fill();
-                for (let next = index + 1; next < particles.length; next += 1) {
-                    const other = particles[next];
-                    const dx = particle.x - other.x;
-                    const dy = particle.y - other.y;
-                    const distance = Math.hypot(dx, dy);
-                    if (distance < 118) {
+        const hero = canvas.closest(".hero");
+
+        if (context && hero) {
+            let particles = [];
+            let width = 0;
+            let height = 0;
+            let frame = null;
+            let previousTime = null;
+            let visible = hero.getBoundingClientRect().bottom > 0;
+
+            const resizeCanvas = () => {
+                const ratio = Math.min(window.devicePixelRatio || 1, 2);
+                const rect = canvas.getBoundingClientRect();
+                if (rect.width === width && rect.height === height && canvas.width === Math.floor(width * ratio)) return;
+
+                width = rect.width;
+                height = rect.height;
+                canvas.width = Math.floor(width * ratio);
+                canvas.height = Math.floor(height * ratio);
+                context.setTransform(ratio, 0, 0, ratio, 0, 0);
+                const count = Math.min(72, Math.max(32, Math.floor(width / 20)));
+                particles = Array.from({ length: count }, (_, index) => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - .5) * 17,
+                    vy: (Math.random() - .5) * 15,
+                    radius: .55 + Math.random() * 1.25,
+                    phase: Math.random() * Math.PI * 2,
+                    color: index % 8 === 0 ? "255, 151, 117" : "84, 226, 211"
+                }));
+            };
+
+            const draw = (now) => {
+                const dt = previousTime === null ? 0 : Math.min((now - previousTime) / 1000, .05);
+                previousTime = now;
+                const seconds = now / 1000;
+                const reach = width < 600 ? 102 : 124;
+
+                context.clearRect(0, 0, width, height);
+                particles.forEach((particle) => {
+                    const { x, y, vx, vy } = particle;
+                    particle.x = Math.max(0, Math.min(width, x + vx * dt));
+                    particle.y = Math.max(0, Math.min(height, y + vy * dt));
+                    if ((particle.x === 0 && vx < 0) || (particle.x === width && vx > 0)) particle.vx *= -1;
+                    if ((particle.y === 0 && vy < 0) || (particle.y === height && vy > 0)) particle.vy *= -1;
+                });
+
+                particles.forEach((particle, index) => {
+                    let carriedSignal = false;
+                    for (let next = index + 1; next < particles.length; next += 1) {
+                        const other = particles[next];
+                        const dx = other.x - particle.x;
+                        const dy = other.y - particle.y;
+                        const distanceSquared = dx * dx + dy * dy;
+                        if (distanceSquared >= reach * reach) continue;
+
+                        const connection = 1 - Math.sqrt(distanceSquared) / reach;
                         context.beginPath();
-                        context.strokeStyle = `rgba(66,188,190,${(1 - distance / 118) * .18})`;
-                        context.lineWidth = .8;
                         context.moveTo(particle.x, particle.y);
                         context.lineTo(other.x, other.y);
+                        context.lineWidth = .8;
+                        context.strokeStyle = `rgba(76, 198, 190, ${connection * .22})`;
                         context.stroke();
-                    }
-                }
-            });
-            frame = window.requestAnimationFrame(draw);
-        };
-        resizeCanvas();
-        draw();
-        window.addEventListener("resize", resizeCanvas, { passive: true });
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) window.cancelAnimationFrame(frame);
-            else draw();
-        });
-    }
 
+                        if (index % 11 === 0 && !carriedSignal && connection > .3) {
+                            const phase = (seconds * .22 + index * .037) % 1;
+                            carriedSignal = true;
+                            context.beginPath();
+                            context.arc(particle.x + dx * phase, particle.y + dy * phase, 1.25, 0, Math.PI * 2);
+                            context.fillStyle = `rgba(147, 255, 232, ${connection * Math.sin(phase * Math.PI) * .92})`;
+                            context.fill();
+                        }
+                    }
+
+                    const pulse = .53 + Math.sin(seconds * 1.22 + particle.phase) * .24;
+                    context.beginPath();
+                    context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    context.fillStyle = `rgba(${particle.color}, ${pulse})`;
+                    context.fill();
+                });
+                frame = window.requestAnimationFrame(draw);
+            };
+
+            const syncMotion = () => {
+                const shouldRun = visible && !document.hidden && !intro?.open;
+                hero.classList.toggle("hero-motion-paused", !shouldRun);
+                if (shouldRun && frame === null) {
+                    previousTime = null;
+                    frame = window.requestAnimationFrame(draw);
+                } else if (!shouldRun && frame !== null) {
+                    window.cancelAnimationFrame(frame);
+                    frame = null;
+                }
+            };
+
+            resizeCanvas();
+            if ("ResizeObserver" in window) new ResizeObserver(resizeCanvas).observe(canvas);
+            else window.addEventListener("resize", resizeCanvas, { passive: true });
+
+            if ("IntersectionObserver" in window) {
+                new IntersectionObserver(([entry]) => {
+                    visible = entry.isIntersecting;
+                    syncMotion();
+                }).observe(hero);
+            }
+            if (intro) new MutationObserver(syncMotion).observe(intro, { attributeFilter: ["open"] });
+            document.addEventListener("visibilitychange", syncMotion);
+            syncMotion();
+        }
+    }
 })();
