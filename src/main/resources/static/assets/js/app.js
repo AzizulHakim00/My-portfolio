@@ -11,63 +11,6 @@
     const sections = [...document.querySelectorAll("main section[id]")];
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const ahoIntro = document.querySelector("#aho-intro");
-    const directLink = (window.location.hash && window.location.hash !== "#home") || window.location.search;
-    if (ahoIntro && typeof ahoIntro.showModal === "function" && !reducedMotion && !directLink) {
-        const introStorageKey = "aho-rebuild-intro-seen";
-        let introSeen = false;
-        try {
-            introSeen = window.sessionStorage.getItem(introStorageKey) === "1";
-        } catch {
-            // The intro can still run when storage is unavailable.
-        }
-
-        if (!introSeen) {
-            const frames = ahoIntro.querySelector(".aho-intro__frames");
-            let introTimer;
-
-            const dismissIntro = () => {
-                if (ahoIntro.classList.contains("is-leaving")) return;
-                window.clearTimeout(introTimer);
-                try {
-                    window.sessionStorage.setItem(introStorageKey, "1");
-                } catch {
-                    // Dismissal does not depend on storage.
-                }
-                ahoIntro.classList.add("is-leaving");
-                window.setTimeout(() => {
-                    ahoIntro.close();
-                    document.body.classList.remove("aho-intro-open");
-                }, 480);
-            };
-
-            ahoIntro.querySelectorAll("[data-aho-intro-enter]").forEach((button) => {
-                button.addEventListener("click", dismissIntro);
-            });
-            ahoIntro.addEventListener("cancel", (event) => {
-                event.preventDefault();
-                dismissIntro();
-            });
-
-            frames.addEventListener("animationend", () => {
-                if (ahoIntro.classList.contains("is-leaving")) return;
-                window.clearTimeout(introTimer);
-                introTimer = window.setTimeout(dismissIntro, 1100);
-            }, { once: true });
-
-            document.body.classList.add("aho-intro-open");
-            ahoIntro.showModal();
-            introTimer = window.setTimeout(dismissIntro, 4500);
-            frames.src = frames.dataset.src;
-            frames.decode().then(() => {
-                if (!ahoIntro.open || ahoIntro.classList.contains("is-leaving")) return;
-                window.clearTimeout(introTimer);
-                ahoIntro.classList.add("is-playing");
-                introTimer = window.setTimeout(dismissIntro, 11500);
-            }, dismissIntro);
-        }
-    }
-
     const closeMenu = () => {
         nav?.classList.remove("open");
         document.body.classList.remove("menu-open");

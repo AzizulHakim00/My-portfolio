@@ -10,8 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-aho-rebuild" th:href="@{/assets/css/style.css(v='20261116-aho-rebuild')}">
-    <script defer src="/assets/js/app.js?v=20261116-aho-rebuild" th:src="@{/assets/js/app.js(v='20261116-aho-rebuild')}"></script>
+    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-aho-motion" th:href="@{/assets/css/style.css(v='20261116-aho-motion')}">
+    <script defer src="/assets/js/app.js?v=20261116-aho-motion" th:src="@{/assets/js/app.js(v='20261116-aho-motion')}"></script>
+    <script defer src="/assets/js/aho-intro.js?v=20261116-aho-motion"></script>
     <script defer src="/assets/js/project-details.js?v=20261116-soft"></script>
     <script defer src="/assets/js/portfolio-chat.js?v=20261116-soft"></script>
 </head>
@@ -20,8 +21,9 @@
     <button class="aho-intro__skip" type="button" autofocus data-aho-intro-enter>Skip intro</button>
     <button class="aho-intro__showcase" type="button" data-aho-intro-enter>
         <span class="aho-intro__screen" aria-hidden="true">
-            <img class="aho-intro__frames" data-src="/assets/images/aho-cut-shatter-rebuild.webp"
-                 alt="" width="384" height="4104" fetchpriority="high">
+            <canvas class="aho-intro__canvas" width="864" height="640"
+                    data-storyboard="/assets/images/aho-cut-shatter-rebuild.webp"
+                    data-emblem="/assets/images/aho-emblem.svg"></canvas>
         </span>
         <span class="aho-intro__enter">Enter portfolio <span aria-hidden="true">↗</span></span>
     </button>

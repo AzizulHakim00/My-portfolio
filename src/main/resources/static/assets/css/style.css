@@ -840,7 +840,7 @@ body.aho-intro-open { overflow: hidden; }
     display: grid;
     justify-items: center;
     gap: 14px;
-    width: min(92vw, 610px, calc((100dvh - 140px) * 1.123));
+    width: min(94vw, 840px, calc((100dvh - 142px) * 1.35));
     padding: 0;
     border: 0;
     border-radius: 12px;
@@ -852,27 +852,15 @@ body.aho-intro-open { overflow: hidden; }
     position: relative;
     display: block;
     width: 100%;
-    aspect-ratio: 384 / 342;
+    aspect-ratio: 864 / 640;
     overflow: hidden;
     border: 1px solid rgba(96, 255, 186, .25);
     border-radius: 12px;
     background: #051110;
     box-shadow: 0 20px 54px rgba(0, 0, 0, .55), 0 0 38px rgba(24, 221, 150, .12);
 }
-.aho-intro__frames {
-    position: absolute;
-    inset: 0 0 auto;
-    width: 100%;
-    height: auto;
-    visibility: hidden;
-}
-.aho-intro.is-playing .aho-intro__frames {
-    visibility: visible;
-    animation: aho-rebuild-frames 9.6s steps(12, jump-none) both;
-}
-@keyframes aho-rebuild-frames {
-    to { transform: translateY(-91.6666667%); }
-}
+.aho-intro__canvas { display: block; width: 100%; height: 100%; opacity: 0; }
+.aho-intro.is-playing .aho-intro__canvas { opacity: 1; }
 .aho-intro__skip, .aho-intro__enter {
     display: inline-grid;
     grid-auto-flow: column;
