@@ -93,22 +93,57 @@
         window.setTimeout(type, 900);
     }
 
-    const filterButtons = [...document.querySelectorAll("[data-filter]")];
-    const projectCards = [...document.querySelectorAll(".project-card[data-category]")];
-    filterButtons.forEach((button) => button.addEventListener("click", () => {
-        const filter = button.dataset.filter;
-        filterButtons.forEach((item) => item.classList.toggle("active", item === button));
-        projectCards.forEach((card) => {
-            const visible = filter === "all" || card.dataset.category === filter;
-            card.classList.toggle("hidden", !visible);
-            if (visible) card.animate?.([
-                { opacity: 0, transform: "translateY(12px)" },
-                { opacity: 1, transform: "translateY(0)" }
-            ], { duration: 340, easing: "ease-out" });
-        });
-    }));
+    const projectSection = document.querySelector("#projects");
+    const projectCards = [...projectSection.querySelectorAll("[data-project-stage]")];
+    const filters = [...projectSection.querySelectorAll("[data-filter]")];
+    const additionalProjects = projectSection.querySelector("#additional-projects");
+    const showMoreButton = projectSection.querySelector("#project-show-more");
+    const projectStatus = projectSection.querySelector("#project-filter-status");
+    const groups = [...projectSection.querySelectorAll("[data-project-grid]")];
+    const countStage = (stage) => projectCards.filter((card) => card.dataset.projectStage === stage).length;
+    const moreCount = countStage("more");
+    let category = "all";
+    let showMore = false;
 
-    document.querySelectorAll("[data-gallery]").forEach((gallery, galleryIndex) => {
+    projectSection.querySelector("[data-project-total]").textContent = projectCards.length;
+    projectSection.querySelector("[data-project-featured]").textContent = countStage("featured");
+    projectSection.querySelector("[data-project-upcoming]").textContent = countStage("upcoming");
+
+    const updateProjects = () => {
+        const overview = category === "all";
+        filters.forEach((button) => {
+            const selected = button.dataset.filter === category;
+            button.classList.toggle("active", selected);
+            button.setAttribute("aria-pressed", String(selected));
+        });
+
+        projectCards.forEach((card) => {
+            card.hidden = !overview && card.dataset.category !== category;
+        });
+        groups.forEach((grid) => {
+            const hasResults = Boolean(grid.querySelector(".project-card:not([hidden])"));
+            const heading = document.getElementById(grid.getAttribute("aria-labelledby"));
+            grid.hidden = !hasResults || (grid === additionalProjects && overview && !showMore);
+            if (heading) heading.hidden = grid.hidden;
+        });
+
+        showMoreButton.hidden = !overview || !moreCount;
+        showMoreButton.setAttribute("aria-expanded", String(!additionalProjects.hidden));
+        showMoreButton.textContent = showMore ? "Show fewer projects" : "Show " + moreCount + " more projects";
+        projectStatus.hidden = overview || projectCards.some((card) => !card.hidden);
+        projectStatus.textContent = projectStatus.hidden ? "" : "No projects match this category.";
+    };
+
+    filters.forEach((button) => button.addEventListener("click", () => {
+        category = button.dataset.filter;
+        updateProjects();
+    }));
+    showMoreButton.addEventListener("click", () => {
+        showMore = !showMore;
+        updateProjects();
+    });
+
+    document.querySelectorAll("[data-gallery]").forEach((gallery) => {
         const slides = [...gallery.querySelectorAll(":scope > img")];
         const counter = gallery.querySelector(".gallery-controls b");
         const previous = gallery.querySelector("[data-prev]");
@@ -116,9 +151,10 @@
         if (slides.length < 2) return;
 
         let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains("active")));
-        let paused = false;
         const show = (requestedIndex) => {
             activeIndex = (requestedIndex + slides.length) % slides.length;
+            const slide = slides[activeIndex];
+            if (slide.dataset.src && !slide.hasAttribute("src")) slide.src = slide.dataset.src;
             slides.forEach((slide, index) => {
                 slide.classList.toggle("active", index === activeIndex);
                 slide.setAttribute("aria-hidden", String(index !== activeIndex));
@@ -127,17 +163,13 @@
         };
         previous?.addEventListener("click", () => show(activeIndex - 1));
         next?.addEventListener("click", () => show(activeIndex + 1));
-        gallery.addEventListener("pointerenter", () => { paused = true; });
-        gallery.addEventListener("pointerleave", () => { paused = false; });
-        gallery.addEventListener("focusin", () => { paused = true; });
-        gallery.addEventListener("focusout", () => { paused = false; });
         show(activeIndex);
+    });
 
-        if (!reducedMotion) {
-            window.setInterval(() => {
-                if (!paused && document.visibilityState === "visible") show(activeIndex + 1);
-            }, 4800 + galleryIndex * 170);
-        }
+    const papers = [...document.querySelectorAll("[data-paper-status]")];
+    document.querySelectorAll("[data-paper-count]").forEach((count) => {
+        const status = count.dataset.paperCount;
+        count.textContent = status === "all" ? papers.length : papers.filter((paper) => paper.dataset.paperStatus === status).length;
     });
 
     if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {

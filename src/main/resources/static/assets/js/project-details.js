@@ -16,8 +16,8 @@
     document.head.appendChild(node);
   };
 
-  addStyle("/assets/css/upgrade.css?v=20261115-portfolio");
-  addScript("/assets/js/upgrade.js?v=20260721-motion");
+  addStyle("/assets/css/upgrade.css?v=20261116-portfolio");
+  addScript("/assets/js/upgrade.js?v=20261116-portfolio");
 
   addStyle("/assets/css/project-details.css?v=20260719");
 
@@ -54,7 +54,8 @@
     "TaskFlow": ["Registration, authentication and user-scoped dashboards", "Tasks with priority, status, due dates, search and filtering", "Profile editing and password management", "Deployed full-stack Django application"],
     "Assignment Writer Hire": ["Student and administrator stakeholder workflows", "Requests, writer selection, orders and history", "Administration screens for users and writers", "JavaFX, FXML and MySQL architecture"],
     "Real Madrid Club Management": ["Players, matches, transfers and training management", "Formation editing and performance records", "FXML controllers and database persistence", "Six documented working screens"],
-    "FoodMoboChain Firebase": ["Buyer, vendor, student and administrator roles", "Firebase Authentication, Realtime Database and App Check", "Server-enforced prices, ownership and status transitions", "Orders, rentals, reviews, newsfeed and moderation"],
+    "CareerPilot AI": ["Explainable ATS scoring and skills-gap analysis", "Role matching and a 90-day roadmap", "Interview practice and private application tracking"],
+    "CivicLens AI": ["Road hazard reports with location and evidence", "Severity, duplicate warnings, and an authority dashboard", "Rule-based demo inference and an optional FastAPI / ONNX service"],
     "Firebase CRUD App": ["Firebase Authentication", "Realtime Database create, update and delete operations", "Restaurant, food and order screens", "Android learning project"],
     "DVWA Security Casebook": ["Ten controlled-lab vulnerability modules", "Twenty-five payload and command records", "Thirty-eight indexed evidence screenshots", "Search, severity filters, fullscreen evidence and remediation guidance"]
   };
@@ -62,7 +63,6 @@
     "TaskFlow": "/projects/taskflow",
     "Assignment Writer Hire": "/projects/assignment-writer-hire",
     "Real Madrid Club Management": "/projects/real-madrid-management",
-    "FoodMoboChain Firebase": "/projects/foodmobochain-firebase",
     "DVWA Security Casebook": "/projects/dvwa-security-casebook"
   };
 
@@ -83,7 +83,7 @@
     const description = card.querySelector(".project-body > p:not(.project-type)")?.textContent.trim() || "";
     const technologies = [...card.querySelectorAll(".project-body li")].map((item) => item.textContent.trim());
     const links = [...card.querySelectorAll(".project-links a")];
-    images = [...card.querySelectorAll("figure img")].map((image) => ({ src: image.currentSrc || image.src, alt: image.alt }));
+    images = [...card.querySelectorAll("figure img")].map((image) => ({ src: image.dataset.src || image.currentSrc || image.src, alt: image.alt }));
     if (!images.length) images = [{ src: "/assets/images/projects/project-fallback.svg", alt: `${name} project visual` }];
 
     q("[data-type]").textContent = type;
@@ -92,7 +92,18 @@
     q("[data-tech]").replaceChildren(...technologies.map((text) => Object.assign(document.createElement("li"), { textContent: text })));
     q("[data-highlights]").replaceChildren(...(highlights[name] || ["Portfolio project summary", `${images.length} project visuals`, "Verified links are shown below"]).map((text) => Object.assign(document.createElement("li"), { textContent: text })));
     q("[data-actions]").replaceChildren(...links.map((link) => { const clone = link.cloneNode(true); clone.className = "project-details-action"; return clone; }));
-    thumbs.replaceChildren(...images.map((data, index) => { const button = document.createElement("button"); button.type = "button"; button.setAttribute("aria-label", `Show screenshot ${index + 1}`); const image = document.createElement("img"); image.src = data.src; image.alt = ""; button.appendChild(image); button.addEventListener("click", () => show(index)); return button; }));
+    thumbs.replaceChildren(...images.map((data, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", `Show screenshot ${index + 1}`);
+      const image = document.createElement("img");
+      image.src = data.src;
+      image.alt = "";
+      image.loading = "lazy";
+      button.appendChild(image);
+      button.addEventListener("click", () => show(index));
+      return button;
+    }));
     imageIndex = 0;
     show(0);
     modal.showModal();

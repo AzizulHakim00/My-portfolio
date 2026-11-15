@@ -38,7 +38,7 @@
             "@type": "Person",
             name: "Azizul Hakim Omor",
             url: pageUrl,
-            email: "mailto:mdomor01815@gmail.com",
+            email: "mailto:azizulhakimomor@gmail.com",
             homeLocation: { "@type": "Place", name: "Dhaka, Bangladesh" },
             sameAs: [
                 "https://github.com/AzizulHakim00",
@@ -80,14 +80,7 @@
     updateHeadingProgress();
 
     const cards = [...document.querySelectorAll(".project-card")];
-    cards.forEach((card, index) => {
-        const figure = card.querySelector("figure");
-        if (figure && !figure.querySelector(".project-number")) {
-            const number = document.createElement("span");
-            number.className = "project-number";
-            number.textContent = String(index + 1).padStart(2, "0");
-            figure.appendChild(number);
-        }
+    cards.forEach((card) => {
         if (finePointer && !reducedMotion) {
             card.addEventListener("pointermove", (event) => {
                 const rect = card.getBoundingClientRect();

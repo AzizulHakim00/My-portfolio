@@ -10,12 +10,12 @@ This audit records how earlier portfolio-related archives were handled. The Nove
 ## Identity and CV
 
 - Name: Azizul Hakim Omor.
-- Email: `mdomor01815@gmail.com`.
+- Email: `azizulhakimomor@gmail.com`.
 - GitHub: `https://github.com/AzizulHakim00`.
 - Codeforces: `https://codeforces.com/profile/heythere99`.
 - LinkedIn, Facebook and Instagram: linked exactly as supplied.
 - `Azizul_Hakim_Omor_CV.pdf`: audited but not published because it contains teaching, tutoring, assistant-lecturer, work-experience and CGPA claims the owner explicitly rejected.
-- Corrected CV: the PDF is published with those claims removed; the editable DOCX is excluded from deployable assets.
+- The updated PDF and editable Word CV show the current semester, CGPA, software projects, research status, and memberships.
 
 ## Certificates
 
@@ -27,7 +27,7 @@ This audit records how earlier portfolio-related archives were handled. The Nove
 - Project source ZIPs were reviewed for portfolio evidence but are excluded from deployable assets.
 - Assignment Writer Hire, Real Madrid and ICE Lab use the repository URLs supplied by the owner.
 - Bank Management, Firebase CRUD, Fruit Market, Café Shop Management and Movie Management use descriptions, technology labels and available screenshots without downloadable archives.
-- FoodMoboChain keeps its actual interface gallery; its source archive and UI report are excluded from the website.
+- The Spring Boot Food Mobo Chain gallery shows the live staging interface. The Android Firebase marketplace and its case study were removed.
 - ICE penetration-testing lab remains positioned last after Fruit Market with screenshots; its full PDF report is excluded from the website.
 - Student Excuse Generator: removed from the portfolio and its public downloads as requested.
 
