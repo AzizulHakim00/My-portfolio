@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">AHO emblem</title>
+  <desc id="desc">An original metallic AHO monogram surrounded by an emerald arcane ring.</desc>
+  <defs>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f7f5"/>
+      <stop offset=".22" stop-color="#9aa9a7"/>
+      <stop offset=".48" stop-color="#35434a"/>
+      <stop offset=".72" stop-color="#d5dedb"/>
+      <stop offset="1" stop-color="#68777b"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b8ffe3"/>
+      <stop offset=".45" stop-color="#16e99c"/>
+      <stop offset="1" stop-color="#087c69"/>
+    </linearGradient>
+    <filter id="emerald-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.02 0 0 0 0 0.95 0 0 0 0 0.55 0 0 0 1 0" result="tint"/>
+      <feMerge><feMergeNode in="tint"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="metal-shadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2.5" result="blur"/>
+      <feOffset dy="4" result="offset"/>
+      <feComponentTransfer><feFuncA type="linear" slope=".55"/></feComponentTransfer>
+      <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g fill="none" stroke-linecap="round">
+    <circle cx="128" cy="128" r="101" stroke="#1a453b" stroke-width="8" stroke-dasharray="455 15 90 15" transform="rotate(-90 128 128)"/>
+    <circle cx="128" cy="128" r="101" stroke="url(#green)" stroke-width="2.6" stroke-dasharray="455 15 90 15" transform="rotate(-90 128 128)" filter="url(#emerald-glow)"/>
+    <circle cx="128" cy="128" r="88" stroke="#19c98b" stroke-opacity=".5" stroke-width="1.1" stroke-dasharray="2 8"/>
+    <path d="M128 8 139 28 128 49 117 28Z M128 207 139 228 128 248 117 228Z" fill="url(#green)" stroke="#b7ffe2" stroke-width="1.2" filter="url(#emerald-glow)"/>
+    <path d="M8 128 28 117 49 128 28 139Z M207 128 228 117 248 128 228 139Z" fill="#183b35" stroke="#1ce7a0" stroke-width="1.4"/>
+    <path d="M53 53 63 63 M193 193 203 203 M203 53 193 63 M63 193 53 203" stroke="#55f4b5" stroke-width="2" opacity=".8"/>
+    <path d="M128 19V237" stroke="#16ed9d" stroke-width="1.2" opacity=".35" filter="url(#emerald-glow)"/>
+  </g>
+  <g fill="#1eeaa0" filter="url(#emerald-glow)">
+    <circle cx="128" cy="28" r="2.4"/><circle cx="128" cy="228" r="2.4"/>
+    <circle cx="28" cy="128" r="2"/><circle cx="228" cy="128" r="2"/>
+  </g>
+  <g fill="url(#steel)" stroke="#111d22" stroke-width="3" stroke-linejoin="bevel" filter="url(#metal-shadow)">
+    <path fill-rule="evenodd" d="M28 181 75 70 120 181H96L87 157H63L53 181H28ZM69 139H81L75 121Z"/>
+    <path d="M109 78H128V116H148V78H167V181H148V137H128V181H109Z"/>
+    <path fill-rule="evenodd" d="M174 91 187 78H213L226 91V168L213 181H187L174 168V91ZM193 98V161H207V98Z"/>
+  </g>
+  <g fill="none" stroke="#b8ffe3" stroke-width="1.1" opacity=".55">
+    <path d="M38 174 75 83 111 174 M116 85V171 M159 85V171 M181 94 190 85H210"/>
+  </g>
+  <path d="M75 70 75 121 M128 78V181 M200 98V161" stroke="#21efa3" stroke-width="2" opacity=".72" filter="url(#emerald-glow)"/>
+  <path d="M62 157H87 M128 126H148 M190 168H212" stroke="#18e99b" stroke-width="1.8" opacity=".75" filter="url(#emerald-glow)"/>
+</svg>
