@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-chat" th:href="@{/assets/css/style.css(v='20261116-chat')}">
-    <script defer src="/assets/js/app.js?v=20261116-chat" th:src="@{/assets/js/app.js(v='20261116-chat')}"></script>
-    <script defer src="/assets/js/project-details.js?v=20261116-chat"></script>
-    <script defer src="/assets/js/portfolio-chat.js?v=20261116-chat"></script>
+    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-polish" th:href="@{/assets/css/style.css(v='20261116-polish')}">
+    <script defer src="/assets/js/app.js?v=20261116-polish" th:src="@{/assets/js/app.js(v='20261116-polish')}"></script>
+    <script defer src="/assets/js/project-details.js?v=20261116-polish"></script>
+    <script defer src="/assets/js/portfolio-chat.js?v=20261116-polish"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -382,16 +382,27 @@
                 </div>
             </div>
             <h3 class="other-research-heading">Research projects</h3>
-            <div class="paper-groups">
-                <article class="paper-card other-research method-card" id="pixelated-antenna">
-                    <h4>BPSO-Optimized Pixelated Antenna Design for Sub-6 GHz 5G Applications</h4>
-                    <p>Designing a pixelated microstrip antenna in CST. The project uses Binary Particle Swarm Optimization to search pixel configurations and evaluates candidate designs for impedance matching, bandwidth, and gain.</p>
-                    <figure class="methodology-figure">
-                        <a href="/assets/images/research/bpso-methodology.webp" target="_blank" rel="noreferrer" aria-label="Open the full-size BPSO research methodology"><img src="/assets/images/research/bpso-methodology.webp" alt="Pixelated antenna workflow showing CST simulation, surrogate training, binary particle swarm optimization, and CST validation" width="1320" height="738" loading="lazy" decoding="async"></a>
-                        <figcaption>Research methodology · Open image to zoom</figcaption>
+            <div class="paper-groups research-projects">
+                <article class="paper-card other-research research-project" id="pixelated-antenna">
+                    <div class="research-project-copy">
+                        <h4>BPSO-Optimized Pixelated Antenna Design for Sub-6 GHz 5G Applications</h4>
+                        <p>Designing a pixelated microstrip antenna in CST. The project uses Binary Particle Swarm Optimization to search pixel configurations and evaluates candidate designs for impedance matching, bandwidth, and gain.</p>
+                    </div>
+                    <figure class="research-project-media">
+                        <img src="/assets/images/research/bpso-methodology.webp" alt="Pixelated antenna workflow showing CST simulation, surrogate training, binary particle swarm optimization, and CST validation" width="1320" height="738" loading="lazy" decoding="async">
                     </figure>
+                    <div class="paper-links research-project-links"><a href="/assets/images/research/bpso-methodology.webp" target="_blank" rel="noreferrer">View full-size methodology ↗</a></div>
                 </article>
-                <details class="paper-card other-research" id="dhaka-street-plastic"><summary>DhakaStreetPlastic</summary><p>A collaborative street-level dataset and technical report for detecting plastic and polythene litter across sunny, cloudy, rainy and night conditions in Dhaka. The gallery shows examples from each lighting and weather condition.</p><figure class="research-gallery" data-gallery><img class="active" src="/assets/images/research/dhaka-street-plastic/02-sunny.webp" alt="Sunny-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/03-cloudy.webp" alt="Cloudy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/04-rainy.webp" alt="Rainy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/05-night.webp" alt="Night-time dataset samples" loading="lazy"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous dataset image">←</button><b>1 / 4</b><button type="button" data-next aria-label="Next dataset image">→</button></div></figure><div class="paper-links"><a href="https://github.com/AzizulHakim00" target="_blank" rel="noreferrer">GitHub profile ↗</a></div></details>
+                <article class="paper-card other-research research-project" id="dhaka-street-plastic">
+                    <div class="research-project-copy">
+                        <h4>DhakaStreetPlastic</h4>
+                        <p>A collaborative street-level dataset and technical report for detecting plastic and polythene litter across sunny, cloudy, rainy and night conditions in Dhaka.</p>
+                    </div>
+                    <figure class="research-project-media research-gallery" data-gallery aria-label="DhakaStreetPlastic sample images">
+                        <img class="active" src="/assets/images/research/dhaka-street-plastic/02-sunny.webp" alt="Sunny-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/03-cloudy.webp" alt="Cloudy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/04-rainy.webp" alt="Rainy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/05-night.webp" alt="Night-time dataset samples" loading="lazy"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous dataset image">←</button><b>1 / 4</b><button type="button" data-next aria-label="Next dataset image">→</button></div>
+                    </figure>
+                    <div class="paper-links research-project-links"><a href="https://github.com/AzizulHakim00" target="_blank" rel="noreferrer">GitHub profile ↗</a></div>
+                </article>
             </div>
         </div>
     </section>
@@ -505,10 +516,10 @@
 
 <dialog class="lightbox" id="lightbox"><button type="button" aria-label="Close certificate">×</button><img src="" alt="Certificate preview"></dialog>
 <a class="back-to-top" href="#home" aria-label="Back to top">↑</a>
-<button class="portfolio-chat-launch" type="button" aria-haspopup="dialog" aria-controls="portfolio-chat" hidden><img src="/assets/images/icons/tabler/message-circle.svg" alt="" loading="lazy" width="24" height="24"><span>Ask Azizul Bot</span></button>
+<button class="portfolio-chat-launch" type="button" aria-haspopup="dialog" aria-controls="portfolio-chat" hidden><img src="/assets/images/azizul-bot.png" alt="" loading="lazy" width="24" height="24"><span>Ask Azizul Bot</span></button>
 <dialog class="portfolio-chat" id="portfolio-chat" aria-labelledby="portfolio-chat-title">
     <header class="chat-header">
-        <img class="chat-avatar" src="/assets/images/portrait.jpg" alt="" width="44" height="44">
+        <img class="chat-avatar" src="/assets/images/azizul-bot.png" alt="" width="44" height="44">
         <div><h2 id="portfolio-chat-title">Azizul Bot</h2><p>Portfolio guide</p></div>
         <button class="chat-close" type="button" aria-label="Close Azizul Bot">×</button>
     </header>
