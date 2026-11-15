@@ -93,6 +93,50 @@
         window.setTimeout(type, 900);
     }
 
+    const skillsBrowser = document.querySelector("[data-skills-browser]");
+    if (skillsBrowser) {
+        const tabList = skillsBrowser.querySelector(".skill-tabs");
+        const tabs = [...tabList.querySelectorAll("button")];
+        const panels = tabs.map((tab) => document.getElementById(tab.getAttribute("aria-controls")));
+
+        function selectSkill(activeIndex) {
+            tabs.forEach((tab, index) => {
+                const selected = index === activeIndex;
+                tab.setAttribute("aria-selected", String(selected));
+                tab.tabIndex = selected ? 0 : -1;
+                panels[index].hidden = !selected;
+            });
+        }
+
+        tabList.setAttribute("role", "tablist");
+        tabs.forEach((tab, index) => {
+            const panel = panels[index];
+            tab.setAttribute("role", "tab");
+            panel.setAttribute("role", "tabpanel");
+            panel.setAttribute("aria-labelledby", tab.id);
+            panel.tabIndex = 0;
+            tab.addEventListener("click", () => selectSkill(index));
+            tab.addEventListener("keydown", (event) => {
+                const destinations = {
+                    ArrowRight: (index + 1) % tabs.length,
+                    ArrowDown: (index + 1) % tabs.length,
+                    ArrowLeft: (index + tabs.length - 1) % tabs.length,
+                    ArrowUp: (index + tabs.length - 1) % tabs.length,
+                    Home: 0,
+                    End: tabs.length - 1
+                };
+                if (!Object.hasOwn(destinations, event.key)) return;
+                event.preventDefault();
+                const next = destinations[event.key];
+                selectSkill(next);
+                tabs[next].focus();
+            });
+        });
+        selectSkill(0);
+        skillsBrowser.classList.add("is-interactive");
+        tabList.hidden = false;
+    }
+
     const projectSection = document.querySelector("#projects");
     const projectCards = [...projectSection.querySelectorAll("[data-project-stage]")];
     const filters = [...projectSection.querySelectorAll("[data-filter]")];
@@ -173,16 +217,6 @@
     });
 
     if (!reducedMotion && window.matchMedia("(pointer: fine)").matches) {
-        document.querySelectorAll(".tilt-card").forEach((card) => {
-            card.addEventListener("pointermove", (event) => {
-                const rect = card.getBoundingClientRect();
-                const x = (event.clientX - rect.left) / rect.width - .5;
-                const y = (event.clientY - rect.top) / rect.height - .5;
-                card.style.transform = `perspective(800px) rotateY(${x * 7}deg) rotateX(${y * -7}deg) translateY(-3px)`;
-            });
-            card.addEventListener("pointerleave", () => { card.style.transform = ""; });
-        });
-
         document.querySelectorAll(".magnetic").forEach((button) => {
             button.addEventListener("pointermove", (event) => {
                 const rect = button.getBoundingClientRect();
