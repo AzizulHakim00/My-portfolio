@@ -5,23 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Azizul Hakim Omor – Southeast University CSE student, full-stack software developer, and researcher in reliable and explainable AI, with work in clinical prediction and microwave sensing.">
     <meta name="theme-color" content="#061523">
+    <link rel="icon" type="image/svg+xml" href="/assets/images/aho-emblem.svg">
     <title>Azizul Hakim Omor | AI Research & Software Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-calm" th:href="@{/assets/css/style.css(v='20261116-calm')}">
-    <script defer src="/assets/js/app.js?v=20261116-calm" th:src="@{/assets/js/app.js(v='20261116-calm')}"></script>
+    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-og-motion" th:href="@{/assets/css/style.css(v='20261116-og-motion')}">
+    <script defer src="/assets/js/app.js?v=20261116-og-motion" th:src="@{/assets/js/app.js(v='20261116-og-motion')}"></script>
     <script defer src="/assets/js/project-details.js?v=20261116-soft"></script>
     <script defer src="/assets/js/portfolio-chat.js?v=20261116-soft"></script>
 </head>
 <body>
+<dialog class="aho-intro" id="aho-intro" aria-label="AHO portfolio introduction">
+    <div class="aho-intro__backdrop" aria-hidden="true"></div>
+    <div class="aho-intro__portal" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="aho-intro__beam" aria-hidden="true"></div>
+    <div class="aho-intro__shards" aria-hidden="true">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="aho-intro__content">
+        <p class="aho-intro__kicker">SIGNAL DETECTED <span> / </span> AHO-001</p>
+        <img class="aho-intro__emblem" src="/assets/images/aho-emblem.svg" alt="AHO emblem" fetchpriority="high">
+        <p class="aho-intro__tagline">AI RESEARCH <span>·</span> SOFTWARE <span>·</span> SYSTEMS</p>
+        <button class="aho-intro__enter" type="button" data-aho-intro-enter>ENTER PORTFOLIO <span>↗</span></button>
+    </div>
+    <button class="aho-intro__skip" type="button" autofocus data-aho-intro-enter>SKIP INTRO</button>
+    <p class="aho-intro__foot" aria-hidden="true">AN ORIGINAL SIGNAL <span>·</span> AHO</p>
+</dialog>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
 <div class="cursor-glow" aria-hidden="true"></div>
 
 <header class="site-header" id="top">
     <a class="brand" href="#home" aria-label="Azizul Hakim Omor home">
-        <span class="brand-mark">AH</span>
+        <span class="brand-mark"><img src="/assets/images/aho-emblem.svg" alt="" width="50" height="50"></span>
         <span class="brand-copy"><strong>Azizul Hakim Omor</strong><small>Research · Software · Systems</small></span>
     </a>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-controls="site-navigation" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -537,7 +554,7 @@
         </section>
     </div>
     <div class="shell footer-grid">
-        <a class="footer-mark" href="#home">AH</a>
+        <a class="footer-mark" href="#home" aria-label="Back to homepage"><img src="/assets/images/aho-emblem.svg" alt="" width="66" height="66" loading="lazy"></a>
         <div><strong>Azizul Hakim Omor</strong><p>CSE student · Full-stack software · Explainable AI research</p></div>
         <nav aria-label="Footer navigation"><a href="#about">About</a><a href="#projects">Projects</a><a href="#research">Research</a><a href="#contact">Contact</a></nav>
         <div class="footer-meta"><span>Dhaka, Bangladesh</span><span>© <b id="year">2026</b> Azizul Hakim Omor</span></div>

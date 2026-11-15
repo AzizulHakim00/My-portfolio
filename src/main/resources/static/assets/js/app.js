@@ -11,6 +11,47 @@
     const sections = [...document.querySelectorAll("main section[id]")];
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+    const ahoIntro = document.querySelector("#aho-intro");
+    const directLink = (window.location.hash && window.location.hash !== "#home") || window.location.search;
+    if (ahoIntro && typeof ahoIntro.showModal === "function" && !reducedMotion && !directLink) {
+        const introStorageKey = "aho-intro-seen";
+        let introSeen = false;
+        try {
+            introSeen = window.sessionStorage.getItem(introStorageKey) === "1";
+        } catch {
+            // The intro can still run when storage is unavailable.
+        }
+
+        if (!introSeen) {
+            const dismissIntro = () => {
+                if (ahoIntro.classList.contains("is-leaving")) return;
+                window.clearTimeout(autoDismiss);
+                try {
+                    window.sessionStorage.setItem(introStorageKey, "1");
+                } catch {
+                    // Dismissal does not depend on storage.
+                }
+                ahoIntro.classList.add("is-leaving");
+                window.setTimeout(() => {
+                    ahoIntro.close();
+                    document.body.classList.remove("aho-intro-open");
+                }, 950);
+            };
+
+            ahoIntro.querySelectorAll("[data-aho-intro-enter]").forEach((button) => {
+                button.addEventListener("click", dismissIntro);
+            });
+            ahoIntro.addEventListener("cancel", (event) => {
+                event.preventDefault();
+                dismissIntro();
+            });
+
+            const autoDismiss = window.setTimeout(dismissIntro, 10500);
+            document.body.classList.add("aho-intro-open");
+            ahoIntro.showModal();
+        }
+    }
+
     const closeMenu = () => {
         nav?.classList.remove("open");
         document.body.classList.remove("menu-open");
@@ -56,7 +97,7 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: .08, rootMargin: "0px 0px -14px" });
+        }, { threshold: .11, rootMargin: "0px 0px -40px" });
         root.classList.add("motion-ready");
         document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
     } else {
@@ -179,7 +220,7 @@
                 const rect = card.getBoundingClientRect();
                 const x = (event.clientX - rect.left) / rect.width - .5;
                 const y = (event.clientY - rect.top) / rect.height - .5;
-                card.style.transform = `perspective(800px) rotateY(${x * 3}deg) rotateX(${y * -3}deg) translateY(-1px)`;
+                card.style.transform = `perspective(800px) rotateY(${x * 7}deg) rotateX(${y * -7}deg) translateY(-3px)`;
             });
             card.addEventListener("pointerleave", () => { card.style.transform = ""; });
         });
