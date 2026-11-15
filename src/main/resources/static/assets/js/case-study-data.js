@@ -116,6 +116,58 @@ window.PORTFOLIO_CASE_STUDIES = {
     next: ["Extend authenticated seller-flow and catalog regression checks"],
     features: ["Spring Security with JWT cookies and CSRF protection","Spring Data MongoDB and a cached public catalog","Server-signed Cloudinary image upload support","Render staging with a MongoDB readiness endpoint"]
   },
+  "cpu-scheduling-visualizer": {
+    "eyebrow": "OPERATING SYSTEMS LAB",
+    "title": "CPU Scheduling Visualizer",
+    "summary": "An interactive operating systems lab for testing CPU scheduling algorithms with editable process inputs and visual comparisons.",
+    "tags": [
+      "React",
+      "JavaScript",
+      "Operating systems",
+      "Scheduling"
+    ],
+    "repo": "https://github.com/AzizulHakim00/operating_systems_lab_project",
+    "live": "https://os-project.web.app/",
+    "images": [
+      "/assets/images/projects/cpu-scheduling-visualizer/step-1.webp",
+      "/assets/images/projects/cpu-scheduling-visualizer/step-2.webp",
+      "/assets/images/projects/cpu-scheduling-visualizer/step-3.webp",
+      "/assets/images/projects/cpu-scheduling-visualizer/step-4.webp",
+      "/assets/images/projects/cpu-scheduling-visualizer/step-5.webp",
+      "/assets/images/projects/cpu-scheduling-visualizer/step-6.webp",
+      "/assets/images/projects/cpu-scheduling-visualizer/step-7.webp"
+    ],
+    "imageAlts": [
+      "CPU Scheduling Visualizer introduction",
+      "Process table with arrival time, burst time and priority",
+      "Scheduling algorithm and comparison selection",
+      "Schedule Gantt chart and per-process metrics",
+      "Editable inputs for each comparison algorithm",
+      "Side-by-side algorithm results and averages",
+      "Completion screen with the option to run again"
+    ],
+    "problem": "A scheduling algorithm is easier to understand when learners can change process inputs, see the execution order, and compare the resulting trade-offs.",
+    "role": "Implemented a browser-based walkthrough that connects editable process inputs with a scheduling engine, Gantt charts, and comparison tables.",
+    "architecture": [
+      "React screens",
+      "Shared scheduler state",
+      "Scheduling engine",
+      "Gantt chart and metrics",
+      "Comparison view"
+    ],
+    "challenge": "The walkthrough keeps a shared set of processes for the initial simulation and lets learners edit each algorithm’s comparison inputs independently.",
+    "result": "The lab guides learners from process setup to a visual schedule and side-by-side comparison of waiting time, turnaround time, and CPU idle time.",
+    "next": [
+      "Try different arrival times to see how the execution order changes",
+      "Change the Round Robin time quantum and compare the resulting schedule"
+    ],
+    "features": [
+      "FCFS, SJF, Priority, Round Robin, SRTF, and LJF",
+      "Editable arrival time, burst time, and priority",
+      "Gantt timeline with per-process completion, turnaround, and waiting times",
+      "Independent comparison inputs and a Round Robin time quantum"
+    ]
+  },
   "dvwa-security-casebook": {
     eyebrow: "AUTHORIZED CYBERSECURITY LAB · EVIDENCE-LED CASEBOOK",
     title: "DVWA Security Casebook",

@@ -57,6 +57,7 @@
     "CareerPilot AI": ["Explainable ATS scoring and skills-gap analysis", "Role matching and a 90-day roadmap", "Interview practice and private application tracking"],
     "CivicLens AI": ["Road hazard reports with location and evidence", "Severity, duplicate warnings, and an authority dashboard", "Rule-based demo inference and an optional FastAPI / ONNX service"],
     "Firebase CRUD App": ["Firebase Authentication", "Realtime Database create, update and delete operations", "Restaurant, food and order screens", "Android learning project"],
+    "CPU Scheduling Visualizer": ["Six CPU scheduling algorithms", "Editable process inputs and Round Robin quantum", "Gantt charts and per-process metrics", "Side-by-side comparisons with independent inputs"],
     "DVWA Security Casebook": ["Ten controlled-lab vulnerability modules", "Twenty-five payload and command records", "Thirty-eight indexed evidence screenshots", "Search, severity filters, fullscreen evidence and remediation guidance"]
   };
   const studies = {

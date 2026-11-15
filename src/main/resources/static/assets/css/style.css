@@ -453,3 +453,77 @@ button { color: inherit; }
 }
 .conference-art:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
 .research-focus-copy { max-width: 65ch; color: #b7c6cd; line-height: 1.7; }
+
+.learning { background: var(--paper-blue); }
+.learning-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.learning-grid .project-card { min-height: 0; }
+.learning-grid .project-gallery { height: clamp(190px, 24vw, 300px); background: #dbe8ea; }
+
+.conference-section .research-heading { margin-bottom: 22px; }
+.conference-section .research-focus-copy { margin: 0 0 18px; }
+.paper-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+.paper-group { display: grid; gap: 10px; min-width: 0; }
+.paper-group > h3, .other-research-heading, .credential-group > h3 {
+    margin: 0 0 4px;
+    font: 700 clamp(19px, 2.5vw, 25px)/1.2 var(--display);
+}
+.other-research-heading { margin: 28px 0 12px; }
+.paper-card {
+    padding: 13px 16px;
+    border: 1px solid #355267;
+    border-radius: 9px;
+    background: #0a2636;
+    scroll-margin-top: 12px;
+}
+.paper-meta { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 10px; font-size: 12px; font-weight: 700; }
+.paper-status { color: var(--cyan); }
+[data-paper-status="pending"] .paper-status { color: #ffba86; }
+.paper-meta a, .paper-links a { color: #d4e2e8; text-decoration: underline; text-underline-offset: .18em; }
+.paper-meta a:hover, .paper-links a:hover { color: var(--cyan); }
+.paper-card h4 { margin: 6px 0 4px; font: 700 16px/1.3 var(--display); }
+.paper-authors { margin: 0; color: #bbccd5; font-size: 13px; line-height: 1.45; }
+.paper-card details { margin-top: 5px; }
+.paper-card summary { width: fit-content; cursor: pointer; color: #bfe3e4; font-size: 13px; font-weight: 700; }
+.paper-card details[open] > summary, .other-research[open] > summary { margin-bottom: 6px; }
+.paper-detail { display: flex; align-items: flex-start; gap: 12px; }
+.paper-detail p, .other-research p { margin: 0; color: #cbd9df; font-size: 13px; line-height: 1.6; }
+.paper-art { width: min(85px, 24%); max-height: 55px; object-fit: contain; object-position: top; }
+.paper-links { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 7px; font-size: 13px; }
+.other-research .research-gallery { position: relative; height: 220px; overflow: hidden; margin: 10px 0 0; border-radius: 8px; }
+.other-research .research-gallery img { object-fit: contain; }
+
+.credential-columns { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: start; gap: 22px; }
+.credential-group { position: relative; min-width: 0; scroll-margin-top: 12px; }
+.credential-group > h3 { margin-bottom: 12px; }
+.credential-rows { display: grid; gap: 10px; }
+.legacy-membership-anchor { position: absolute; top: 0; }
+.credential-row {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr);
+    gap: 13px;
+    align-items: start;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--white);
+    scroll-margin-top: 12px;
+}
+.credential-preview { width: 100%; padding: 5px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper-blue); cursor: zoom-in; }
+.credential-preview img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; }
+.credential-row h3 { margin: 3px 0 4px; font: 700 15px/1.25 var(--display); }
+.credential-row dl, .credential-row .certificate-note { margin: 0 0 4px; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.credential-row dl div { display: flex; flex-wrap: wrap; gap: 0 6px; }
+.credential-row dt { font-weight: 700; }
+.credential-row dd { margin: 0; }
+.credential-link { color: var(--cyan-dark); font-size: 12px; font-weight: 800; text-decoration: underline; text-underline-offset: .18em; }
+
+@media (min-width: 901px) and (max-width: 1150px) {
+    .site-header { grid-template-columns: max-content minmax(0, 1fr) auto; gap: 12px; }
+}
+@media (max-width: 760px) {
+    .paper-groups, .credential-columns { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 650px) {
+    .learning-grid { grid-template-columns: minmax(0, 1fr); }
+    .credential-row { grid-template-columns: 74px minmax(0, 1fr); gap: 10px; }
+}

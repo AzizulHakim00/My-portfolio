@@ -9,9 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-portfolio" th:href="@{/assets/css/style.css(v='20261116-portfolio')}">
-    <script defer src="/assets/js/app.js?v=20261116-portfolio" th:src="@{/assets/js/app.js(v='20261116-portfolio')}"></script>
-    <script defer src="/assets/js/project-details.js?v=20261116-portfolio"></script>
+    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-learning" th:href="@{/assets/css/style.css(v='20261116-learning')}">
+    <script defer src="/assets/js/app.js?v=20261116-learning" th:src="@{/assets/js/app.js(v='20261116-learning')}"></script>
+    <script defer src="/assets/js/project-details.js?v=20261116-learning"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -30,9 +30,10 @@
         <a href="#skills">Skills</a>
         <a href="#education">Education</a>
         <a href="#projects">Projects</a>
+        <a href="#learning">Learning</a>
         <a href="#research">Research</a>
         <a href="#certificates">Certificates</a>
-        <a href="#others">Others</a>
+        <a href="#memberships">Memberships</a>
         <a href="#contact">Contact</a>
     </nav>
     <a class="header-cv" href="/assets/downloads/Azizul_Hakim_Omor_CV_2026.pdf" target="_blank" rel="noreferrer">CV <span>↗</span></a>
@@ -132,7 +133,7 @@
         <div class="shell">
             <div class="section-heading split-heading reveal">
                 <div><p class="eyebrow"><span>04</span> SELECTED PROJECTS</p><h2>Applications, research tools and <em>interactive systems.</em></h2></div>
-                <p class="portfolio-project-stats" aria-label="Project totals"><span><strong data-project-total>19</strong> total</span><span><strong data-project-featured>7</strong> featured</span><span><strong data-project-upcoming>2</strong> upcoming</span></p>
+                <p class="portfolio-project-stats" aria-label="Project totals"><span><strong data-project-total>18</strong> total</span><span><strong data-project-featured>7</strong> featured</span><span><strong data-project-upcoming>2</strong> upcoming</span></p>
             </div>
             <div class="project-filters reveal" role="group" aria-label="Filter projects">
                 <button type="button" class="active" aria-pressed="true" data-filter="all">Overview</button>
@@ -141,7 +142,6 @@
                 <button type="button" aria-pressed="false" data-filter="mobile">Android / Firebase</button>
                 <button type="button" aria-pressed="false" data-filter="ai">AI &amp; data</button>
                 <button type="button" aria-pressed="false" data-filter="game">Games</button>
-                <button type="button" aria-pressed="false" data-filter="security">Cybersecurity</button>
             </div>
             <aside class="security-callout reveal">
                 <div><span>CORE SECURITY PRACTICE</span><h3>Penetration testing is a highlighted capability.</h3></div>
@@ -179,7 +179,7 @@
                 </article>
             </div>
             <div class="more-projects">
-                <button type="button" class="button button-dark" id="project-show-more" aria-controls="additional-projects" aria-expanded="false">Show 10 more projects</button>
+                <button type="button" class="button button-dark" id="project-show-more" aria-controls="additional-projects" aria-expanded="false">Show 9 more projects</button>
                 <div id="additional-projects" class="projects-grid" aria-label="More projects" data-project-grid hidden>
                 <article class="project-card reveal" data-project-stage="more" data-category="ai">
                     <figure class="project-gallery" data-gallery><img class="active" src="/assets/images/projects/incidentcommander-ai/gallery-01.webp" alt="Incident workspace overview" loading="lazy" decoding="async"><img data-src="/assets/images/projects/incidentcommander-ai/gallery-02.webp" alt="Scenario timeline and replay" loading="lazy" decoding="async"><img data-src="/assets/images/projects/incidentcommander-ai/gallery-03.webp" alt="Service health and incident statistics" loading="lazy" decoding="async"><img data-src="/assets/images/projects/incidentcommander-ai/gallery-04.webp" alt="Dependency evidence and log records" loading="lazy" decoding="async"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous IncidentCommander AI screenshot">←</button><b aria-live="polite">1 / 4</b><button type="button" data-next aria-label="Next IncidentCommander AI screenshot">→</button></div></figure>
@@ -217,10 +217,7 @@
                     <figure class="project-gallery" data-gallery><img class="active" src="/assets/images/projects/firebase-crud-gallery/01.webp" alt="Android app welcome screen" loading="lazy" decoding="async"><img data-src="/assets/images/projects/firebase-crud-gallery/02.webp" alt="Firebase sign-in" loading="lazy" decoding="async"><img data-src="/assets/images/projects/firebase-crud-gallery/03.webp" alt="Realtime Database records" loading="lazy" decoding="async"><img data-src="/assets/images/projects/firebase-crud-gallery/04.webp" alt="Record entry form" loading="lazy" decoding="async"><img data-src="/assets/images/projects/firebase-crud-gallery/05.webp" alt="Record editing screen" loading="lazy" decoding="async"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous Firebase CRUD App screenshot">←</button><b aria-live="polite">1 / 5</b><button type="button" data-next aria-label="Next Firebase CRUD App screenshot">→</button></div></figure>
                     <div class="project-body"><p class="project-type">ANDROID LEARNING PROJECT</p><h3>Firebase CRUD App</h3><p>Android coursework demonstrating Firebase Authentication and Realtime Database operations for course records, including add, edit and delete flows.</p><ul><li>Android</li><li>Java</li><li>Firebase Auth</li><li>Realtime DB</li></ul><div class="project-links"><a href="https://github.com/AzizulHakim00" target="_blank" rel="noreferrer">GitHub profile ↗</a></div></div>
                 </article>
-                <article class="project-card reveal" data-project-stage="more" data-category="security">
-                    <figure class="project-gallery" data-gallery><img class="active" src="/assets/images/projects/dvwa-casebook/01-hero-terminal.svg" alt="DVWA security assessment overview" loading="lazy"><img src="/assets/images/projects/dvwa-casebook/02-module-ledger.svg" alt="DVWA vulnerability module ledger" loading="lazy"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous DVWA image">←</button><b>1 / 2</b><button type="button" data-next aria-label="Next DVWA image">→</button></div></figure>
-                    <div class="project-body"><p class="project-type">CYBERSECURITY · WEB APPLICATION SECURITY</p><h3>DVWA Security Casebook</h3><p>A controlled DVWA penetration-testing casebook covering ten vulnerability modules, indexed lab evidence, and developer-focused remediation guidance.</p><ul><li>DVWA</li><li>Burp Suite</li><li>SQL injection</li><li>XSS</li><li>CSRF</li></ul><div class="project-links"><a href="https://azizulhakim00.github.io/dvwa-security-casebook/" target="_blank" rel="noreferrer">Live casebook ↗</a><a href="https://github.com/AzizulHakim00/dvwa-security-casebook" target="_blank" rel="noreferrer">GitHub repository ↗</a></div></div>
-                </article>
+
                 </div>
             </div>
             <h3 class="project-group-title" id="upcoming-projects-title">Upcoming Projects</h3>
@@ -238,71 +235,174 @@
         </div>
     </section>
 
-    <section class="section research" id="research">
+    <section class="section learning" id="learning">
+        <div class="shell">
+            <div class="section-heading reveal"><h2>Learning <em>modules.</em></h2></div>
+            <div class="projects-grid learning-grid">
+                <article class="project-card reveal" id="learning-cpu-scheduler" data-category="learning" aria-labelledby="cpu-scheduler-title">
+                    <figure class="project-gallery" data-gallery><img class="active" src="/assets/images/projects/cpu-scheduling-visualizer/step-1.webp" alt="CPU Scheduling Visualizer introduction" loading="lazy" decoding="async"><img data-src="/assets/images/projects/cpu-scheduling-visualizer/step-2.webp" alt="Process table with arrival time, burst time and priority" loading="lazy" decoding="async"><img data-src="/assets/images/projects/cpu-scheduling-visualizer/step-3.webp" alt="Scheduling algorithm and comparison selection" loading="lazy" decoding="async"><img data-src="/assets/images/projects/cpu-scheduling-visualizer/step-4.webp" alt="Schedule Gantt chart and per-process metrics" loading="lazy" decoding="async"><img data-src="/assets/images/projects/cpu-scheduling-visualizer/step-5.webp" alt="Editable inputs for each comparison algorithm" loading="lazy" decoding="async"><img data-src="/assets/images/projects/cpu-scheduling-visualizer/step-6.webp" alt="Side-by-side algorithm results and averages" loading="lazy" decoding="async"><img data-src="/assets/images/projects/cpu-scheduling-visualizer/step-7.webp" alt="Completion screen with the option to run again" loading="lazy" decoding="async"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous CPU Scheduling Visualizer screenshot">←</button><b aria-live="polite">1 / 7</b><button type="button" data-next aria-label="Next CPU Scheduling Visualizer screenshot">→</button></div></figure>
+                    <div class="project-body"><p class="project-type">OPERATING SYSTEMS LAB</p><h3 id="cpu-scheduler-title">CPU Scheduling Visualizer</h3><p>An interactive operating systems lab for testing CPU scheduling algorithms with editable process inputs and visual comparisons.</p><ul><li>React</li><li>JavaScript</li><li>Six algorithms</li><li>Gantt chart</li></ul><div class="project-links"><a href="/projects/cpu-scheduling-visualizer">Full case study ↗</a><a href="https://os-project.web.app/" target="_blank" rel="noreferrer">Open visualizer ↗</a><a href="https://github.com/AzizulHakim00/operating_systems_lab_project" target="_blank" rel="noreferrer">GitHub repository ↗</a></div></div>
+                </article>
+                <article class="project-card reveal" id="learning-dvwa" data-category="learning" aria-labelledby="dvwa-learning-title">
+                    <figure class="project-gallery" data-gallery><img class="active" src="/assets/images/projects/dvwa-casebook/01-hero-terminal.svg" alt="DVWA security assessment overview" loading="lazy"><img src="/assets/images/projects/dvwa-casebook/02-module-ledger.svg" alt="DVWA vulnerability module ledger" loading="lazy"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous DVWA image">←</button><b>1 / 2</b><button type="button" data-next aria-label="Next DVWA image">→</button></div></figure>
+                    <div class="project-body"><p class="project-type">CYBERSECURITY · WEB APPLICATION SECURITY</p><h3 id="dvwa-learning-title">DVWA Security Casebook</h3><p>A controlled DVWA penetration-testing casebook covering ten vulnerability modules, indexed lab evidence, and developer-focused remediation guidance.</p><ul><li>DVWA</li><li>Burp Suite</li><li>SQL injection</li><li>XSS</li><li>CSRF</li></ul><div class="project-links"><a href="https://azizulhakim00.github.io/dvwa-security-casebook/" target="_blank" rel="noreferrer">Live casebook ↗</a><a href="https://github.com/AzizulHakim00/dvwa-security-casebook" target="_blank" rel="noreferrer">GitHub repository ↗</a></div></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section research conference-section" id="research">
         <div class="research-backdrop" aria-hidden="true"></div>
         <div class="shell">
             <div class="section-heading research-heading reveal">
                 <p class="eyebrow"><span>05</span> RESEARCH</p>
                 <h2>Conference papers and <em>research projects.</em></h2>
             </div>
-            <p class="research-focus-copy">I study explainable and reliable clinical AI, including missing data, calibration, and whether results carry across patient cohorts. I also work on microwave sensing and antenna design.</p>
-            <div class="portfolio-paper-stats" aria-label="Conference paper counts"><span><strong data-paper-count="all">6</strong> conference papers</span><span><strong data-paper-count="accepted">3</strong> accepted and presented</span><span><strong data-paper-count="pending">3</strong> pending decision</span></div>
-            <article class="research-feature reveal" id="dual-band" data-paper-status="accepted">
-                <div class="research-feature-copy"><a class="conference-art" href="https://r10.ieee.org/bd-aps-mtts/marscon/" target="_blank" rel="noreferrer"><img src="/assets/images/research/conferences/marscon.webp" alt="Official IEEE MARSCON 2026 artwork from the AUST conference site" loading="lazy" decoding="async"></a><span class="status-badge active">Accepted and presented</span><p class="project-type">MICROWAVE SENSING · METAMATERIALS</p><h3>Dual-Band Single Negative Metamaterial Sensor for Machine Learning Optimized Soil Moisture Sensing</h3><dl class="research-publication-meta"><div><dt>Venue</dt><dd><a href="https://r10.ieee.org/bd-aps-mtts/marscon/" target="_blank" rel="noreferrer">IEEE MARSCON 2026 ↗</a></dd></div><div><dt>Authors</dt><dd>Azizul Hakim Omor, Ahmad Musa, Fardin Mahmud, Md Foyshal Ahmmed Chowdhury, Abdul Kadar Muhammad Masum, and Mohammad Lutful Hakim</dd></div></dl><p>A CST-based study of a dual-band metamaterial sensor for sandy and loamy soil. It models how soil moisture shifts resonances near 2.480 and 5.055 GHz and explores machine learning for interpreting the extracted features.</p><div class="project-links"><a href="https://github.com/AzizulHakim00/Dual-Band-Single-Negative-Metamaterial-Sensor-for" target="_blank" rel="noreferrer">GitHub repository ↗</a><a href="#certificate-marscon-2026-dual-band">Presentation certificate ↗</a></div></div>
-                <div class="research-feature-art research-gallery" data-gallery><img class="active" src="/assets/images/research/dual-band/01.webp" alt="Floquet-port CST simulation setup for the dual-band sensor"><img src="/assets/images/research/dual-band/02.webp" alt="S-parameter response and soil sample experiment" loading="lazy"><img src="/assets/images/research/dual-band/03.webp" alt="Electric-field distribution of the metamaterial sensor" loading="lazy"><img src="/assets/images/research/dual-band/04.webp" alt="Surface-current distribution of the metamaterial sensor" loading="lazy"><img src="/assets/images/research/dual-band/05.webp" alt="Dimensioned dual-band metamaterial unit-cell geometry" loading="lazy"><span>SENSOR / FIELD / CALIBRATION</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous dual-band image">←</button><b>1 / 5</b><button type="button" data-next aria-label="Next dual-band image">→</button></div></div>
-            </article>
-            <div class="research-grid">
-                <article class="research-card primary-research-card reveal" id="tabsymnn" data-paper-status="accepted"><a class="conference-art" href="https://wiecon-ece.org/" target="_blank" rel="noreferrer"><img src="/assets/images/research/conferences/wiecon.webp" alt="Official 12th IEEE WIECON-ECE 2026 conference banner" loading="lazy" decoding="async"></a><span class="status-badge active">Accepted and presented</span><p class="project-type">EXPLAINABLE AI · ASTHMA CLASSIFICATION</p><h3>TabSymNN: An Explainable Transformer with Symmetry Regularization for Asthma Classification</h3><dl class="research-publication-meta"><div><dt>Venue</dt><dd><a href="https://wiecon-ece.org/" target="_blank" rel="noreferrer">12th IEEE WIECON-ECE 2026 ↗</a></dd></div><div><dt>Authors</dt><dd>Safayet Ullah, Azizul Hakim Omor, Hussain Al Naeem, and Shimul Dey Katha</dd></div><div><dt>Paper ID</dt><dd>323</dd></div></dl><p>This paper studies an explainable transformer with symmetry regularization for asthma classification.</p><div class="project-links"><a href="#certificate-wiecon-ece-2026-tabsymnn">Presentation certificate ↗</a></div></article>
-                <article class="research-card primary-research-card reveal" id="dfu-imageguard" data-paper-status="accepted"><a class="conference-art" href="https://wiecon-ece.org/" target="_blank" rel="noreferrer"><img src="/assets/images/research/conferences/wiecon.webp" alt="Official 12th IEEE WIECON-ECE 2026 conference banner" loading="lazy" decoding="async"></a><span class="status-badge active">Accepted and presented</span><p class="project-type">RELIABLE AI · MEDICAL IMAGE CLASSIFICATION</p><h3>DFU-ImageGuard: An Explainable and Reliability-Validated Framework for Diabetic Foot Ulcer Image Classification</h3><dl class="research-publication-meta"><div><dt>Venue</dt><dd><a href="https://wiecon-ece.org/" target="_blank" rel="noreferrer">12th IEEE WIECON-ECE 2026 ↗</a></dd></div><div><dt>Authors</dt><dd>Azizul Hakim Omor, Al-Amain, Sushmita Jinnuraien, and Abdul Kadar Muhammad Masum</dd></div><div><dt>Paper ID</dt><dd>365</dd></div></dl><p>This paper studies explainability and reliability validation for diabetic foot ulcer image classification.</p><div class="project-links"><a href="#certificate-wiecon-ece-2026-dfu-imageguard">Presentation certificate ↗</a></div></article>
-                <article class="research-card primary-research-card reveal" id="thyro-rift" data-paper-status="pending"><a class="conference-art" href="https://www.icict.org/" target="_blank" rel="noreferrer"><img src="/assets/images/research/conferences/icict.webp" alt="Official banner for the current ICICT edition" loading="lazy" decoding="async"></a><span class="status-badge team">Pending decision · Passed preliminary screening</span><p class="project-type">RELIABLE CLINICAL AI · THYROID DISEASE</p><h3>Thyro-RIFT: A Missingness-Aware and Reliability-Informed Feature Transformer for Structured Thyroid Disease Prediction</h3><dl class="research-publication-meta"><div><dt>Venue</dt><dd><a href="https://www.icict.org/" target="_blank" rel="noreferrer">International Conference on Information and Computer Technologies (ICICT) ↗</a></dd></div><div><dt>Authors</dt><dd>Azizul Hakim Omor, Md. Zubayer Ahmad Shibly, Alamain, Md Masum Billah, and Md. Tarek Habib</dd></div></dl><p>Thyro-RIFT uses missingness indicators and reliability-guided attention for thyroid disease prediction from structured clinical and laboratory data. Its evaluation covers held-out benchmarks, robustness tests, and external data.</p><div class="project-links"><a href="https://github.com/AzizulHakim00/Thyro-RIFT" target="_blank" rel="noreferrer">GitHub repository ↗</a></div></article>
-                <article class="research-card primary-research-card reveal" id="ckd-transformer" data-paper-status="pending"><a class="conference-art" href="https://www.icict.org/" target="_blank" rel="noreferrer"><img src="/assets/images/research/conferences/icict.webp" alt="Official banner for the current ICICT edition" loading="lazy" decoding="async"></a><span class="status-badge team">Pending decision · Passed preliminary screening</span><p class="project-type">EXPLAINABLE AI · CHRONIC KIDNEY DISEASE</p><h3>An Explainable Transformer Integrating Quantile-State and Missingness-Aware Clinical Representations with Organ-Role Interactions for Chronic Kidney Disease Classification</h3><dl class="research-publication-meta"><div><dt>Venue</dt><dd><a href="https://www.icict.org/" target="_blank" rel="noreferrer">ICICT ↗</a></dd></div><div><dt>Authors</dt><dd>Azizul Hakim Omor, Alamain, Md. Zubayer Ahmad Shibly, Rajon Bardhan, Md Masum Billah, and Md. Tarek Habib</dd></div></dl><p>This study combines quantile-based feature states, missingness-aware clinical representations, and interactions between organ roles for chronic kidney disease classification.</p></article>
-                <article class="research-card primary-research-card reveal" id="sepsis-transportability" data-paper-status="pending"><a class="conference-art" href="https://www.icict.org/" target="_blank" rel="noreferrer"><img src="/assets/images/research/conferences/icict.webp" alt="Official banner for the current ICICT edition" loading="lazy" decoding="async"></a><span class="status-badge team">Pending decision · Passed preliminary screening</span><p class="project-type">TRANSCRIPTOMICS · CROSS-COHORT VALIDATION</p><h3>Effect-Consistency and Transportability-Locked Learning for Cross-Cohort Sepsis Transcriptomic Classification</h3><dl class="research-publication-meta"><div><dt>Venue</dt><dd><a href="https://www.icict.org/" target="_blank" rel="noreferrer">ICICT ↗</a></dd></div><div><dt>Authors</dt><dd>Azizul Hakim Omor, Alamain, Rajon Bardhan, Md Masum Billah, and Md. Tarek Habib</dd></div></dl><p>This study examines whether gene-expression signals for classifying sepsis carry across cohorts when training favors consistent effects.</p></article>
-                <article class="research-card primary-research-card reveal" id="pixelated-antenna"><span class="status-badge team">Final year design project · In progress</span><p class="project-type">RF ENGINEERING · DESIGN OPTIMIZATION</p><h3>BPSO-Optimized Pixelated Antenna Design for Sub-6 GHz 5G Applications</h3><p>Designing a pixelated microstrip antenna in CST. The project uses Binary Particle Swarm Optimization to search pixel configurations and evaluates candidate designs for impedance matching, bandwidth, and gain.</p></article>
-                <article class="research-card primary-research-card reveal" id="dhaka-street-plastic"><figure class="research-gallery" data-gallery><img class="active" src="/assets/images/research/dhaka-street-plastic/01-directory.webp" alt="Recommended DhakaStreetPlastic dataset directory structure"><img src="/assets/images/research/dhaka-street-plastic/02-sunny.webp" alt="Sunny-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/03-cloudy.webp" alt="Cloudy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/04-rainy.webp" alt="Rainy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/05-night.webp" alt="Night-time dataset samples" loading="lazy"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous dataset image">←</button><b>1 / 5</b><button type="button" data-next aria-label="Next dataset image">→</button></div></figure><span class="status-badge team">DATASET REPORT</span><p class="project-type">URBAN COMPUTER VISION · LOCAL DATASET</p><h3>DhakaStreetPlastic</h3><p>A collaborative street-level dataset and technical report for detecting plastic and polythene litter across sunny, cloudy, rainy and night conditions in Dhaka. The gallery shows the dataset structure and examples from each lighting and weather condition.</p><div class="project-links"><a href="https://github.com/AzizulHakim00" target="_blank" rel="noreferrer">GitHub profile ↗</a></div></article>
+            <p class="research-focus-copy">My research covers explainable clinical AI, model reliability across datasets, and microwave sensing.</p>
+            <div class="portfolio-paper-stats" aria-label="Conference paper counts">
+                <span><strong data-paper-count="all">9</strong> conference papers</span>
+                <span><strong data-paper-count="accepted">4</strong> accepted</span>
+                <span><strong data-paper-count="pending">5</strong> pending decision</span>
+            </div>
+            <div class="paper-groups">
+                <div class="paper-group" aria-labelledby="papers-accepted">
+                    <h3 id="papers-accepted">Accepted papers</h3>
+                    <article class="paper-card" id="dual-band" data-paper-status="accepted">
+                        <div class="paper-meta"><span class="paper-status">Accepted and presented</span><a href="https://r10.ieee.org/bd-aps-mtts/marscon/" target="_blank" rel="noreferrer">IEEE MARSCON 2026 ↗</a></div>
+                        <h4>Dual-Band Single Negative Metamaterial Sensor for Machine Learning Optimized Soil Moisture Sensing</h4>
+                        <p class="paper-authors">Azizul Hakim Omor, Ahmad Musa, Fardin Mahmud, Md Foyshal Ahmmed Chowdhury, Abdul Kadar Muhammad Masum, and Mohammad Lutful Hakim</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><p>A CST-based study of a dual-band metamaterial sensor for sandy and loamy soil. It models how soil moisture shifts resonances near 2.480 and 5.055 GHz and explores machine learning for interpreting the extracted features.</p></div>
+                            <div class="paper-links"><a href="https://github.com/AzizulHakim00/Dual-Band-Single-Negative-Metamaterial-Sensor-for" target="_blank" rel="noreferrer">GitHub repository ↗</a><a href="#certificate-marscon-2026-dual-band">Presentation certificate ↗</a></div>
+                        </details>
+                    </article>
+                    <article class="paper-card" id="tabsymnn" data-paper-status="accepted">
+                        <div class="paper-meta"><span class="paper-status">Accepted and presented</span><a href="https://wiecon-ece.org/" target="_blank" rel="noreferrer">12th IEEE WIECON-ECE 2026 ↗</a></div>
+                        <h4>TabSymNN: An Explainable Transformer with Symmetry Regularization for Asthma Classification</h4>
+                        <p class="paper-authors">Safayet Ullah, Azizul Hakim Omor, Hussain Al Naeem, and Shimul Dey Katha</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><img class="paper-art" src="/assets/images/research/conferences/wiecon.webp" alt="" loading="lazy" decoding="async"><p>This paper studies an explainable transformer with symmetry regularization for asthma classification. <strong>Paper ID 323.</strong></p></div>
+                            <div class="paper-links"><a href="#certificate-wiecon-ece-2026-tabsymnn">Presentation certificate ↗</a></div>
+                        </details>
+                    </article>
+                    <article class="paper-card" id="dfu-imageguard" data-paper-status="accepted">
+                        <div class="paper-meta"><span class="paper-status">Accepted and presented</span><a href="https://wiecon-ece.org/" target="_blank" rel="noreferrer">12th IEEE WIECON-ECE 2026 ↗</a></div>
+                        <h4>DFU-ImageGuard: An Explainable and Reliability-Validated Framework for Diabetic Foot Ulcer Image Classification</h4>
+                        <p class="paper-authors">Azizul Hakim Omor, Al-Amain, Sushmita Jinnuraien, and Abdul Kadar Muhammad Masum</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><img class="paper-art" src="/assets/images/research/conferences/wiecon.webp" alt="" loading="lazy" decoding="async"><p>This paper studies explainability and reliability validation for diabetic foot ulcer image classification. <strong>Paper ID 365.</strong></p></div>
+                            <div class="paper-links"><a href="#certificate-wiecon-ece-2026-dfu-imageguard">Presentation certificate ↗</a></div>
+                        </details>
+                    </article>
+                    <article class="paper-card" id="trust-ecg" data-paper-status="accepted">
+                        <div class="paper-meta"><span class="paper-status">Accepted</span><a href="https://icaic.gyancity.com/" target="_blank" rel="noreferrer">IEEE ICAIC 2027 ↗</a></div>
+                        <h4>TRUST-ECG: Transportability-Aware and Label-Efficient Deployment Certification for Multi-Source 12-Lead ECG Classification</h4>
+                        <p class="paper-authors">Azizul Hakim Omor, Al-Amain, MD Masum Billah, and Md. Tarek Habib</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><img class="paper-art" src="/assets/images/research/conferences/icaic.webp" alt="" loading="lazy" decoding="async"><p>The study examines how 12-lead ECG classifiers can be evaluated for transfer across data sources when only a limited number of labels are available.</p></div>
+
+                        </details>
+                    </article>
+                </div>
+                <div class="paper-group" aria-labelledby="papers-pending">
+                    <h3 id="papers-pending">Pending decision</h3>
+                    <article class="paper-card" id="thyro-rift" data-paper-status="pending">
+                        <div class="paper-meta"><span class="paper-status">Preliminary screening passed</span><a href="https://www.icict.org/" target="_blank" rel="noreferrer">International Conference on Information and Computer Technologies (ICICT) ↗</a></div>
+                        <h4>Thyro-RIFT: A Missingness-Aware and Reliability-Informed Feature Transformer for Structured Thyroid Disease Prediction</h4>
+                        <p class="paper-authors">Azizul Hakim Omor, Md. Zubayer Ahmad Shibly, Alamain, Md Masum Billah, and Md. Tarek Habib</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><img class="paper-art" src="/assets/images/research/conferences/icict.webp" alt="" loading="lazy" decoding="async"><p>Thyro-RIFT uses missingness indicators and reliability-guided attention for thyroid disease prediction from structured clinical and laboratory data. Its evaluation covers held-out benchmarks, robustness tests, and external data.</p></div>
+                            <div class="paper-links"><a href="https://github.com/AzizulHakim00/Thyro-RIFT" target="_blank" rel="noreferrer">GitHub repository ↗</a></div>
+                        </details>
+                    </article>
+                    <article class="paper-card" id="ckd-transformer" data-paper-status="pending">
+                        <div class="paper-meta"><span class="paper-status">Preliminary screening passed</span><a href="https://www.icict.org/" target="_blank" rel="noreferrer">ICICT ↗</a></div>
+                        <h4>An Explainable Transformer Integrating Quantile-State and Missingness-Aware Clinical Representations with Organ-Role Interactions for Chronic Kidney Disease Classification</h4>
+                        <p class="paper-authors">Azizul Hakim Omor, Alamain, Md. Zubayer Ahmad Shibly, Rajon Bardhan, Md Masum Billah, and Md. Tarek Habib</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><img class="paper-art" src="/assets/images/research/conferences/icict.webp" alt="" loading="lazy" decoding="async"><p>This study combines quantile-based feature states, missingness-aware clinical representations, and interactions between organ roles for chronic kidney disease classification.</p></div>
+
+                        </details>
+                    </article>
+                    <article class="paper-card" id="sepsis-transportability" data-paper-status="pending">
+                        <div class="paper-meta"><span class="paper-status">Preliminary screening passed</span><a href="https://www.icict.org/" target="_blank" rel="noreferrer">ICICT ↗</a></div>
+                        <h4>Effect-Consistency and Transportability-Locked Learning for Cross-Cohort Sepsis Transcriptomic Classification</h4>
+                        <p class="paper-authors">Azizul Hakim Omor, Alamain, Rajon Bardhan, Md Masum Billah, and Md. Tarek Habib</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><img class="paper-art" src="/assets/images/research/conferences/icict.webp" alt="" loading="lazy" decoding="async"><p>This study examines whether gene-expression signals for classifying sepsis carry across cohorts when training favors consistent effects.</p></div>
+
+                        </details>
+                    </article>
+                    <article class="paper-card" id="mirage" data-paper-status="pending">
+                        <div class="paper-meta"><span class="paper-status">Pending decision</span><a href="https://icece.org.bd/2026/" target="_blank" rel="noreferrer">ICECE 2026 ↗</a></div>
+                        <h4>MIRAGE: Morphology-Informed Prior-Guided Transformer for Leakage-Safe and Explainable Breast Cancer Classification</h4>
+                        <p class="paper-authors">Azizul Hakim Omor, Md. Zubayer Ahmad Shibly, and Shimul Dey Katha</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><img class="paper-art" src="/assets/images/research/conferences/icece.webp" alt="" loading="lazy" decoding="async"><p>MIRAGE uses morphology-informed priors in a transformer to study explainable breast cancer classification under a leakage-controlled evaluation.</p></div>
+
+                        </details>
+                    </article>
+                    <article class="paper-card" id="automated-grocery-checkout" data-paper-status="pending">
+                        <div class="paper-meta"><span class="paper-status">Pending decision</span><a href="https://manuu.edu.in/ICCIDSDT2027/" target="_blank" rel="noreferrer">ICCIDSDT 2027 ↗</a></div>
+                        <h4>Automated Grocery Checkout through Multi-Product Visual Recognition and GTIN-Integrated Point-of-Sale System</h4>
+                        <p class="paper-authors">Md. Akash Miah, Sheikh Md. Salman Farsi, Md. Zubayer Ahmad Shibly, Azizul Hakim Omor, and Muhaimen Khan</p>
+                        <details><summary>Paper details</summary>
+                            <div class="paper-detail"><img class="paper-art" src="/assets/images/research/conferences/iccidsdt.webp" alt="" loading="lazy" decoding="async"><p>The work combines visual recognition of multiple grocery products with GTIN identifiers for point-of-sale checkout.</p></div>
+
+                        </details>
+                    </article>
+                </div>
+            </div>
+            <h3 class="other-research-heading">Research projects</h3>
+            <div class="paper-groups">
+                <details class="paper-card other-research" id="pixelated-antenna"><summary>BPSO-Optimized Pixelated Antenna Design for Sub-6 GHz 5G Applications</summary><p>Designing a pixelated microstrip antenna in CST. The project uses Binary Particle Swarm Optimization to search pixel configurations and evaluates candidate designs for impedance matching, bandwidth, and gain.</p></details>
+                <details class="paper-card other-research" id="dhaka-street-plastic"><summary>DhakaStreetPlastic</summary><p>A collaborative street-level dataset and technical report for detecting plastic and polythene litter across sunny, cloudy, rainy and night conditions in Dhaka. The gallery shows the dataset structure and examples from each lighting and weather condition.</p><figure class="research-gallery" data-gallery><img class="active" src="/assets/images/research/dhaka-street-plastic/01-directory.webp" alt="Recommended DhakaStreetPlastic dataset directory structure"><img src="/assets/images/research/dhaka-street-plastic/02-sunny.webp" alt="Sunny-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/03-cloudy.webp" alt="Cloudy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/04-rainy.webp" alt="Rainy-day dataset samples" loading="lazy"><img src="/assets/images/research/dhaka-street-plastic/05-night.webp" alt="Night-time dataset samples" loading="lazy"><div class="gallery-controls"><button type="button" data-prev aria-label="Previous dataset image">←</button><b>1 / 5</b><button type="button" data-next aria-label="Next dataset image">→</button></div></figure><div class="paper-links"><a href="https://github.com/AzizulHakim00" target="_blank" rel="noreferrer">GitHub profile ↗</a></div></details>
             </div>
         </div>
     </section>
 
     <section class="section certificates" id="certificates">
         <div class="shell">
-            <div class="section-heading reveal"><p class="eyebrow"><span>06</span> CERTIFICATES</p><h2>Research presentations and <em>cybersecurity credentials.</em></h2></div>
-            <div class="certificate-grid">
-                <article class="certificate-card reveal" id="certificate-marscon-2026-dual-band">
-                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/marscon-2026-dual-band.webp" aria-label="Enlarge presentation certificate for Dual-Band Single Negative Metamaterial Sensor for Machine Learning Optimized Soil Moisture Sensing"><img src="/assets/images/certificates/marscon-2026-dual-band.webp" alt="IEEE MARSCON 2026 certificate of presentation for Dual-Band Single Negative Metamaterial Sensor for Machine Learning Optimized Soil Moisture Sensing" loading="lazy"><span>VIEW ↗</span></button>
-                    <div><p class="project-type">IEEE MARSCON 2026</p><h3>Dual-Band Single Negative Metamaterial Sensor for Machine Learning Optimized Soil Moisture Sensing</h3><dl><div><dt>Conference dates</dt><dd>13–14 August 2026</dd></div><div><dt>Hosted at</dt><dd>Ahsanullah University of Science and Technology, Dhaka</dd></div></dl><a class="button button-dark" href="/assets/images/certificates/marscon-2026-dual-band.webp" target="_blank" rel="noreferrer">Open presentation certificate ↗</a></div>
-                </article>
-                <article class="certificate-card reveal" id="certificate-wiecon-ece-2026-tabsymnn">
-                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/wiecon-ece-2026-tabsymnn.webp" aria-label="Enlarge presentation certificate for TabSymNN: An Explainable Transformer with Symmetry Regularization for Asthma Classification"><img src="/assets/images/certificates/wiecon-ece-2026-tabsymnn.webp" alt="12th IEEE WIECON-ECE 2026 certificate of presentation for TabSymNN: An Explainable Transformer with Symmetry Regularization for Asthma Classification" loading="lazy"><span>VIEW ↗</span></button>
-                    <div><p class="project-type">12th IEEE WIECON-ECE 2026</p><h3>TabSymNN: An Explainable Transformer with Symmetry Regularization for Asthma Classification</h3><dl><div><dt>Conference dates</dt><dd>30–31 October 2026</dd></div><div><dt>Hosted at</dt><dd>Southeast University, Dhaka</dd></div><div><dt>Paper ID</dt><dd>323</dd></div></dl><a class="button button-dark" href="/assets/images/certificates/wiecon-ece-2026-tabsymnn.webp" target="_blank" rel="noreferrer">Open presentation certificate ↗</a></div>
-                </article>
-                <article class="certificate-card reveal" id="certificate-wiecon-ece-2026-dfu-imageguard">
-                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/wiecon-ece-2026-dfu-imageguard.webp" aria-label="Enlarge presentation certificate for DFU-ImageGuard: An Explainable and Reliability-Validated Framework for Diabetic Foot Ulcer Image Classification"><img src="/assets/images/certificates/wiecon-ece-2026-dfu-imageguard.webp" alt="12th IEEE WIECON-ECE 2026 certificate of presentation for DFU-ImageGuard: An Explainable and Reliability-Validated Framework for Diabetic Foot Ulcer Image Classification" loading="lazy"><span>VIEW ↗</span></button>
-                    <div><p class="project-type">12th IEEE WIECON-ECE 2026</p><h3>DFU-ImageGuard: An Explainable and Reliability-Validated Framework for Diabetic Foot Ulcer Image Classification</h3><dl><div><dt>Conference dates</dt><dd>30–31 October 2026</dd></div><div><dt>Hosted at</dt><dd>Southeast University, Dhaka</dd></div><div><dt>Paper ID</dt><dd>365</dd></div></dl><a class="button button-dark" href="/assets/images/certificates/wiecon-ece-2026-dfu-imageguard.webp" target="_blank" rel="noreferrer">Open presentation certificate ↗</a></div>
-                </article>
-                <article class="certificate-card reveal">
-                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/cpte.png" aria-label="Enlarge CPTE certificate"><img src="/assets/images/certificates/cpte.png" alt="Mile2 CPTE certificate for Azizul Hakim Omor"><span>VIEW ↗</span></button>
-                    <div><p class="project-type">MILE2 CYBERSECURITY CERTIFICATIONS</p><h3>C)PTE: Certified Penetration Testing Engineer</h3><dl><div><dt>Issued</dt><dd>06 September 2026</dd></div><div><dt>Valid through</dt><dd>06 August 2029</dd></div><div><dt>Certificate ID</dt><dd>30039-178-102-0834</dd></div></dl><a class="button button-dark" href="/assets/downloads/CPTE_Certificate_Azizul_Hakim_Omor.pdf" target="_blank">Open certificate <span>↗</span></a></div>
-                </article>
-                <article class="certificate-card reveal">
-                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/applied-penetration-testing.png" aria-label="Enlarge applied penetration testing certificate"><img src="/assets/images/certificates/applied-penetration-testing.png" alt="Applied Penetration Testing assessment certificate for Azizul Hakim Omor"><span>VIEW ↗</span></button>
-                    <div><p class="project-type">NATIONAL CYBER SECURITY AGENCY TRAINING ASSESSMENT</p><h3>Applied Penetration Testing Engineer: Hands-on</h3><dl><div><dt>Assessment date</dt><dd>19 May 2026</dd></div><div><dt>Score</dt><dd>100</dd></div><div><dt>Certificate ID</dt><dd>4940</dd></div></dl><p class="certificate-note">This verified score is highlighted alongside authorized penetration-testing lab practice.</p><a class="button button-dark" href="/assets/downloads/Applied_Penetration_Testing_Certificate.pdf" target="_blank">Open certificate <span>↗</span></a></div>
-                </article>
+            <div class="section-heading reveal">
+                <p class="eyebrow"><span>06</span> CREDENTIALS</p>
+                <h2>Certificates and <em>memberships.</em></h2>
             </div>
-        </div>
-    </section>
-
-    <section class="section certificates" id="others">
-        <div class="shell">
-            <div class="section-heading reveal"><p class="eyebrow">OTHERS</p><h2>Professional <em>memberships.</em></h2></div>
-            <div class="certificate-grid">
-                <article class="certificate-card reveal" id="certificate-ieee-student-2026">
-                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/ieee-student-2026.webp" aria-label="Enlarge IEEE Student Member certificate"><img src="/assets/images/certificates/ieee-student-2026.webp" alt="IEEE Student Member certificate for Azizul Hakim Omor" loading="lazy"><span>VIEW ↗</span></button>
-                    <div><p class="project-type">IEEE</p><h3>IEEE Student Member</h3><p class="certificate-note">Student Member in good standing through December 2026.</p><a class="button button-dark" href="/assets/images/certificates/ieee-student-2026.webp" target="_blank" rel="noreferrer">Open membership certificate ↗</a></div>
+            <div class="credential-columns">
+                <div class="credential-group" aria-labelledby="certificate-heading">
+                    <h3 id="certificate-heading">Certificates</h3>
+                    <div class="credential-rows"><article class="credential-row" id="certificate-marscon-2026-dual-band">
+                    <button class="credential-preview" type="button" data-lightbox="/assets/images/certificates/marscon-2026-dual-band.webp" aria-label="Enlarge presentation certificate for Dual-Band Single Negative Metamaterial Sensor for Machine Learning Optimized Soil Moisture Sensing"><img src="/assets/images/certificates/marscon-2026-dual-band.webp" alt="IEEE MARSCON 2026 certificate of presentation for Dual-Band Single Negative Metamaterial Sensor for Machine Learning Optimized Soil Moisture Sensing" loading="lazy"></button>
+                    <div><p class="project-type">IEEE MARSCON 2026</p><h3>Dual-Band Single Negative Metamaterial Sensor for Machine Learning Optimized Soil Moisture Sensing</h3><dl><div><dt>Conference dates</dt><dd>13–14 August 2026</dd></div><div><dt>Hosted at</dt><dd>Ahsanullah University of Science and Technology, Dhaka</dd></div></dl><a class="credential-link" href="/assets/images/certificates/marscon-2026-dual-band.webp" target="_blank" rel="noreferrer">Open presentation certificate ↗</a></div>
                 </article>
-                <article class="certificate-card reveal" id="certificate-ieee-cis-student-2026">
-                    <button class="certificate-image" type="button" data-lightbox="/assets/images/certificates/ieee-cis-student-2026.webp" aria-label="Enlarge IEEE Computational Intelligence Society Student Member certificate"><img src="/assets/images/certificates/ieee-cis-student-2026.webp" alt="IEEE Computational Intelligence Society Student Member certificate for Azizul Hakim Omor" loading="lazy"><span>VIEW ↗</span></button>
-                    <div><p class="project-type">IEEE COMPUTATIONAL INTELLIGENCE SOCIETY</p><h3>IEEE Computational Intelligence Society Student Member</h3><p class="certificate-note">Student membership certificate for 2026.</p><a class="button button-dark" href="/assets/images/certificates/ieee-cis-student-2026.webp" target="_blank" rel="noreferrer">Open membership certificate ↗</a></div>
+<article class="credential-row" id="certificate-wiecon-ece-2026-tabsymnn">
+                    <button class="credential-preview" type="button" data-lightbox="/assets/images/certificates/wiecon-ece-2026-tabsymnn.webp" aria-label="Enlarge presentation certificate for TabSymNN: An Explainable Transformer with Symmetry Regularization for Asthma Classification"><img src="/assets/images/certificates/wiecon-ece-2026-tabsymnn.webp" alt="12th IEEE WIECON-ECE 2026 certificate of presentation for TabSymNN: An Explainable Transformer with Symmetry Regularization for Asthma Classification" loading="lazy"></button>
+                    <div><p class="project-type">12th IEEE WIECON-ECE 2026</p><h3>TabSymNN: An Explainable Transformer with Symmetry Regularization for Asthma Classification</h3><dl><div><dt>Conference dates</dt><dd>30–31 October 2026</dd></div><div><dt>Hosted at</dt><dd>Southeast University, Dhaka</dd></div><div><dt>Paper ID</dt><dd>323</dd></div></dl><a class="credential-link" href="/assets/images/certificates/wiecon-ece-2026-tabsymnn.webp" target="_blank" rel="noreferrer">Open presentation certificate ↗</a></div>
                 </article>
+<article class="credential-row" id="certificate-wiecon-ece-2026-dfu-imageguard">
+                    <button class="credential-preview" type="button" data-lightbox="/assets/images/certificates/wiecon-ece-2026-dfu-imageguard.webp" aria-label="Enlarge presentation certificate for DFU-ImageGuard: An Explainable and Reliability-Validated Framework for Diabetic Foot Ulcer Image Classification"><img src="/assets/images/certificates/wiecon-ece-2026-dfu-imageguard.webp" alt="12th IEEE WIECON-ECE 2026 certificate of presentation for DFU-ImageGuard: An Explainable and Reliability-Validated Framework for Diabetic Foot Ulcer Image Classification" loading="lazy"></button>
+                    <div><p class="project-type">12th IEEE WIECON-ECE 2026</p><h3>DFU-ImageGuard: An Explainable and Reliability-Validated Framework for Diabetic Foot Ulcer Image Classification</h3><dl><div><dt>Conference dates</dt><dd>30–31 October 2026</dd></div><div><dt>Hosted at</dt><dd>Southeast University, Dhaka</dd></div><div><dt>Paper ID</dt><dd>365</dd></div></dl><a class="credential-link" href="/assets/images/certificates/wiecon-ece-2026-dfu-imageguard.webp" target="_blank" rel="noreferrer">Open presentation certificate ↗</a></div>
+                </article>
+<article class="credential-row">
+                    <button class="credential-preview" type="button" data-lightbox="/assets/images/certificates/cpte.png" aria-label="Enlarge CPTE certificate"><img src="/assets/images/certificates/cpte.png" alt="Mile2 CPTE certificate for Azizul Hakim Omor"></button>
+                    <div><p class="project-type">MILE2 CYBERSECURITY CERTIFICATIONS</p><h3>C)PTE: Certified Penetration Testing Engineer</h3><dl><div><dt>Issued</dt><dd>06 September 2026</dd></div><div><dt>Valid through</dt><dd>06 August 2029</dd></div><div><dt>Certificate ID</dt><dd>30039-178-102-0834</dd></div></dl><a class="credential-link" href="/assets/downloads/CPTE_Certificate_Azizul_Hakim_Omor.pdf" target="_blank">Open certificate <span>↗</span></a></div>
+                </article>
+<article class="credential-row">
+                    <button class="credential-preview" type="button" data-lightbox="/assets/images/certificates/applied-penetration-testing.png" aria-label="Enlarge applied penetration testing certificate"><img src="/assets/images/certificates/applied-penetration-testing.png" alt="Applied Penetration Testing assessment certificate for Azizul Hakim Omor"></button>
+                    <div><p class="project-type">NATIONAL CYBER SECURITY AGENCY TRAINING ASSESSMENT</p><h3>Applied Penetration Testing Engineer: Hands-on</h3><dl><div><dt>Assessment date</dt><dd>19 May 2026</dd></div><div><dt>Score</dt><dd>100</dd></div><div><dt>Certificate ID</dt><dd>4940</dd></div></dl><a class="credential-link" href="/assets/downloads/Applied_Penetration_Testing_Certificate.pdf" target="_blank">Open certificate <span>↗</span></a></div>
+                </article></div>
+                </div>
+                <aside class="credential-group" id="memberships" aria-labelledby="membership-heading">
+                    <span id="others" class="legacy-membership-anchor" aria-hidden="true"></span>
+                    <h3 id="membership-heading">Memberships</h3>
+                    <div class="credential-rows"><article class="credential-row" id="certificate-ieee-student-2026">
+                    <button class="credential-preview" type="button" data-lightbox="/assets/images/certificates/ieee-student-2026.webp" aria-label="Enlarge IEEE Student Member certificate"><img src="/assets/images/certificates/ieee-student-2026.webp" alt="IEEE Student Member certificate for Azizul Hakim Omor" loading="lazy"></button>
+                    <div><p class="project-type">IEEE</p><h3>IEEE Student Member</h3><p class="certificate-note">Student Member in good standing through December 2026.</p><a class="credential-link" href="/assets/images/certificates/ieee-student-2026.webp" target="_blank" rel="noreferrer">Open membership certificate ↗</a></div>
+                </article>
+<article class="credential-row" id="certificate-ieee-cis-student-2026">
+                    <button class="credential-preview" type="button" data-lightbox="/assets/images/certificates/ieee-cis-student-2026.webp" aria-label="Enlarge IEEE Computational Intelligence Society Student Member certificate"><img src="/assets/images/certificates/ieee-cis-student-2026.webp" alt="IEEE Computational Intelligence Society Student Member certificate for Azizul Hakim Omor" loading="lazy"></button>
+                    <div><p class="project-type">IEEE COMPUTATIONAL INTELLIGENCE SOCIETY</p><h3>IEEE Computational Intelligence Society Student Member</h3><p class="certificate-note">Student membership certificate for 2026.</p><a class="credential-link" href="/assets/images/certificates/ieee-cis-student-2026.webp" target="_blank" rel="noreferrer">Open membership certificate ↗</a></div>
+                </article></div>
+                </aside>
             </div>
         </div>
     </section>

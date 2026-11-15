@@ -36,6 +36,7 @@ public class PortfolioController {
             "real-madrid-management",
             "jersey-see",
             "food-mobo-chain",
+            "cpu-scheduling-visualizer",
             "dvwa-security-casebook"
     );
     private static final long RATE_WINDOW_MS = 60L * 60L * 1000L;
