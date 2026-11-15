@@ -9,10 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-refined" th:href="@{/assets/css/style.css(v='20261116-refined')}">
-    <script defer src="/assets/js/app.js?v=20261116-refined" th:src="@{/assets/js/app.js(v='20261116-refined')}"></script>
-    <script defer src="/assets/js/project-details.js?v=20261116-refined"></script>
-    <script defer src="/assets/js/portfolio-chat.js?v=20261116-refined"></script>
+    <link rel="stylesheet" href="/assets/css/style.css?v=20261116-soft" th:href="@{/assets/css/style.css(v='20261116-soft')}">
+    <script defer src="/assets/js/app.js?v=20261116-soft" th:src="@{/assets/js/app.js(v='20261116-soft')}"></script>
+    <script defer src="/assets/js/project-details.js?v=20261116-soft"></script>
+    <script defer src="/assets/js/portfolio-chat.js?v=20261116-soft"></script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -102,16 +102,46 @@
     <section class="section skills" id="skills">
         <div class="shell">
             <div class="section-heading split-heading reveal">
-                <div><p class="eyebrow"><span>02</span> TECHNICAL TOOLKIT</p><h2>Skills organized by the systems they help me <em>build.</em></h2></div>
+                <div><p class="eyebrow"><span>02</span> TECHNICAL TOOLKIT</p><h2>Skills and <em>tools.</em></h2></div>
                 <p>Technologies and methods used in my software projects, research, and coursework.</p>
             </div>
             <div class="skills-grid">
-                <article class="skill-card reveal" data-accent="cyan"><h3>Full-Stack Development</h3><p>Web applications with role-based access, REST APIs, responsive interfaces, and server-side caching.</p><div class="skill-tags"><span><img src="/assets/images/icons/devicon/java.svg" alt="" loading="lazy" width="24" height="24">Java</span><span><img src="/assets/images/icons/devicon/spring.svg" alt="" loading="lazy" width="24" height="24">Spring Boot</span><span><img src="/assets/images/icons/devicon/spring.svg" alt="" loading="lazy" width="24" height="24">Spring Security</span><span><img src="/assets/images/icons/devicon/react.svg" alt="" loading="lazy" width="24" height="24">React</span><span><img src="/assets/images/icons/devicon/thymeleaf.svg" alt="" loading="lazy" width="24" height="24">Thymeleaf</span><span><img src="/assets/images/icons/devicon/javascript.svg" alt="" loading="lazy" width="24" height="24">JavaScript</span><span><img src="/assets/images/icons/devicon/typescript.svg" alt="" loading="lazy" width="24" height="24">TypeScript</span><span><img src="/assets/images/icons/devicon/csharp.svg" alt="" loading="lazy" width="24" height="24">C#</span><span><img src="/assets/images/icons/devicon/dotnetcore.svg" alt="" loading="lazy" width="24" height="24">ASP.NET Core</span><span><img src="/assets/images/icons/devicon/django.svg" alt="" loading="lazy" width="24" height="24">Django</span></div></article>
-                <article class="skill-card reveal" data-accent="coral"><h3>Data and Deployment</h3><p>Relational and document databases, image storage, migrations, and application deployment.</p><div class="skill-tags"><span><img src="/assets/images/icons/devicon/postgresql.svg" alt="" loading="lazy" width="24" height="24">PostgreSQL</span><span><img src="/assets/images/icons/devicon/mongodb.svg" alt="" loading="lazy" width="24" height="24">MongoDB</span><span><img src="/assets/images/icons/devicon/sqlite.svg" alt="" loading="lazy" width="24" height="24">SQLite</span><span><img src="/assets/images/icons/devicon/redis.svg" alt="" loading="lazy" width="24" height="24">Redis</span><span><img src="/assets/images/icons/devicon/cloudflare.svg" alt="" loading="lazy" width="24" height="24">Cloudflare D1 / R2</span><span>Cloudinary</span><span><img src="/assets/images/icons/devicon/docker.svg" alt="" loading="lazy" width="24" height="24">Docker</span><span><img src="/assets/images/icons/devicon/githubactions.svg" alt="" loading="lazy" width="24" height="24">GitHub Actions</span><span>Render</span><span><img src="/assets/images/icons/devicon/vercel.svg" alt="" loading="lazy" width="24" height="24">Vercel</span></div></article>
-                <article class="skill-card reveal" data-accent="violet"><h3>Machine Learning and Research</h3><p>Explainable clinical prediction, robustness to missing data, calibration, and evaluation across datasets.</p><div class="skill-tags"><span><img src="/assets/images/icons/devicon/python.svg" alt="" loading="lazy" width="24" height="24">Python</span><span><img src="/assets/images/icons/devicon/scikitlearn.svg" alt="" loading="lazy" width="24" height="24">scikit-learn</span><span><img src="/assets/images/icons/devicon/pytorch.svg" alt="" loading="lazy" width="24" height="24">PyTorch</span><span>Transformers</span><span>SHAP</span><span>Cross-cohort validation</span><span>Computer vision</span></div></article>
-                <article class="skill-card reveal" data-accent="gold"><h3>Applied AI and Interfaces</h3><p>Interfaces for log analysis, career planning, and geospatial hazard reporting.</p><div class="skill-tags"><span><img src="/assets/images/icons/devicon/streamlit.svg" alt="" loading="lazy" width="24" height="24">Streamlit</span><span><img src="/assets/images/icons/devicon/plotly.svg" alt="" loading="lazy" width="24" height="24">Plotly</span><span><img src="/assets/images/icons/devicon/fastapi.svg" alt="" loading="lazy" width="24" height="24">FastAPI</span><span>ONNX</span><span>IndexedDB</span><span><img src="/assets/images/icons/devicon/cloudflare.svg" alt="" loading="lazy" width="24" height="24">Cloudflare Workers</span></div></article>
-                <article class="skill-card reveal" data-accent="green"><h3>Cybersecurity</h3><p>Authorized lab practice in reconnaissance, service enumeration, vulnerability validation, and reporting.</p><div class="skill-tags"><span><img src="/assets/images/icons/devicon/kalilinux.svg" alt="" loading="lazy" width="24" height="24">Kali Linux</span><span>Nmap</span><span>Burp Suite</span><span>Metasploit</span><span>DVWA</span></div></article>
-                <article class="skill-card reveal" data-accent="blue"><h3>RF and Software Foundations</h3><p>Microwave and antenna simulation alongside object-oriented and database-backed coursework.</p><div class="skill-tags"><span>CST Studio Suite</span><span>BPSO</span><span>Metamaterials</span><span><img src="/assets/images/icons/devicon/cplusplus.svg" alt="" loading="lazy" width="24" height="24">C / C++</span><span>JavaFX</span><span>SQL</span></div></article>
+                <article class="skill-card reveal" data-accent="cyan">
+                    <span class="skill-number" aria-hidden="true">01</span>
+                    <h3>AI, ML &amp; Data</h3>
+                    <p>Explainable clinical AI, computer vision, and model evaluation across datasets.</p>
+                    <div class="skill-tags"><span>Python</span><span>scikit-learn</span><span>PyTorch</span><span>Transformers</span><span>SHAP</span><span>Cross-cohort validation</span><span>ONNX</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="coral">
+                    <span class="skill-number" aria-hidden="true">02</span>
+                    <h3>Programming</h3>
+                    <p>Programming, algorithms, and object-oriented design used in coursework and personal projects.</p>
+                    <div class="skill-tags"><span>C</span><span>C++</span><span>Java</span><span>JavaScript</span><span>TypeScript</span><span>C#</span><span>SQL</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="violet">
+                    <span class="skill-number" aria-hidden="true">03</span>
+                    <h3>Web &amp; Interface</h3>
+                    <p>Responsive interfaces and REST APIs with authentication and role-based access.</p>
+                    <div class="skill-tags"><span>React</span><span>Spring Boot</span><span>Spring Security</span><span>Thymeleaf</span><span>ASP.NET Core</span><span>Django</span><span>FastAPI</span><span>Streamlit</span><span>Plotly</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="gold">
+                    <span class="skill-number" aria-hidden="true">04</span>
+                    <h3>Data &amp; Deployment</h3>
+                    <p>Relational and document databases, cloud storage, and application delivery.</p>
+                    <div class="skill-tags"><span>PostgreSQL</span><span>MongoDB</span><span>SQLite</span><span>Redis</span><span>Cloudflare D1 / R2</span><span>Cloudinary</span><span>Docker</span><span>GitHub Actions</span><span>Render</span><span>Vercel</span><span>Cloudflare Workers</span><span>IndexedDB</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="green">
+                    <span class="skill-number" aria-hidden="true">05</span>
+                    <h3>Cybersecurity</h3>
+                    <p>Authorized lab work in reconnaissance, vulnerability validation, and reporting.</p>
+                    <div class="skill-tags"><span>Kali Linux</span><span>Nmap</span><span>Burp Suite</span><span>Metasploit</span><span>DVWA</span></div>
+                </article>
+                <article class="skill-card reveal" data-accent="blue">
+                    <span class="skill-number" aria-hidden="true">06</span>
+                    <h3>RF &amp; Sensing</h3>
+                    <p>Microwave and antenna simulation, with an emphasis on design optimization.</p>
+                    <div class="skill-tags"><span>CST Studio Suite</span><span>BPSO</span><span>Metamaterials</span></div>
+                </article>
             </div>
         </div>
     </section>
@@ -460,7 +490,7 @@
                 <h2>Have a research idea or software problem? <em>Let&apos;s talk.</em></h2>
                 <p>I am open to thoughtful student collaboration, research discussion and junior software opportunities.</p>
                 <a class="contact-email" href="mailto:azizulhakimomor@gmail.com">azizulhakimomor@gmail.com <span>↗</span></a>
-                <a class="contact-whatsapp" href="https://wa.me/8801675323618" target="_blank" rel="noreferrer"><img src="/assets/images/icons/tabler/brand-whatsapp.svg" alt="" loading="lazy" width="24" height="24"><span>WhatsApp · 01675 323618</span></a>
+                <a class="contact-whatsapp" href="https://wa.me/8801675323618" target="_blank" rel="noreferrer"><span>WhatsApp · 01675 323618</span></a>
             </div>
             <form class="contact-form reveal" id="contact-form" action="https://formsubmit.co/azizulhakimomor@gmail.com" method="POST" novalidate>
                 <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -481,28 +511,28 @@
     <div class="shell footer-discovery">
         <section aria-labelledby="footer-connect-title">
             <h2 id="footer-connect-title">Connect with me</h2>
-            <div class="social-icons">
-                <a class="social-icon social-linkedin" href="https://www.linkedin.com/in/azizul-hakim-omor-343132423/" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noreferrer"><img src="/assets/images/icons/tabler/brand-linkedin.svg" alt="" loading="lazy" width="24" height="24"></a>
-                <a class="social-icon social-github" href="https://github.com/AzizulHakim00" aria-label="GitHub" title="GitHub" target="_blank" rel="noreferrer"><img src="/assets/images/icons/tabler/brand-github.svg" alt="" loading="lazy" width="24" height="24"></a>
-                <a class="social-icon social-facebook" href="https://www.facebook.com/md.omor.7946" aria-label="Facebook" title="Facebook" target="_blank" rel="noreferrer"><img src="/assets/images/icons/tabler/brand-facebook.svg" alt="" loading="lazy" width="24" height="24"></a>
-                <a class="social-icon social-instagram" href="https://www.instagram.com/azizul_hakim_omor__/" aria-label="Instagram" title="Instagram" target="_blank" rel="noreferrer"><img src="/assets/images/icons/tabler/brand-instagram.svg" alt="" loading="lazy" width="24" height="24"></a>
-                <a class="social-icon social-whatsapp" href="https://wa.me/8801675323618" aria-label="WhatsApp" title="WhatsApp" target="_blank" rel="noreferrer"><img src="/assets/images/icons/tabler/brand-whatsapp.svg" alt="" loading="lazy" width="24" height="24"></a>
-                <a class="social-icon social-email" href="mailto:azizulhakimomor@gmail.com" aria-label="Email" title="Email"><img src="/assets/images/icons/tabler/mail.svg" alt="" loading="lazy" width="24" height="24"></a>
+            <div class="footer-social-links">
+                <a class="footer-social-link social-linkedin" href="https://www.linkedin.com/in/azizul-hakim-omor-343132423/" title="LinkedIn" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a class="footer-social-link social-github" href="https://github.com/AzizulHakim00" title="GitHub" target="_blank" rel="noreferrer">GitHub</a>
+                <a class="footer-social-link social-facebook" href="https://www.facebook.com/md.omor.7946" title="Facebook" target="_blank" rel="noreferrer">Facebook</a>
+                <a class="footer-social-link social-instagram" href="https://www.instagram.com/azizul_hakim_omor__/" title="Instagram" target="_blank" rel="noreferrer">Instagram</a>
+                <a class="footer-social-link social-whatsapp" href="https://wa.me/8801675323618" title="WhatsApp" target="_blank" rel="noreferrer">WhatsApp</a>
+                <a class="footer-social-link social-email" href="mailto:azizulhakimomor@gmail.com" title="Email">Email</a>
             </div>
         </section>
         <section aria-labelledby="footer-tech-title">
             <h2 id="footer-tech-title">Technologies I work with</h2>
             <ul class="technology-grid">
-                <li><img src="/assets/images/icons/devicon/java.svg" alt="" loading="lazy" width="24" height="24"><span>Java</span></li>
-                <li><img src="/assets/images/icons/devicon/spring.svg" alt="" loading="lazy" width="24" height="24"><span>Spring Boot</span></li>
-                <li><img src="/assets/images/icons/devicon/python.svg" alt="" loading="lazy" width="24" height="24"><span>Python</span></li>
-                <li><img src="/assets/images/icons/devicon/mongodb.svg" alt="" loading="lazy" width="24" height="24"><span>MongoDB</span></li>
-                <li><img src="/assets/images/icons/devicon/docker.svg" alt="" loading="lazy" width="24" height="24"><span>Docker</span></li>
-                <li><img src="/assets/images/icons/devicon/react.svg" alt="" loading="lazy" width="24" height="24"><span>React</span></li>
-                <li><img src="/assets/images/icons/devicon/postgresql.svg" alt="" loading="lazy" width="24" height="24"><span>PostgreSQL</span></li>
-                <li><img src="/assets/images/icons/devicon/githubactions.svg" alt="" loading="lazy" width="24" height="24"><span>GitHub Actions</span></li>
-                <li><img src="/assets/images/icons/devicon/pytorch.svg" alt="" loading="lazy" width="24" height="24"><span>PyTorch</span></li>
-                <li><img src="/assets/images/icons/devicon/cloudflare.svg" alt="" loading="lazy" width="24" height="24"><span>Cloudflare Workers</span></li>
+                <li>Java</li>
+                <li>Spring Boot</li>
+                <li>Python</li>
+                <li>MongoDB</li>
+                <li>Docker</li>
+                <li>React</li>
+                <li>PostgreSQL</li>
+                <li>GitHub Actions</li>
+                <li>PyTorch</li>
+                <li>Cloudflare Workers</li>
             </ul>
         </section>
     </div>
@@ -528,10 +558,10 @@
             <h3>What would you like to explore?</h3>
             <p>Compare projects, find a paper, or tell me where you’d like to go.</p>
             <div class="chat-topics">
-                <button type="button" data-chat-question="What projects has Azizul built?"><img src="/assets/images/icons/tabler/code.svg" alt="" loading="lazy" width="24" height="24"><span>Projects</span></button>
-                <button type="button" data-chat-question="What learning modules can I try?"><img src="/assets/images/icons/tabler/book.svg" alt="" loading="lazy" width="24" height="24"><span>Learning Modules</span></button>
-                <button type="button" data-chat-question="What research has Azizul done?"><img src="/assets/images/icons/tabler/file-description.svg" alt="" loading="lazy" width="24" height="24"><span>Research</span></button>
-                <button type="button" data-chat-question="What is Azizul’s background?"><img src="/assets/images/icons/tabler/user.svg" alt="" loading="lazy" width="24" height="24"><span>About Azizul</span></button>
+                <button type="button" data-chat-question="What projects has Azizul built?"><span>Projects</span></button>
+                <button type="button" data-chat-question="What learning modules can I try?"><span>Learning Modules</span></button>
+                <button type="button" data-chat-question="What research has Azizul done?"><span>Research</span></button>
+                <button type="button" data-chat-question="What is Azizul’s background?"><span>About Azizul</span></button>
             </div>
         </div>
         <ol class="chat-messages" role="log" aria-label="Conversation" aria-live="polite"></ol>
