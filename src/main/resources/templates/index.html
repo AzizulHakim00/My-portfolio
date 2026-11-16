@@ -14,14 +14,14 @@
     <script defer src="/assets/js/app.js?v=20261116-direct-entry" th:src="@{/assets/js/app.js(v='20261116-direct-entry')}"></script>
     <script defer src="/assets/js/project-details.js?v=20261116-soft"></script>
     <script defer src="/assets/js/portfolio-chat.js?v=20261116-soft"></script>
-    <link rel="stylesheet" href="/assets/css/aho-intro.css" th:href="@{/assets/css/aho-intro.css}">
-    <script defer src="/assets/js/aho-intro.js" th:src="@{/assets/js/aho-intro.js}"></script>
+    <link rel="stylesheet" href="/assets/css/aho-intro.css?v=canvas-1" th:href="@{/assets/css/aho-intro.css(v='canvas-1')}">
+    <script defer src="/assets/js/aho-intro.js?v=canvas-1" th:src="@{/assets/js/aho-intro.js(v='canvas-1')}"></script>
 </head>
 <body>
 <dialog class="aho-intro" id="aho-intro" aria-label="Portfolio intro">
-    <video class="aho-intro-video" muted playsinline preload="none" aria-hidden="true"
-        data-desktop-src="/assets/video/aho-intro.mp4" th:data-desktop-src="@{/assets/video/aho-intro.mp4}"
-        data-mobile-src="/assets/video/aho-intro-mobile.mp4" th:data-mobile-src="@{/assets/video/aho-intro-mobile.mp4}"></video>
+    <img class="aho-intro-art" alt="" aria-hidden="true" decoding="async">
+    <canvas class="aho-intro-stage" aria-hidden="true"></canvas>
+    <button class="aho-intro-enter" type="button" hidden>Explore portfolio</button>
     <button class="aho-intro-skip" type="button" autofocus>Skip intro</button>
 </dialog>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -49,7 +49,7 @@
     <a class="header-cv" href="/assets/downloads/Azizul_Hakim_Omor_CV_2026.pdf" target="_blank" rel="noreferrer">CV <span>↗</span></a>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
     <section class="hero" id="home">
         <canvas id="signal-canvas" aria-hidden="true"></canvas>
         <div class="hero-grid shell">
