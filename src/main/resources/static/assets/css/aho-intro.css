@@ -19,12 +19,12 @@ body:has(.aho-intro[open]) {
     border: 0;
     background: #061713;
     color: #f0fff7;
-    transition: opacity 300ms ease;
+    transition: opacity 720ms ease-in-out;
 }
 
 .aho-intro::backdrop {
     background: #02070a;
-    transition: opacity 300ms ease;
+    transition: opacity 720ms ease-in-out;
 }
 
 .aho-intro.is-fading,

@@ -3,7 +3,7 @@ const canvas = dialog?.querySelector(".aho-intro-stage");
 const enter = dialog?.querySelector(".aho-intro-enter");
 const skip = dialog?.querySelector(".aho-intro-skip");
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const sessionKey = "aho-steel-intro-seen";
+const sessionKey = "aho-ring-intro-seen";
 
 function alreadySeen() {
     try {
@@ -56,7 +56,7 @@ async function playIntro() {
     window.addEventListener("keydown", cancelPending, { ...options, capture: true });
 
     try {
-        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=steel-1");
+        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=ring-1");
         if (listeners.signal.aborted) return;
         const { render, setViewport } = await loadIntroScene(canvas, listeners.signal);
         if (listeners.signal.aborted) return;
@@ -96,7 +96,7 @@ async function playIntro() {
                 return;
             }
             if (t >= 13.1 && enter.hidden) enter.hidden = false;
-            if (t >= INTRO_LENGTH - 0.32) dialog.classList.add("is-fading");
+            if (t >= INTRO_LENGTH - 0.74) dialog.classList.add("is-fading");
 
             // Learn the display cadence from the shortest normal intervals.
             // Keep timestamp-based motion at every frame rate.
