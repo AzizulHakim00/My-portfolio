@@ -79,9 +79,9 @@
     window.addEventListener("keydown", cancelPendingIntro, { ...options, capture: true });
     window.addEventListener("hashchange", finish, options);
 
-    const usePortrait = window.matchMedia("(max-width: 900px) and (orientation: portrait)").matches;
+    const useMobile = window.matchMedia("(max-width: 900px)").matches;
     video.muted = true;
-    video.src = usePortrait ? video.dataset.mobileSrc : video.dataset.desktopSrc;
+    video.src = useMobile ? video.dataset.mobileSrc : video.dataset.desktopSrc;
     setTimeoutToFinish(4000);
     video.play().catch(() => {
         if (!listeners.signal.aborted) finish();
