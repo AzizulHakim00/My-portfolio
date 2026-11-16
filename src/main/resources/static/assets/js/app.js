@@ -9,7 +9,6 @@
     const menuToggle = document.querySelector(".menu-toggle");
     const navLinks = [...document.querySelectorAll(".site-nav a")];
     const sections = [...document.querySelectorAll("main section[id]")];
-    const intro = document.querySelector("#aho-intro");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const closeMenu = () => {
@@ -78,10 +77,6 @@
         let characterIndex = phrases[0].length;
         let deleting = true;
         const type = () => {
-            if (intro?.open) {
-                intro.addEventListener("close", () => window.setTimeout(type, 1600), { once: true });
-                return;
-            }
             const phrase = phrases[phraseIndex];
             characterIndex += deleting ? -1 : 1;
             let delay = deleting ? 38 : 64;
@@ -345,7 +340,7 @@
             };
 
             const syncMotion = () => {
-                const shouldRun = visible && !document.hidden && !intro?.open;
+                const shouldRun = visible && !document.hidden;
                 hero.classList.toggle("hero-motion-paused", !shouldRun);
                 if (shouldRun && frame === null) {
                     previousTime = null;
@@ -366,7 +361,6 @@
                     syncMotion();
                 }).observe(hero);
             }
-            if (intro) new MutationObserver(syncMotion).observe(intro, { attributeFilter: ["open"] });
             document.addEventListener("visibilitychange", syncMotion);
             syncMotion();
         }

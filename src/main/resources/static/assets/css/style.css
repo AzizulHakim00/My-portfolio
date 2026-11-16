@@ -91,14 +91,6 @@ button { color: inherit; }
     animation-play-state: paused;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-    body.aho-intro-open .hero .reveal {
-        opacity: 0;
-        translate: 0 24px;
-        transition: none;
-    }
-}
-
 @media (max-width: 600px) {
     .hero > #signal-canvas { opacity: .59; }
     .hero::after { inset: -9%; }
@@ -816,7 +808,7 @@ button { color: inherit; }
 @keyframes chat-greet { 0% { transform: translateY(0); } 50% { transform: translateY(-3px); } 100% { transform: translateY(0); } }
 
 /* --------------------------------------------------------------------------
-   AHO cinematic portfolio intro and shared brand emblem
+   AHO brand emblem
    -------------------------------------------------------------------------- */
 .brand-mark {
     flex: 0 0 50px;
@@ -847,80 +839,6 @@ button { color: inherit; }
     object-fit: contain;
     filter: drop-shadow(0 0 10px rgba(32, 200, 196, .22));
 }
-
-body.aho-intro-open { overflow: hidden; }
-
-.aho-intro:not([open]) { display: none; }
-.aho-intro::backdrop { background: transparent; }
-.aho-intro {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    max-height: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
-    background: radial-gradient(ellipse at 50% 48%, #0b3025 0%, #071716 42%, #020709 80%);
-    color: #edfdf7;
-    transition: opacity .45s ease;
-}
-.aho-intro.is-leaving { opacity: 0; pointer-events: none; }
-
-.aho-intro__showcase {
-    display: grid;
-    justify-items: center;
-    gap: 14px;
-    width: min(94vw, 840px, calc((100dvh - 142px) * 1.35));
-    padding: 0;
-    border: 0;
-    border-radius: 12px;
-    background: transparent;
-    color: inherit;
-    cursor: pointer;
-}
-.aho-intro__screen {
-    position: relative;
-    display: block;
-    width: 100%;
-    aspect-ratio: 864 / 640;
-    overflow: hidden;
-    border: 1px solid rgba(96, 255, 186, .25);
-    border-radius: 12px;
-    background: #051110;
-    box-shadow: 0 20px 54px rgba(0, 0, 0, .55), 0 0 38px rgba(24, 221, 150, .12);
-}
-.aho-intro__canvas { display: block; width: 100%; height: 100%; opacity: 0; }
-.aho-intro.is-playing .aho-intro__canvas { opacity: 1; }
-.aho-intro__skip, .aho-intro__enter {
-    display: inline-grid;
-    grid-auto-flow: column;
-    place-content: center;
-    align-items: center;
-    gap: 8px;
-    min-height: 44px;
-    padding: 8px 14px;
-    border: 1px solid rgba(156, 255, 211, .35);
-    border-radius: 6px;
-    background: #091b17;
-    color: #e5faf0;
-    font: 700 13px var(--display);
-    cursor: pointer;
-}
-.aho-intro__enter { border-color: rgba(92, 255, 166, .65); }
-.aho-intro__enter span { color: #5dffbc; }
-.aho-intro__skip {
-    position: absolute;
-    z-index: 1;
-    top: max(14px, env(safe-area-inset-top));
-    right: max(14px, env(safe-area-inset-right));
-}
-.aho-intro__skip:hover, .aho-intro__showcase:hover .aho-intro__enter { border-color: #5dffbc; }
-.aho-intro :focus-visible { outline: 2px solid #5dffbc; outline-offset: 4px; }
 
 @media (max-width: 600px) {
     .brand { gap: 9px; }
