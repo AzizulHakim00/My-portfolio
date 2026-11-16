@@ -27,8 +27,8 @@ function surface(width, height, options) {
 
 function line(ctx, x0, y0, x1, y1, color, width = 1) {
     ctx.beginPath();
-    ctx.moveTo(point(x0), point(y0));
-    ctx.lineTo(point(x1), point(y1));
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x1, y1);
     ctx.strokeStyle = color;
     ctx.lineWidth = width === 1 ? 1.24 : width;
     ctx.stroke();
@@ -37,7 +37,7 @@ function line(ctx, x0, y0, x1, y1, color, width = 1) {
 function dot(ctx, x, y, radius, color) {
     ctx.fillStyle = color;
     ctx.beginPath();
-    ctx.arc(point(x), point(y), radius, 0, TAU);
+    ctx.arc(x, y, radius, 0, TAU);
     ctx.fill();
 }
 
@@ -69,9 +69,13 @@ export async function loadIntroScene(canvas, signal) {
 
     canvas.width = W;
     canvas.height = H;
-    const output = canvas.getContext("2d", { alpha: false });
-    if (!output) throw new Error("Canvas unavailable");
-    const scene = surface(1, 1, { alpha: false });
+    const scene = canvas.getContext("2d");
+    if (!scene || !canvas.parentElement) throw new Error("Canvas unavailable");
+    const camera = canvas.parentElement;
+    backdrop.className = "aho-intro-art";
+    backdrop.alt = "";
+    backdrop.setAttribute("aria-hidden", "true");
+    camera.prepend(backdrop);
     const overlay = surface(1, 1);
     const filtered = surface(1, 1);
     const figureLayer = surface(data.figure[2], data.figure[3]);
@@ -81,11 +85,11 @@ export async function loadIntroScene(canvas, signal) {
     metalLayer.imageSmoothingQuality = "high";
     let view;
 
-    function paintMetalLogo() {
+    function paintMetalLogo(ctx, x, y) {
         if (highResolutionLogo) {
-            metalLayer.drawImage(highResolutionLogo, 0, 0, LW, LH);
+            ctx.drawImage(highResolutionLogo, x, y, LW, LH);
         } else {
-            sprite(metalLayer, data.logo, 0, 0);
+            sprite(ctx, data.logo, x, y);
         }
     }
 
@@ -108,17 +112,18 @@ export async function loadIntroScene(canvas, signal) {
         const fit = Math.min(width / W, height / H);
         const x = (width - W * fit) / 2;
         const y = (height - H * fit) / 2;
-        const cover = Math.max(width / W, height / H);
         // Blur and additive effects use smaller buffers than the final frame.
         const overlayScale = Math.min(1, 2048 / Math.max(width, height), Math.sqrt(1800000 / (width * height)));
-        const blurScale = Math.min(1 / 3, 900 / Math.max(width, height));
-        view = { width, height, fit, x, y, cover, left: -x / fit, top: -y / fit, overlayScale, blurScale };
+        const blurScale = Math.min(1 / 3, 720 / Math.max(width, height));
+        view = {
+            width, height, fit, x, y, left: -x / fit, top: -y / fit, overlayScale, blurScale,
+            cameraX: fit * cssWidth / width, cameraY: fit * cssHeight / height
+        };
 
-        resize(output, width, height);
         resize(scene, width, height);
         resize(overlay, Math.ceil(width * overlayScale), Math.ceil(height * overlayScale));
         resize(filtered, Math.ceil(width * blurScale), Math.ceil(height * blurScale));
-        output.imageSmoothingQuality = scene.imageSmoothingQuality = "high";
+        scene.imageSmoothingQuality = "medium";
 
         return {
             top: (y + 605 * fit) / height,
@@ -132,30 +137,39 @@ export async function loadIntroScene(canvas, signal) {
     }
 
     function sprite(ctx, source, x, y, width = source[2], height = source[3]) {
-        ctx.drawImage(atlas, ...source, point(x), point(y), width, height);
+        ctx.drawImage(atlas, ...source, x, y, width, height);
     }
 
-    function bloom(paint, blur, power, core = 0) {
+    function bloom(paint, blur, power, core, [left, top, right, bottom]) {
+        const { fit, x, y, overlayScale, blurScale } = view;
+        const padding = 4 + 3 * blur;
+        const sx = Math.max(0, Math.floor((x + fit * (left - padding)) * overlayScale));
+        const sy = Math.max(0, Math.floor((y + fit * (top - padding)) * overlayScale));
+        const sw = Math.min(overlay.canvas.width, Math.ceil((x + fit * (right + padding)) * overlayScale)) - sx;
+        const sh = Math.min(overlay.canvas.height, Math.ceil((y + fit * (bottom + padding)) * overlayScale)) - sy;
+        if (sw <= 0 || sh <= 0) return;
+
         overlay.resetTransform();
-        overlay.clearRect(0, 0, overlay.canvas.width, overlay.canvas.height);
-        project(overlay, view.overlayScale);
+        overlay.clearRect(sx, sy, sw, sh);
+        project(overlay, overlayScale);
         paint(overlay);
         scene.save();
         scene.resetTransform();
         scene.globalCompositeOperation = "lighter";
+        const destination = [sx / overlayScale, sy / overlayScale, sw / overlayScale, sh / overlayScale];
         if (power > 0) {
-            const w = filtered.canvas.width;
-            const h = filtered.canvas.height;
+            const w = Math.min(filtered.canvas.width, Math.ceil(sw * blurScale / overlayScale));
+            const h = Math.min(filtered.canvas.height, Math.ceil(sh * blurScale / overlayScale));
             filtered.clearRect(0, 0, w, h);
-            filtered.filter = "blur(" + blur * view.fit * view.blurScale + "px)";
-            filtered.drawImage(overlay.canvas, 0, 0, w, h);
+            filtered.filter = "blur(" + blur * fit * blurScale + "px)";
+            filtered.drawImage(overlay.canvas, sx, sy, sw, sh, 0, 0, w, h);
             filtered.filter = "none";
             scene.globalAlpha = power;
-            scene.drawImage(filtered.canvas, 0, 0, view.width, view.height);
+            scene.drawImage(filtered.canvas, 0, 0, w, h, ...destination);
         }
         if (core > 0) {
             scene.globalAlpha = core;
-            scene.drawImage(overlay.canvas, 0, 0, view.width, view.height);
+            scene.drawImage(overlay.canvas, sx, sy, sw, sh, ...destination);
         }
         scene.restore();
     }
@@ -199,7 +213,9 @@ export async function loadIntroScene(canvas, signal) {
                 layer.strokeStyle = "rgb(210,241,244)";
                 layer.lineWidth = 2;
                 layer.stroke();
-            }, 16, amount * 0.65, amount * 0.7);
+            }, 16, amount * 0.65, amount * 0.7,
+                [Math.min(...data.storm[i].map(p => p[0])) - 3, Math.min(-7, view.top - 7),
+                    Math.max(...data.storm[i].map(p => p[0])) + 3, 264]);
             wash("rgb(255,252,229)", amount * 0.08);
         });
     }
@@ -232,12 +248,13 @@ export async function loadIntroScene(canvas, signal) {
                         j % 5 === 0 ? 2 : 1, "rgb(123,235,88)");
                 }
             }
-        }, 11, 0.52 * strength, 0.8 * strength);
+        }, 11, 0.52 * strength, 0.8 * strength, [334, 103, 946, 605]);
 
         const beam = inOut(t, 1, 1.35, 2.17, 2.62);
         if (beam > 0.01) {
             const sky = Math.min(-50, view.top - 4);
-            bloom((layer) => line(layer, 640, sky, 640, 535, "rgb(116,255,24)", 20), 32, 0.8 * beam);
+            bloom((layer) => line(layer, 640, sky, 640, 535, "rgb(116,255,24)", 20), 32, 0.8 * beam, 0,
+                [628, sky - 12, 652, 547]);
             line(scene, 640, sky, 640, 535, "rgb(180,245,115)", Math.max(1, point(4 * beam)));
             circleGlow(640, 530, 180, "105,255,37", 0.35 * beam);
         }
@@ -291,7 +308,7 @@ export async function loadIntroScene(canvas, signal) {
                 layer.fillStyle = rgb(48, 73 + 5 * k, 16);
                 layer.fill();
             }
-        }, 28, 0.37 * amount);
+        }, 28, 0.37 * amount, 0, [210, 450, 1070, 577]);
 
         const power = amount * smooth((t - 7.40) / 1.06);
         if (power <= 0.01) return;
@@ -305,16 +322,21 @@ export async function loadIntroScene(canvas, signal) {
                         "rgb(100,224,38)", k % 5 === 0 ? 2 : 1);
                 }
             });
-        }, 12, 0.87 * power, 0.78 * power);
+        }, 12, 0.87 * power, 0.78 * power, [374, 340, 896, 458]);
     }
 
     function drawMetal(t) {
         const reveal = smooth((t - 2.13) / 1.22);
         const rebuild = smooth((t - 8.8) / 1.82);
         if (reveal <= 0) return;
-        metalLayer.clearRect(0, 0, LW, LH);
-        paintMetalLogo();
-        if (t > 4.12 && rebuild < 1) {
+        const needsMask = t > 4.12 && rebuild < 1;
+        if (!needsMask) {
+            scene.globalAlpha = reveal;
+            paintMetalLogo(scene, LX, LY);
+            scene.globalAlpha = 1;
+        } else if (t < 5.63 || rebuild > 0) {
+            metalLayer.clearRect(0, 0, LW, LH);
+            paintMetalLogo(metalLayer, 0, 0);
             const alphaMask = metalLayer.createLinearGradient(0, 0, LW, 0);
             for (let i = 0; i <= 30; i++) {
                 const column = i / 30;
@@ -326,10 +348,10 @@ export async function loadIntroScene(canvas, signal) {
             metalLayer.fillStyle = alphaMask;
             metalLayer.fillRect(0, 0, LW, LH);
             metalLayer.globalCompositeOperation = "source-over";
+            scene.globalAlpha = reveal;
+            scene.drawImage(metalLayer.canvas, LX, LY, LW, LH);
+            scene.globalAlpha = 1;
         }
-        scene.globalAlpha = reveal;
-        scene.drawImage(metalLayer.canvas, LX, LY, LW, LH);
-        scene.globalAlpha = 1;
 
         if (t > 3.96 && t < 6.05) {
             const cut = 396 + 440 * smooth((t - 3.98) / 1.25);
@@ -346,7 +368,7 @@ export async function loadIntroScene(canvas, signal) {
             metalLayer.fillRect(-2.8, -2.8, 5.6, 5.6);
             metalLayer.restore();
             metalLayer.globalCompositeOperation = "destination-in";
-            paintMetalLogo();
+            paintMetalLogo(metalLayer, 0, 0);
             metalLayer.globalCompositeOperation = "source-over";
             scene.globalCompositeOperation = "lighter";
             scene.drawImage(metalLayer.canvas, LX, LY, LW, LH);
@@ -365,26 +387,25 @@ export async function loadIntroScene(canvas, signal) {
     function shards(t) {
         if (t > 4.15 && t < 10.85) {
             const returnHome = smooth((t - 8.09) / 2.53);
+            const assembled = smooth((t - 8.8) / 1.82);
             data.shards.forEach(([sx, sy, atlasX, atlasY, w, h, vx, vy, spin, delay, phase]) => {
                 const hit = 4.17 + (sx + w * 0.5) / LW * 0.93 + delay * 0.15;
                 const amount = smooth((t - hit) / 1.06) * (1 - returnHome);
-                if (amount < 0.006) return;
-                const x = point(LX + sx + vx * amount + 9 * Math.sin(t * 1.8 + phase) * amount);
-                const y = point(LY + sy + vy * amount + 5 * Math.cos(t * 1.4 + phase) * amount);
+                const opacity = smooth((t - hit) / 0.17) * (1 - assembled);
+                if (opacity <= 0) return;
+                const x = LX + sx + vx * amount + 9 * Math.sin(t * 1.8 + phase) * amount;
+                const y = LY + sy + vy * amount + 5 * Math.cos(t * 1.4 + phase) * amount;
                 scene.save();
                 scene.translate(x, y);
-                scene.beginPath();
-                scene.rect(0, 0, w, h);
-                scene.clip();
                 scene.translate(w * 0.5, h * 0.5);
                 scene.rotate(-spin * amount * DEG);
                 scene.translate(-w * 0.5, -h * 0.5);
-                scene.globalAlpha = 0.98;
+                scene.globalAlpha = 0.98 * opacity;
                 sprite(scene, [atlasX, atlasY, w, h], 0, 0);
                 if (t < 6.5) {
                     const hot = (1 - smooth((t - hit) / 1.3)) * smooth((t - hit + 0.2) / 0.3);
                     if (hot > 0.02) {
-                        scene.globalAlpha = hot * 0.77;
+                        scene.globalAlpha = hot * 0.77 * opacity;
                         sprite(scene, [atlasX + w + 1, atlasY, w, h], 0, 0);
                     }
                 }
@@ -415,8 +436,10 @@ export async function loadIntroScene(canvas, signal) {
         const tipY = 351 + point(0.9 * Math.sin(t * 10));
         const source = Math.min(-65, view.left - 8);
         const end = Math.max(source, tipX);
-        bloom((layer) => line(layer, source, 352, end, tipY, "rgb(187,24,18)", 55), 31, 0.95 * fire);
-        bloom((layer) => line(layer, source, 352, end, tipY, "rgb(252,30,24)", 27), 11, 0.86 * fire);
+        bloom((layer) => line(layer, source, 352, end, tipY, "rgb(187,24,18)", 55), 31, 0.95 * fire, 0,
+            [source - 28, 323, end + 28, 381]);
+        bloom((layer) => line(layer, source, 352, end, tipY, "rgb(252,30,24)", 27), 11, 0.86 * fire, 0,
+            [source - 14, 336, end + 14, 367]);
         const rails = [
             [22, "rgb(229,39,23)"], [12, "rgb(255,82,47)"],
             [6, "rgb(255,193,153)"], [3, "rgb(255,246,238)"]
@@ -452,7 +475,7 @@ export async function loadIntroScene(canvas, signal) {
                     const half = point((33 + j * 2.6) * (0.75 + 0.25 * Math.sin(t * 18 + j) ** 2));
                     line(layer, x - half, y, x + half, y, "rgb(155,42,14)");
                 }
-            }, 10, 0.7 * contact * fire);
+            }, 10, 0.7 * contact * fire, 0, [tipX - 110, 520, tipX + 110, 697]);
             circleGlow(tipX, 450, 160, "210,41,23", 0.13 * contact * fire);
         }
         wash("rgb(255,150,124)", peak(t, 4.26, 0.08) * 0.1);
@@ -490,7 +513,7 @@ export async function loadIntroScene(canvas, signal) {
                     dot(layer, 640 + rx * Math.cos(a), 370 + ry * Math.sin(a), 2, "rgb(159,255,84)");
                 }
             }
-        }, 15, 0.82 * q, 0.83 * q);
+        }, 15, 0.82 * q, 0.83 * q, [198, 130, 1082, 610]);
         data.sparks.forEach(([, u, , , angle, speed], k) => {
             const theta = t * (0.9 + speed * 0.25) + angle * TAU;
             const radius = (45 + u * 310) * (1 - power * 0.82);
@@ -504,7 +527,7 @@ export async function loadIntroScene(canvas, signal) {
                     const theta = i * TAU / 20 + t * 2;
                     dot(layer, 640 + 300 * Math.cos(theta), 360 + 120 * Math.sin(theta), 2, "rgb(165,255,117)");
                 }
-            }, 10, 0.35 * alpha);
+            }, 10, 0.35 * alpha, 0, [335, 236, 945, 485]);
         }
     }
 
@@ -523,9 +546,8 @@ export async function loadIntroScene(canvas, signal) {
     }
 
     function render(t) {
-        const { width, height, fit, cover } = view;
         scene.resetTransform();
-        scene.drawImage(backdrop, (width - W * cover) / 2, (height - H * cover) / 2, W * cover, H * cover);
+        scene.clearRect(0, 0, view.width, view.height);
         project(scene);
         portal(t);
         ambient(t);
@@ -543,11 +565,11 @@ export async function loadIntroScene(canvas, signal) {
         let dy = 2 * Math.sin(t * 0.31);
         if (t > 4.5 && t < 4.9) {
             const shake = peak(t, 4.7, 0.2);
-            dx += 5 * shake * Math.sin(t * 47);
-            dy += 4 * shake * Math.sin(t * 62);
+            dx += 2.5 * shake * Math.sin(t * 28);
+            dy += 2 * shake * Math.sin(t * 34);
         }
-        output.drawImage(scene.canvas, (1 - z) * width / 2 + dx * fit,
-            (1 - z) * height / 2 + dy * fit, width * z, height * z);
+        // Let the compositor move the camera without a second full-frame Canvas draw.
+        camera.style.transform = "translate3d(" + dx * view.cameraX + "px," + dy * view.cameraY + "px,0) scale(" + z + ")";
     }
 
     return { render, setViewport };

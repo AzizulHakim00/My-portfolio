@@ -257,6 +257,7 @@
     if (canvas instanceof HTMLCanvasElement && !reducedMotion) {
         const context = canvas.getContext("2d");
         const hero = canvas.closest(".hero");
+        const intro = document.querySelector("#aho-intro");
 
         if (context && hero) {
             let particles = [];
@@ -340,7 +341,7 @@
             };
 
             const syncMotion = () => {
-                const shouldRun = visible && !document.hidden;
+                const shouldRun = visible && !document.hidden && !intro?.open;
                 hero.classList.toggle("hero-motion-paused", !shouldRun);
                 if (shouldRun && frame === null) {
                     previousTime = null;
@@ -361,6 +362,7 @@
                     syncMotion();
                 }).observe(hero);
             }
+            if (intro) new MutationObserver(syncMotion).observe(intro, { attributes: true, attributeFilter: ["open"] });
             document.addEventListener("visibilitychange", syncMotion);
             syncMotion();
         }

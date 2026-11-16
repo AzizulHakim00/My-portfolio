@@ -30,12 +30,24 @@ body:has(.aho-intro[open]) {
     inset: 0;
 }
 
+.aho-intro-camera {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+}
+
+.aho-intro-art,
 .aho-intro-stage {
     position: absolute;
     inset: 0;
     display: block;
     width: 100%;
     height: 100%;
+    pointer-events: none;
+}
+
+.aho-intro-art {
+    object-fit: cover;
 }
 
 .aho-intro .aho-intro-skip {

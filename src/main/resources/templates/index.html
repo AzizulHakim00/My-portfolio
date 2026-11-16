@@ -11,16 +11,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/style.css?v=emerald-1" th:href="@{/assets/css/style.css(v='emerald-1')}">
-    <script defer src="/assets/js/app.js?v=emerald-1" th:src="@{/assets/js/app.js(v='emerald-1')}"></script>
+    <script defer src="/assets/js/app.js?v=smooth-1" th:src="@{/assets/js/app.js(v='smooth-1')}"></script>
     <script defer src="/assets/js/project-details.js?v=single-logo-1"></script>
     <script defer src="/assets/js/portfolio-chat.js?v=20261116-soft"></script>
-    <link rel="stylesheet" href="/assets/css/aho-intro.css?v=emerald-1" th:href="@{/assets/css/aho-intro.css(v='emerald-1')}">
-    <script type="module" src="/assets/js/aho-intro.js?v=uhd-1" th:src="@{/assets/js/aho-intro.js(v='uhd-1')}"></script>
+    <link rel="stylesheet" href="/assets/css/aho-intro.css?v=smooth-1" th:href="@{/assets/css/aho-intro.css(v='smooth-1')}">
+    <script type="module" src="/assets/js/aho-intro.js?v=smooth-1" th:src="@{/assets/js/aho-intro.js(v='smooth-1')}"></script>
 </head>
 <body>
 <dialog class="aho-intro" id="aho-intro" aria-label="Portfolio intro">
     <div class="aho-intro-viewport">
-        <canvas class="aho-intro-stage" width="1280" height="720" aria-hidden="true"></canvas>
+        <div class="aho-intro-camera" aria-hidden="true">
+            <canvas class="aho-intro-stage" width="1280" height="720"></canvas>
+        </div>
         <button class="aho-intro-enter" type="button" hidden>Explore portfolio</button>
     </div>
     <button class="aho-intro-skip" type="button" autofocus>Skip intro</button>

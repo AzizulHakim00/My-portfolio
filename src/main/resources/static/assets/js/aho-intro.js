@@ -3,7 +3,7 @@ const canvas = dialog?.querySelector(".aho-intro-stage");
 const enter = dialog?.querySelector(".aho-intro-enter");
 const skip = dialog?.querySelector(".aho-intro-skip");
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const sessionKey = "aho-uhd-intro-seen";
+const sessionKey = "aho-smooth-intro-seen";
 
 function alreadySeen() {
     try {
@@ -56,7 +56,7 @@ async function playIntro() {
     window.addEventListener("keydown", cancelPending, { ...options, capture: true });
 
     try {
-        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=uhd-1");
+        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=smooth-1");
         if (listeners.signal.aborted) return;
         const { render, setViewport } = await loadIntroScene(canvas, listeners.signal);
         if (listeners.signal.aborted) return;
@@ -67,7 +67,7 @@ async function playIntro() {
         let quality = 1;
 
         function sizeForViewport() {
-            const { width, height } = canvas.getBoundingClientRect();
+            const { width, height } = dialog.getBoundingClientRect();
             if (!width || !height) return;
             const button = setViewport(width, height, window.devicePixelRatio, quality);
             enter.style.top = button.top * 100 + "%";
@@ -86,17 +86,17 @@ async function playIntro() {
         }
 
         function tick(now) {
-            const t = Math.floor(Math.max(0, now - started) * 0.06) / 60;
+            const t = Math.max(0, now - started) / 1000;
             if (t >= INTRO_LENGTH) {
                 finish();
                 return;
             }
             if (t >= 13.1 && enter.hidden) enter.hidden = false;
-            const delta = now - lastTick;
-            slowFrames = lastTick && delta > 40 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
+            const delta = lastTick ? now - lastTick : 0;
+            slowFrames = lastTick && delta > 24 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
             lastTick = now;
-            if (slowFrames >= 12 && quality > 0.7) {
-                quality *= 0.82;
+            if (lastTick && (delta > 85 || slowFrames >= 6) && quality > 0.36) {
+                quality *= delta > 85 ? 0.7 : 0.82;
                 slowFrames = 0;
                 lastFrame = t;
                 sizeForViewport();
