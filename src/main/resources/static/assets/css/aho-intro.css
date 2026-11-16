@@ -19,17 +19,10 @@ body:has(.aho-intro[open]) {
     border: 0;
     background: #061713;
     color: #f0fff7;
-    transition: opacity 300ms ease;
 }
 
 .aho-intro::backdrop {
     background: #02070a;
-    transition: opacity 300ms ease;
-}
-
-.aho-intro.is-fading,
-.aho-intro.is-fading::backdrop {
-    opacity: 0;
 }
 
 .aho-intro-viewport {
@@ -44,7 +37,6 @@ body:has(.aho-intro[open]) {
 }
 
 .aho-intro-art,
-.aho-intro-glow,
 .aho-intro-stage {
     position: absolute;
     inset: 0;
@@ -56,22 +48,6 @@ body:has(.aho-intro[open]) {
 
 .aho-intro-art {
     object-fit: cover;
-    filter: blur(12px);
-    transform: scale(1.05);
-}
-
-.aho-intro-plate {
-    position: absolute;
-    display: block;
-    pointer-events: none;
-    mask-image: linear-gradient(90deg, transparent, #000 3.75%, #000 96.25%, transparent),
-        linear-gradient(transparent, #000 3.75%, #000 96.25%, transparent);
-    mask-composite: intersect;
-}
-
-.aho-intro-glow {
-    filter: blur(var(--intro-glow-blur, 9px));
-    mix-blend-mode: screen;
 }
 
 .aho-intro .aho-intro-skip {
@@ -94,28 +70,14 @@ body:has(.aho-intro[open]) {
 .aho-intro .aho-intro-enter {
     position: absolute;
     left: 50%;
-    min-width: 158px;
     min-height: 44px;
     transform: translate(-50%, -50%);
-    padding: 0.65rem 1.15rem;
-    border: 1px solid #85c97a;
+    padding: 0;
+    border: 0;
     border-radius: 7px;
-    background: linear-gradient(170deg, #153b29, #071610);
-    box-shadow: 0 0 24px #4dff5640, inset 0 1px #b7ff9f50;
-    color: #ecffeb;
-    font: inherit;
-    font-size: 0.875rem;
-    font-weight: 700;
+    background: transparent;
+    color: transparent;
     cursor: pointer;
-}
-
-.aho-intro .aho-intro-enter:not([hidden]) {
-    animation: intro-enter 420ms ease-out both;
-}
-
-@keyframes intro-enter {
-    from { opacity: 0; transform: translate(-50%, calc(-50% + 8px)); }
-    to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
 .aho-intro button:focus-visible {

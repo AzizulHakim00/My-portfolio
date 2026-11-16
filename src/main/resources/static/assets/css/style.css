@@ -811,9 +811,9 @@ button { color: inherit; }
 .brand-mark {
     display: grid;
     place-items: center;
-    flex: 0 0 42px;
-    width: 42px;
-    height: 31px;
+    flex: 0 0 78px;
+    width: 78px;
+    height: 40px;
 }
 .brand-mark img {
     display: block;
@@ -825,8 +825,8 @@ button { color: inherit; }
 .footer-mark {
     display: grid;
     place-items: center;
-    width: 60px;
-    height: 35px;
+    width: 108px;
+    height: 46px;
 }
 .footer-mark img {
     display: block;
@@ -838,6 +838,6 @@ button { color: inherit; }
 
 @media (max-width: 600px) {
     .brand { gap: 9px; }
-    .brand-mark { flex-basis: 36px; width: 36px; height: 27px; }
+    .brand-mark { flex-basis: 64px; width: 64px; height: 38px; }
     .brand-copy strong { font-size: 13px; }
 }
