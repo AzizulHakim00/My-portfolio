@@ -1,11 +1,9 @@
-// Browser renderer for the original AHO Optic Burn scene. All coordinates and
-// timestamps use its 1280 × 720, 60 fps master. The atlas contains static art.
+// Browser renderer for the AHO Optic Burn scene. The timeline uses the
+// original 1280 × 720 coordinates, with separate atlases for the scene and logo shards.
 const W = 1280;
 const H = 720;
 const TAU = 2 * Math.PI;
 const DEG = Math.PI / 180;
-const LX = 253;
-const LY = 205;
 export const INTRO_LENGTH = 14.5;
 
 const clamp = (n) => Math.max(0, Math.min(1, n));
@@ -57,11 +55,12 @@ function loadImage(url) {
 
 const media = (name) => new URL("../images/" + name, import.meta.url);
 export async function loadIntroScene(canvas, signal) {
-    const [backdrop, atlas, highResolutionLogo, data] = await Promise.all([
+    const [backdrop, atlas, logo, shardArt, data] = await Promise.all([
         loadImage(media("aho-intro-storm-hd.webp")).catch(() => loadImage(media("aho-intro-storm.webp"))),
         loadImage(media("aho-intro-art.webp")),
-        loadImage(media("aho-intro-logo-hd.webp")).catch(() => null),
-        fetch(media("aho-intro-scene.json"), { signal }).then((response) => {
+        loadImage(media("aho-green-logo-hd.webp")).catch(() => loadImage(media("aho-green-logo.webp"))),
+        loadImage(media("aho-green-shards.webp")).catch(() => null),
+        fetch(media("aho-intro-scene.json?v=green-logo-1"), { signal }).then((response) => {
             if (!response.ok) throw new Error("Intro scene unavailable");
             return response.json();
         })
@@ -79,18 +78,16 @@ export async function loadIntroScene(canvas, signal) {
     const overlay = surface(1, 1);
     const filtered = surface(1, 1);
     const figureLayer = surface(data.figure[2], data.figure[3]);
-    const [,, LW, LH] = data.logo;
-    const metalLayer = surface(highResolutionLogo?.naturalWidth || LW, highResolutionLogo?.naturalHeight || LH);
+    const [LW, LH] = data.logoSize;
+    const LX = (W - LW) / 2;
+    const LY = 352 - LH / 2;
+    const metalLayer = surface(logo.naturalWidth, logo.naturalHeight);
     metalLayer.setTransform(metalLayer.canvas.width / LW, 0, 0, metalLayer.canvas.height / LH, 0, 0);
     metalLayer.imageSmoothingQuality = "high";
     let view;
 
     function paintMetalLogo(ctx, x, y) {
-        if (highResolutionLogo) {
-            ctx.drawImage(highResolutionLogo, x, y, LW, LH);
-        } else {
-            sprite(ctx, data.logo, x, y);
-        }
+        ctx.drawImage(logo, x, y, LW, LH);
     }
 
     function resize(ctx, width, height) {
@@ -385,7 +382,7 @@ export async function loadIntroScene(canvas, signal) {
     }
 
     function shards(t) {
-        if (t > 4.15 && t < 10.85) {
+        if (shardArt && t > 4.15 && t < 10.85) {
             const returnHome = smooth((t - 8.09) / 2.53);
             const assembled = smooth((t - 8.8) / 1.82);
             data.shards.forEach(([sx, sy, atlasX, atlasY, w, h, vx, vy, spin, delay, phase]) => {
@@ -401,12 +398,12 @@ export async function loadIntroScene(canvas, signal) {
                 scene.rotate(-spin * amount * DEG);
                 scene.translate(-w * 0.5, -h * 0.5);
                 scene.globalAlpha = 0.98 * opacity;
-                sprite(scene, [atlasX, atlasY, w, h], 0, 0);
+                scene.drawImage(shardArt, atlasX, atlasY, w, h, 0, 0, w, h);
                 if (t < 6.5) {
                     const hot = (1 - smooth((t - hit) / 1.3)) * smooth((t - hit + 0.2) / 0.3);
                     if (hot > 0.02) {
                         scene.globalAlpha = hot * 0.77 * opacity;
-                        sprite(scene, [atlasX + w + 1, atlasY, w, h], 0, 0);
+                        scene.drawImage(shardArt, atlasX + w + 1, atlasY, w, h, 0, 0, w, h);
                     }
                 }
                 scene.restore();

@@ -3,7 +3,7 @@ const canvas = dialog?.querySelector(".aho-intro-stage");
 const enter = dialog?.querySelector(".aho-intro-enter");
 const skip = dialog?.querySelector(".aho-intro-skip");
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const sessionKey = "aho-smooth-intro-seen";
+const sessionKey = "aho-green-logo-intro-seen";
 
 function alreadySeen() {
     try {
@@ -56,7 +56,7 @@ async function playIntro() {
     window.addEventListener("keydown", cancelPending, { ...options, capture: true });
 
     try {
-        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=smooth-1");
+        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=green-logo-1");
         if (listeners.signal.aborted) return;
         const { render, setViewport } = await loadIntroScene(canvas, listeners.signal);
         if (listeners.signal.aborted) return;
