@@ -18,11 +18,11 @@ const peak = (t, at, span) => Math.max(0, 1 - Math.abs(t - at) / span);
 const rgb = (r, g, b) => "rgb(" + r + "," + g + "," + b + ")";
 const point = Math.trunc;
 
-function surface(width, height) {
+function surface(width, height, options) {
     const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
-    return canvas.getContext("2d");
+    return canvas.getContext("2d", options);
 }
 
 function line(ctx, x0, y0, x1, y1, color, width = 1) {
@@ -57,9 +57,10 @@ function loadImage(url) {
 
 const media = (name) => new URL("../images/" + name, import.meta.url);
 export async function loadIntroScene(canvas, signal) {
-    const [backdrop, atlas, data] = await Promise.all([
-        loadImage(media("aho-intro-storm.webp")),
+    const [backdrop, atlas, highResolutionLogo, data] = await Promise.all([
+        loadImage(media("aho-intro-storm-hd.webp")).catch(() => loadImage(media("aho-intro-storm.webp"))),
         loadImage(media("aho-intro-art.webp")),
+        loadImage(media("aho-intro-logo-hd.webp")).catch(() => null),
         fetch(media("aho-intro-scene.json"), { signal }).then((response) => {
             if (!response.ok) throw new Error("Intro scene unavailable");
             return response.json();
@@ -70,40 +71,54 @@ export async function loadIntroScene(canvas, signal) {
     canvas.height = H;
     const output = canvas.getContext("2d", { alpha: false });
     if (!output) throw new Error("Canvas unavailable");
-    const scene = surface(W, H);
-    const overlay = surface(W, H);
-    const glowScale = 1 / 3;
-    const filtered = surface(Math.ceil(W * glowScale), H * glowScale);
+    const scene = surface(1, 1, { alpha: false });
+    const overlay = surface(1, 1);
+    const filtered = surface(1, 1);
     const figureLayer = surface(data.figure[2], data.figure[3]);
     const [,, LW, LH] = data.logo;
-    const metalLayer = surface(LW, LH);
+    const metalLayer = surface(highResolutionLogo?.naturalWidth || LW, highResolutionLogo?.naturalHeight || LH);
+    metalLayer.setTransform(metalLayer.canvas.width / LW, 0, 0, metalLayer.canvas.height / LH, 0, 0);
+    metalLayer.imageSmoothingQuality = "high";
     let view;
 
-    function setViewport(cssWidth, cssHeight, deviceDensity) {
-        const density = Math.min(deviceDensity || 1, 1.5,
-            Math.sqrt(1250000 / (cssWidth * cssHeight)));
+    function paintMetalLogo() {
+        if (highResolutionLogo) {
+            metalLayer.drawImage(highResolutionLogo, 0, 0, LW, LH);
+        } else {
+            sprite(metalLayer, data.logo, 0, 0);
+        }
+    }
+
+    function resize(ctx, width, height) {
+        if (ctx.canvas.width !== width || ctx.canvas.height !== height) {
+            ctx.canvas.width = width;
+            ctx.canvas.height = height;
+        }
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+    }
+
+    function setViewport(cssWidth, cssHeight, deviceDensity, quality = 1) {
+        const uhdWidth = 3840;
+        const density = quality * Math.min(Math.max(deviceDensity || 1, 1.2), 2.5,
+            uhdWidth / Math.max(cssWidth, cssHeight),
+            Math.sqrt(uhdWidth * 2160 / (cssWidth * cssHeight)));
         const width = Math.max(1, Math.round(cssWidth * density));
         const height = Math.max(1, Math.round(cssHeight * density));
         const fit = Math.min(width / W, height / H);
         const x = (width - W * fit) / 2;
         const y = (height - H * fit) / 2;
         const cover = Math.max(width / W, height / H);
-        view = { width, height, fit, x, y, cover, left: -x / fit, top: -y / fit };
+        // Blur and additive effects use smaller buffers than the final frame.
+        const overlayScale = Math.min(1, 2048 / Math.max(width, height), Math.sqrt(1800000 / (width * height)));
+        const blurScale = Math.min(1 / 3, 900 / Math.max(width, height));
+        view = { width, height, fit, x, y, cover, left: -x / fit, top: -y / fit, overlayScale, blurScale };
 
-        for (const ctx of [scene, overlay, output]) {
-            if (ctx.canvas.width !== width || ctx.canvas.height !== height) {
-                ctx.canvas.width = width;
-                ctx.canvas.height = height;
-            }
-            ctx.lineCap = "round";
-            ctx.lineJoin = "round";
-        }
-        const glowWidth = Math.ceil(width * glowScale);
-        const glowHeight = Math.ceil(height * glowScale);
-        if (filtered.canvas.width !== glowWidth || filtered.canvas.height !== glowHeight) {
-            filtered.canvas.width = glowWidth;
-            filtered.canvas.height = glowHeight;
-        }
+        resize(output, width, height);
+        resize(scene, width, height);
+        resize(overlay, Math.ceil(width * overlayScale), Math.ceil(height * overlayScale));
+        resize(filtered, Math.ceil(width * blurScale), Math.ceil(height * blurScale));
+        output.imageSmoothingQuality = scene.imageSmoothingQuality = "high";
 
         return {
             top: (y + 605 * fit) / height,
@@ -112,8 +127,8 @@ export async function loadIntroScene(canvas, signal) {
         };
     }
 
-    function project(ctx) {
-        ctx.setTransform(view.fit, 0, 0, view.fit, view.x, view.y);
+    function project(ctx, scale = 1) {
+        ctx.setTransform(view.fit * scale, 0, 0, view.fit * scale, view.x * scale, view.y * scale);
     }
 
     function sprite(ctx, source, x, y, width = source[2], height = source[3]) {
@@ -122,8 +137,8 @@ export async function loadIntroScene(canvas, signal) {
 
     function bloom(paint, blur, power, core = 0) {
         overlay.resetTransform();
-        overlay.clearRect(0, 0, view.width, view.height);
-        project(overlay);
+        overlay.clearRect(0, 0, overlay.canvas.width, overlay.canvas.height);
+        project(overlay, view.overlayScale);
         paint(overlay);
         scene.save();
         scene.resetTransform();
@@ -132,7 +147,7 @@ export async function loadIntroScene(canvas, signal) {
             const w = filtered.canvas.width;
             const h = filtered.canvas.height;
             filtered.clearRect(0, 0, w, h);
-            filtered.filter = "blur(" + blur * view.fit * glowScale + "px)";
+            filtered.filter = "blur(" + blur * view.fit * view.blurScale + "px)";
             filtered.drawImage(overlay.canvas, 0, 0, w, h);
             filtered.filter = "none";
             scene.globalAlpha = power;
@@ -298,7 +313,7 @@ export async function loadIntroScene(canvas, signal) {
         const rebuild = smooth((t - 8.8) / 1.82);
         if (reveal <= 0) return;
         metalLayer.clearRect(0, 0, LW, LH);
-        sprite(metalLayer, data.logo, 0, 0);
+        paintMetalLogo();
         if (t > 4.12 && rebuild < 1) {
             const alphaMask = metalLayer.createLinearGradient(0, 0, LW, 0);
             for (let i = 0; i <= 30; i++) {
@@ -313,7 +328,7 @@ export async function loadIntroScene(canvas, signal) {
             metalLayer.globalCompositeOperation = "source-over";
         }
         scene.globalAlpha = reveal;
-        scene.drawImage(metalLayer.canvas, LX, LY);
+        scene.drawImage(metalLayer.canvas, LX, LY, LW, LH);
         scene.globalAlpha = 1;
 
         if (t > 3.96 && t < 6.05) {
@@ -331,10 +346,10 @@ export async function loadIntroScene(canvas, signal) {
             metalLayer.fillRect(-2.8, -2.8, 5.6, 5.6);
             metalLayer.restore();
             metalLayer.globalCompositeOperation = "destination-in";
-            sprite(metalLayer, data.logo, 0, 0);
+            paintMetalLogo();
             metalLayer.globalCompositeOperation = "source-over";
             scene.globalCompositeOperation = "lighter";
-            scene.drawImage(metalLayer.canvas, LX, LY);
+            scene.drawImage(metalLayer.canvas, LX, LY, LW, LH);
             scene.globalCompositeOperation = "source-over";
             for (let k = 0; k < 21; k++) {
                 const x = cut - 105 + k % 7 * 30;

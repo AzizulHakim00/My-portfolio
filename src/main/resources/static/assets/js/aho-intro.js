@@ -3,7 +3,7 @@ const canvas = dialog?.querySelector(".aho-intro-stage");
 const enter = dialog?.querySelector(".aho-intro-enter");
 const skip = dialog?.querySelector(".aho-intro-skip");
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const sessionKey = "aho-silent-intro-seen";
+const sessionKey = "aho-uhd-intro-seen";
 
 function alreadySeen() {
     try {
@@ -56,16 +56,20 @@ async function playIntro() {
     window.addEventListener("keydown", cancelPending, { ...options, capture: true });
 
     try {
-        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=optic-2");
+        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=uhd-1");
         if (listeners.signal.aborted) return;
         const { render, setViewport } = await loadIntroScene(canvas, listeners.signal);
         if (listeners.signal.aborted) return;
 
         let lastFrame = -1;
+        let lastTick = 0;
+        let slowFrames = 0;
+        let quality = 1;
+
         function sizeForViewport() {
             const { width, height } = canvas.getBoundingClientRect();
             if (!width || !height) return;
-            const button = setViewport(width, height, window.devicePixelRatio);
+            const button = setViewport(width, height, window.devicePixelRatio, quality);
             enter.style.top = button.top * 100 + "%";
             enter.style.width = button.width * 100 + "%";
             enter.style.height = button.height * 100 + "%";
@@ -88,7 +92,15 @@ async function playIntro() {
                 return;
             }
             if (t >= 13.1 && enter.hidden) enter.hidden = false;
-            if (t !== lastFrame) {
+            const delta = now - lastTick;
+            slowFrames = lastTick && delta > 40 ? slowFrames + 1 : Math.max(0, slowFrames - 1);
+            lastTick = now;
+            if (slowFrames >= 12 && quality > 0.7) {
+                quality *= 0.82;
+                slowFrames = 0;
+                lastFrame = t;
+                sizeForViewport();
+            } else if (t !== lastFrame) {
                 render(t);
                 lastFrame = t;
             }
