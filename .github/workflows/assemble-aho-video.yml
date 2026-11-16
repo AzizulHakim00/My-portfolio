@@ -1,0 +1,50 @@
+name: Assemble verified AHO video
+on:
+  push:
+    branches:
+      - feat/approved-aho-video-intro
+    paths:
+      - "src/main/resources/static/assets/video/parts/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aho-video-assembly-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  reconstruct:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout feature branch
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d275973216cd # v4.2.2
+        with:
+          persist-credentials: true
+
+      - name: Reassemble and verify approved video bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          dir=src/main/resources/static/assets/video
+          for n in $(seq -w 0 10); do
+            test -s "$dir/parts/aho-intro.part$n"
+          done
+          cat "$dir"/parts/aho-intro.part?? > "$dir/aho-intro.mp4"
+          printf '%s  %s\n' 'cc2b9a52008bb6d1c102ef78967a84fe1bf52d7e35e240be585bc6ebd14877de' "$dir/aho-intro.mp4" | sha256sum --check --strict
+          printf '%s  %s\n' 'a6da5cd91d7d53da665867fb12c8a090a1c0bb95850ccf7a9833c8de52555ed7' "$dir/aho-intro-mobile.mp4" | sha256sum --check --strict
+          test "$(stat -c '%s' "$dir/aho-intro.mp4")" -eq 16571745
+          rm -r "$dir/parts"
+
+      - name: Commit finished videos and remove temporary parts
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A src/main/resources/static/assets/video
+          if ! git diff --cached --quiet; then
+            git commit -m "Add checksum-verified AHO cinematic videos"
+            git push origin HEAD:feat/approved-aho-video-intro
+          fi

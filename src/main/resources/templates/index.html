@@ -14,8 +14,19 @@
     <script defer src="/assets/js/app.js?v=20261116-direct-entry" th:src="@{/assets/js/app.js(v='20261116-direct-entry')}"></script>
     <script defer src="/assets/js/project-details.js?v=20261116-soft"></script>
     <script defer src="/assets/js/portfolio-chat.js?v=20261116-soft"></script>
+    <link rel="stylesheet" href="/assets/css/aho-intro.css?v=20261116-approved">
+    <script defer src="/assets/js/aho-intro.js?v=20261116-approved"></script>
 </head>
 <body>
+<div id="aho-cinematic-intro" role="dialog" aria-modal="true" aria-label="AHO cinematic introduction" hidden>
+    <video preload="none" playsinline muted aria-label="AHO cinematic portfolio introduction"></video>
+    <div class="aho-cinematic-controls">
+        <button type="button" data-aho-sound aria-pressed="false">Sound off</button>
+        <button type="button" data-aho-skip>Skip intro</button>
+    </div>
+    <div class="aho-cinematic-loading" aria-hidden="true"></div>
+</div>
+
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
 <div class="cursor-glow" aria-hidden="true"></div>

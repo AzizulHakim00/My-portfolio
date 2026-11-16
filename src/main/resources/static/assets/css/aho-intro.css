@@ -1,0 +1,16 @@
+#aho-cinematic-intro[hidden]{display:none!important}
+body.aho-intro-active{overflow:hidden!important}
+#aho-cinematic-intro{position:fixed;inset:0;z-index:2147483000;background:#020809;display:grid;place-items:center;overflow:hidden;isolation:isolate;color:#eafff2;opacity:1;transition:opacity .68s cubic-bezier(.25,.65,.25,1)}
+#aho-cinematic-intro.is-closing{opacity:0;pointer-events:none}
+#aho-cinematic-intro:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center,#11372e,#010606 78%)}
+#aho-cinematic-intro video{display:block;width:100%;height:100%;max-width:100vw;max-height:100dvh;object-fit:contain;background:transparent;user-select:none}
+#aho-cinematic-intro.can-enter video{cursor:pointer}
+.aho-cinematic-controls{position:absolute;top:max(16px,env(safe-area-inset-top));right:max(16px,env(safe-area-inset-right));z-index:2;display:flex;gap:10px}
+.aho-cinematic-controls button{appearance:none;border:1px solid rgba(144,244,194,.38);border-radius:99px;background:rgba(3,15,16,.78);color:#e5ffee;backdrop-filter:blur(10px);min-height:42px;padding:0 17px;font:600 11px/1.2 'Manrope',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s}
+.aho-cinematic-controls button:hover,.aho-cinematic-controls button:focus-visible{background:rgba(16,73,59,.93);border-color:#79ffba}
+.aho-cinematic-loading{position:absolute;left:50%;bottom:max(26px,env(safe-area-inset-bottom));transform:translateX(-50%);height:2px;width:min(34vw,220px);background:rgba(76,193,139,.21);border-radius:10px;overflow:hidden;pointer-events:none;transition:opacity .4s}
+.aho-cinematic-loading:before{content:"";display:block;width:35%;height:100%;background:#57ffae;box-shadow:0 0 12px #2cff9a;animation:aho-loading 1.7s ease-in-out infinite alternate}
+@keyframes aho-loading{from{transform:translateX(-12%)}to{transform:translateX(310%)}}
+#aho-cinematic-intro.is-ready .aho-cinematic-loading{opacity:0}
+@media(max-width:640px){.aho-cinematic-controls button{min-height:40px;padding:0 12px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){#aho-cinematic-intro{transition:none}.aho-cinematic-loading:before{animation:none}}
