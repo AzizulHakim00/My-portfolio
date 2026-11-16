@@ -14,8 +14,16 @@
     <script defer src="/assets/js/app.js?v=20261116-direct-entry" th:src="@{/assets/js/app.js(v='20261116-direct-entry')}"></script>
     <script defer src="/assets/js/project-details.js?v=20261116-soft"></script>
     <script defer src="/assets/js/portfolio-chat.js?v=20261116-soft"></script>
+    <link rel="stylesheet" href="/assets/css/aho-intro.css" th:href="@{/assets/css/aho-intro.css}">
+    <script defer src="/assets/js/aho-intro.js" th:src="@{/assets/js/aho-intro.js}"></script>
 </head>
 <body>
+<dialog class="aho-intro" id="aho-intro" aria-label="Portfolio intro">
+    <video class="aho-intro-video" muted playsinline preload="none" aria-hidden="true"
+        data-desktop-src="/assets/video/aho-intro.mp4" th:data-desktop-src="@{/assets/video/aho-intro.mp4}"
+        data-mobile-src="/assets/video/aho-intro-mobile.mp4" th:data-mobile-src="@{/assets/video/aho-intro-mobile.mp4}"></video>
+    <button class="aho-intro-skip" type="button" autofocus>Skip intro</button>
+</dialog>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="scroll-progress" aria-hidden="true"><span></span></div>
 <div class="cursor-glow" aria-hidden="true"></div>
