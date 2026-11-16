@@ -1,7 +1,10 @@
-// Browser renderer for the AHO Optic Burn scene. The timeline uses the
-// original 1280 × 720 coordinates, with separate atlases for the scene and logo shards.
+// The supplied photo and its mist share the same stage coordinates throughout
+// the reveal, break and reassembly.
 const W = 1280;
 const H = 720;
+const ART_SIZE = 520;
+const ART_X = (W - ART_SIZE) / 2;
+const ART_Y = (H - ART_SIZE) / 2;
 const TAU = 2 * Math.PI;
 const DEG = Math.PI / 180;
 export const INTRO_LENGTH = 14.5;
@@ -53,42 +56,88 @@ function loadImage(url) {
     return image.decode().then(() => image);
 }
 
+function tracePolygon(ctx, points) {
+    ctx.moveTo(...points[0]);
+    for (const [x, y] of points.slice(1)) ctx.lineTo(x, y);
+    ctx.closePath();
+}
+
+function featherArtwork(image, size) {
+    const ctx = surface(size, size);
+    ctx.drawImage(image, 0, 0, size, size);
+    ctx.globalCompositeOperation = "destination-in";
+    for (const [x, y] of [[size, 0], [0, size]]) {
+        const fade = ctx.createLinearGradient(0, 0, x, y);
+        fade.addColorStop(0, "#fff0");
+        fade.addColorStop(0.0375, "#fff");
+        fade.addColorStop(0.9625, "#fff");
+        fade.addColorStop(1, "#fff0");
+        ctx.fillStyle = fade;
+        ctx.fillRect(0, 0, size, size);
+    }
+    return ctx.canvas;
+}
+
+function prepareFragments(artwork, data) {
+    // The stencil is used only for moving fragments and the lighting pass.
+    // Assembled frames draw the complete photo, including its original mist.
+    const size = data.artSize;
+    const texture = surface(size, size);
+    texture.beginPath();
+    for (const points of data.shape) tracePolygon(texture, points);
+    texture.clip();
+    texture.drawImage(artwork, 0, 0, size, size);
+
+    const fragments = surface(...data.atlasSize);
+    for (const [sx, sy, x, y, width, height, , , , , , points] of data.fragments) {
+        fragments.save();
+        fragments.translate(x, y);
+        fragments.beginPath();
+        tracePolygon(fragments, points);
+        fragments.clip();
+        fragments.drawImage(texture.canvas, sx, sy, width, height, 0, 0, width, height);
+        fragments.restore();
+    }
+    return { texture: texture.canvas, atlas: fragments.canvas };
+}
+
 const media = (name) => new URL("../images/" + name, import.meta.url);
 export async function loadIntroScene(canvas, signal) {
-    const [backdrop, atlas, logo, shardArt, data] = await Promise.all([
-        loadImage(media("aho-intro-storm-hd.webp")).catch(() => loadImage(media("aho-intro-storm.webp"))),
+    const [mist, atlas, artwork, data] = await Promise.all([
+        loadImage(media("aho-intro-emerald-mist.webp")),
         loadImage(media("aho-intro-art.webp")),
-        loadImage(media("aho-forged-logo-hd.webp")).catch(() => loadImage(media("aho-forged-logo.webp"))),
-        loadImage(media("aho-forged-shards.webp")).catch(() => null),
-        fetch(media("aho-intro-scene.json?v=forged-1"), { signal }).then((response) => {
+        loadImage(media("aho-intro-emerald-art.webp")),
+        fetch(media("aho-intro-scene.json?v=emerald-mist-1"), { signal }).then((response) => {
             if (!response.ok) throw new Error("Intro scene unavailable");
             return response.json();
         })
     ]);
+    if (signal.aborted) throw signal.reason;
 
     canvas.width = W;
     canvas.height = H;
     const scene = canvas.getContext("2d");
     if (!scene || !canvas.parentElement) throw new Error("Canvas unavailable");
     const camera = canvas.parentElement;
-    backdrop.className = "aho-intro-art";
-    backdrop.alt = "";
-    backdrop.setAttribute("aria-hidden", "true");
-    camera.prepend(backdrop);
+    const plate = mist.cloneNode();
+    mist.className = "aho-intro-art";
+    plate.className = "aho-intro-plate";
+    for (const layer of [mist, plate]) {
+        layer.alt = "";
+        layer.setAttribute("aria-hidden", "true");
+    }
+    camera.prepend(mist, plate);
+
     const glow = surface(1, 1);
     glow.canvas.className = "aho-intro-glow";
-    camera.insertBefore(glow.canvas, canvas);
+    camera.append(glow.canvas);
     const figureLayer = surface(data.figure[2], data.figure[3]);
-    const [LW, LH] = data.logoSize;
-    const LX = (W - LW) / 2;
-    const LY = 352 - LH / 2;
-    const metalLayer = surface(1, 1);
+    const artworkLayer = surface(1, 1);
+    const complete = featherArtwork(artwork, data.artSize);
+    const { texture, atlas: shardAtlas } = prepareFragments(artwork, data);
+    const unit = ART_SIZE / data.artSize;
     const glowTextures = new Map();
     let view;
-
-    function paintMetalLogo(ctx, x, y) {
-        ctx.drawImage(logo, x, y, LW, LH);
-    }
 
     function resize(ctx, width, height) {
         if (ctx.canvas.width !== width || ctx.canvas.height !== height) {
@@ -117,10 +166,15 @@ export async function loadIntroScene(canvas, signal) {
 
         resize(scene, width, height);
         resize(glow, Math.ceil(width * glowScale), Math.ceil(height * glowScale));
-        resize(metalLayer, Math.max(1, Math.min(logo.naturalWidth, Math.round(LW * fit))),
-            Math.max(1, Math.min(logo.naturalHeight, Math.round(LH * fit))));
-        metalLayer.setTransform(metalLayer.canvas.width / LW, 0, 0, metalLayer.canvas.height / LH, 0, 0);
-        metalLayer.imageSmoothingQuality = "high";
+        const artworkResolution = Math.max(1, Math.min(960, Math.round(ART_SIZE * fit)));
+        resize(artworkLayer, artworkResolution, artworkResolution);
+        const artScale = artworkResolution / ART_SIZE;
+        artworkLayer.setTransform(artScale, 0, 0, artScale, 0, 0);
+        artworkLayer.imageSmoothingQuality = "high";
+        plate.style.left = (cssWidth - ART_SIZE * view.cameraX) / 2 + "px";
+        plate.style.top = (cssHeight - ART_SIZE * view.cameraY) / 2 + "px";
+        plate.style.width = ART_SIZE * view.cameraX + "px";
+        plate.style.height = ART_SIZE * view.cameraY + "px";
         scene.imageSmoothingQuality = "high";
         glow.canvas.style.setProperty("--intro-glow-blur", Math.max(3, 9 * view.cameraX) + "px");
 
@@ -249,7 +303,7 @@ export async function loadIntroScene(canvas, signal) {
     }
 
     function sorcerer(t) {
-        const amount = inOut(t, 6.47, 8.15, 10.2, 11.28);
+        const amount = inOut(t, 6.47, 8.15, 9.35, 10.64);
         if (amount < 0.003) return;
         const q = smooth((t - 6.47) / 1.8);
         const scale = 0.985 + 0.019 * q;
@@ -307,87 +361,61 @@ export async function loadIntroScene(canvas, signal) {
         }, 0.87 * power, 0.65 * power);
     }
 
-    function drawMetal(t) {
-        const reveal = smooth((t - 2.13) / 1.22);
-        const rebuild = smooth((t - 8.8) / 1.82);
-        if (reveal <= 0) return;
-        const needsMask = t > 4.12 && rebuild < 1;
-        if (!needsMask) {
-            scene.globalAlpha = reveal;
-            paintMetalLogo(scene, LX, LY);
-            scene.globalAlpha = 1;
-        } else if (t < 5.63 || rebuild > 0) {
-            metalLayer.clearRect(0, 0, LW, LH);
-            paintMetalLogo(metalLayer, 0, 0);
-            const alphaMask = metalLayer.createLinearGradient(0, 0, LW, 0);
-            for (let i = 0; i <= 30; i++) {
-                const column = i / 30;
-                const cut = 4.12 + column * 1.04;
-                const opacity = Math.max(1 - smooth((t - cut) / 0.47), rebuild);
-                alphaMask.addColorStop(column, "rgba(255,255,255," + opacity + ")");
-            }
-            metalLayer.globalCompositeOperation = "destination-in";
-            metalLayer.fillStyle = alphaMask;
-            metalLayer.fillRect(0, 0, LW, LH);
-            metalLayer.globalCompositeOperation = "source-over";
-            scene.globalAlpha = reveal;
-            scene.drawImage(metalLayer.canvas, LX, LY, LW, LH);
-            scene.globalAlpha = 1;
+    function drawArtwork(t) {
+        if (t < 1.15 || (t > 5.65 && t < 8.72)) return;
+        if ((t >= 2.75 && t <= 4.13) || t >= 10.72) {
+            scene.drawImage(complete, ART_X, ART_Y, ART_SIZE, ART_SIZE);
+            return;
         }
 
-        if (t > 3.96 && t < 6.05) {
-            const cut = 396 + 440 * smooth((t - 3.98) / 1.25);
-            const life = 1 - smooth((t - 5.3) / 0.75);
-            metalLayer.clearRect(0, 0, LW, LH);
-            metalLayer.save();
-            metalLayer.translate(cut - LX, 352 - LY);
-            metalLayer.scale(62, 174);
-            const heat = metalLayer.createRadialGradient(0, 0, 0, 0, 0, 2.8);
-            for (let i = 0; i <= 9; i++) {
-                heat.addColorStop(i / 9, "rgba(195,75,25," + life * Math.exp(-((i * 2.8 / 9) ** 2)) + ")");
-            }
-            metalLayer.fillStyle = heat;
-            metalLayer.fillRect(-2.8, -2.8, 5.6, 5.6);
-            metalLayer.restore();
-            metalLayer.globalCompositeOperation = "destination-in";
-            paintMetalLogo(metalLayer, 0, 0);
-            metalLayer.globalCompositeOperation = "source-over";
-            scene.globalCompositeOperation = "lighter";
-            scene.drawImage(metalLayer.canvas, LX, LY, LW, LH);
-            scene.globalCompositeOperation = "source-over";
-            for (let k = 0; k < 21; k++) {
-                const x = cut - 105 + k % 7 * 30;
-                if (x < LX || x > LX + LW) continue;
-                const y = 352 + point(26 * Math.sin(k * 9.2));
-                const length = point((16 + 44 * Math.sin(k * 5.6) ** 2) * (1 + 0.3 * Math.sin(t * 23 + k)));
-                line(scene, x, y - length / 2, x + 13 * Math.sin(k * 3), y + length / 2,
-                    k % 3 ? "rgb(255,79,21)" : "rgb(255,165,100)", k % 7 === 0 ? 2 : 1);
-            }
+        artworkLayer.clearRect(0, 0, ART_SIZE, ART_SIZE);
+        artworkLayer.drawImage(complete, 0, 0, ART_SIZE, ART_SIZE);
+        const coverage = artworkLayer.createLinearGradient(0, 0, ART_SIZE, 52);
+        for (let i = 0; i <= 18; i++) {
+            const column = i / 18;
+            const reveal = smooth((t - 1.15 - column * 0.87) / 0.7);
+            const burn = 1 - smooth((t - 4.13 - column * 1.05) / 0.47);
+            const rebuild = smooth((t - 8.72 - (1 - column) * 0.56) / 1.44);
+            const alpha = reveal * Math.max(burn, rebuild);
+            coverage.addColorStop(column, "rgba(255,255,255," + alpha + ")");
         }
+        artworkLayer.globalCompositeOperation = "destination-in";
+        artworkLayer.fillStyle = coverage;
+        artworkLayer.fillRect(0, 0, ART_SIZE, ART_SIZE);
+        artworkLayer.globalCompositeOperation = "source-over";
+        scene.drawImage(artworkLayer.canvas, ART_X, ART_Y, ART_SIZE, ART_SIZE);
+
+        const forming = inOut(t, 1.18, 1.43, 2.36, 2.75);
+        const lightX = ART_X + ART_SIZE * smooth((t - 1.18) / 1.5);
+        circleGlow(lightX, 356, 138, "103,255,52", 0.23 * forming);
     }
 
     function shards(t) {
-        if (shardArt && t > 4.15 && t < 10.85) {
-            const returnHome = smooth((t - 8.09) / 2.53);
-            const assembled = smooth((t - 8.8) / 1.82);
-            const density = data.shardDensity;
-            data.shards.forEach(([sx, sy, atlasX, atlasY, w, h, vx, vy, spin, delay, phase]) => {
-                const hit = 4.17 + (sx + w * 0.5) / (LW * density) * 0.93 + delay * 0.15;
-                const amount = smooth((t - hit) / 1.06) * (1 - returnHome);
-                const opacity = smooth((t - hit) / 0.17) * (1 - assembled);
-                if (opacity <= 0) return;
-                const x = LX + sx / density + vx * amount + 18 * Math.sin(t * 1.8 + phase) * amount;
-                const y = LY + sy / density + vy * amount + 10 * Math.cos(t * 1.4 + phase) * amount;
+        if (t > 4.15 && t < 10.85) {
+            const returnHome = smooth((t - 7.98) / 2.74);
+            const assembled = smooth((t - 8.72) / 2);
+            for (const [sx, sy, atlasX, atlasY, w, h, vx, vy, spin, delay, phase] of data.fragments) {
+                const hit = 4.15 + (sx + w * 0.5) / data.artSize * 1.05 + delay * 0.15;
+                const amount = smooth((t - hit) / 0.98) * (1 - returnHome);
+                const opacity = smooth((t - hit) / 0.15) * (1 - assembled);
+                if (opacity <= 0) continue;
+
+                const swirl = 25 * Math.sin(t * 2.25 + phase) * amount;
+                const width = w * unit;
+                const height = h * unit;
+                const x = ART_X + sx * unit + vx * amount + swirl + width / 2;
+                const y = ART_Y + sy * unit + vy * amount + 15 * Math.cos(t * 1.55 + phase) * amount + height / 2;
+                const depth = 1 + 0.29 * Math.cos(phase) * amount;
+                const tilt = 0.34 + 0.66 * Math.abs(Math.cos((phase + t * 1.6) * amount));
+
                 scene.save();
                 scene.translate(x, y);
-                const width = w / density;
-                const height = h / density;
-                scene.translate(width * 0.5, height * 0.5);
                 scene.rotate(-spin * amount * DEG);
-                scene.globalAlpha = 0.98 * opacity;
-                scene.drawImage(shardArt, atlasX, atlasY, w, h, -width / 2, -height / 2, width, height);
+                scene.scale(depth * tilt, depth);
+                scene.globalAlpha = 0.99 * opacity;
+                scene.drawImage(shardAtlas, atlasX, atlasY, w, h, -width / 2, -height / 2, width, height);
                 scene.restore();
-            });
+            }
         }
         if (t > 4 && t < 6.2) {
             for (let j = 0; j < 95; j++) {
@@ -469,7 +497,14 @@ export async function loadIntroScene(canvas, signal) {
             const y = 352 + velocity * age * 0.66 * dy + 35 * age ** 2;
             line(scene, x, y, x - 20 * dx, y - 20 * dy, rgb(255, 138 + point(90 * r), 110 + point(100 * r)));
         }
-        wash("rgb(255,206,172)", peak(t, 4.74, 0.09) * 0.28);
+        const shock = (t - 4.37) / 0.94;
+        if (shock > 0 && shock < 1) {
+            const radius = 36 + 360 * smooth(shock);
+            const opacity = 0.34 * Math.sin(Math.PI * shock) * (1 - shock);
+            bloom((layer) => ellipse(layer, 638, 353, radius, radius * 0.56, 0, TAU, "#ffbb78", 2),
+                opacity, opacity * 0.75);
+        }
+        wash("rgb(255,206,172)", peak(t, 4.74, 0.09) * 0.21);
     }
 
     function rebuildMagic(t) {
@@ -506,27 +541,28 @@ export async function loadIntroScene(canvas, signal) {
         }
     }
 
-    function finishMetal(t) {
-        const strength = inOut(t, 10.65, 11.15, 11.9, 12.35);
+    function finishArtwork(t) {
+        const strength = inOut(t, 10.64, 11.12, 11.91, 12.28);
         if (strength <= 0.002) return;
-        const sweep = -120 + (LW + 240) * smooth((t - 10.65) / 1.7);
-        metalLayer.clearRect(0, 0, LW, LH);
-        const shine = metalLayer.createLinearGradient(sweep - 90, 0, sweep + 90, 78);
+        const sweep = -85 + (ART_SIZE + 170) * smooth((t - 10.64) / 1.65);
+        artworkLayer.clearRect(0, 0, ART_SIZE, ART_SIZE);
+        const shine = artworkLayer.createLinearGradient(sweep - 61, 0, sweep + 61, 64);
         shine.addColorStop(0, "#a4ff7e00");
-        shine.addColorStop(0.46, "#a4ff7e73");
-        shine.addColorStop(0.52, "#e8ffbbad");
+        shine.addColorStop(0.49, "#d9ff9964");
+        shine.addColorStop(0.61, "#b8ff8458");
         shine.addColorStop(1, "#a4ff7e00");
-        metalLayer.fillStyle = shine;
-        metalLayer.fillRect(0, 0, LW, LH);
-        metalLayer.globalCompositeOperation = "destination-in";
-        paintMetalLogo(metalLayer, 0, 0);
-        metalLayer.globalCompositeOperation = "source-over";
+        artworkLayer.fillStyle = shine;
+        artworkLayer.fillRect(0, 0, ART_SIZE, ART_SIZE);
+        artworkLayer.globalCompositeOperation = "destination-in";
+        artworkLayer.drawImage(texture, 0, 0, ART_SIZE, ART_SIZE);
+        artworkLayer.globalCompositeOperation = "source-over";
+
         scene.save();
         scene.globalCompositeOperation = "screen";
-        scene.globalAlpha = 0.54 * strength;
-        scene.drawImage(metalLayer.canvas, LX, LY, LW, LH);
+        scene.globalAlpha = 0.58 * strength;
+        scene.drawImage(artworkLayer.canvas, ART_X, ART_Y, ART_SIZE, ART_SIZE);
         scene.restore();
-        circleGlow(LX + LW * 0.78, LY + LH * 0.16, 70, "128,255,48", 0.23 * strength);
+        circleGlow(ART_X + ART_SIZE * 0.76, ART_Y + ART_SIZE * 0.27, 62, "128,255,48", 0.19 * strength);
     }
 
     function render(t) {
@@ -537,18 +573,18 @@ export async function loadIntroScene(canvas, signal) {
         glow.clearRect(0, 0, glow.canvas.width, glow.canvas.height);
         glow.globalCompositeOperation = "lighter";
         project(glow, view.glowScale);
+        drawArtwork(t);
         portal(t);
         ambient(t);
         sorcerer(t);
-        drawMetal(t);
         shards(t);
         opticBeam(t);
         impact(t);
         rebuildMagic(t);
         storm(t);
-        finishMetal(t);
+        finishArtwork(t);
 
-        const z = 1.025 + 0.024 * smooth(t / 3.4) - 0.032 * smooth((t - 8.8) / 4.2);
+        const z = 1.014 + 0.025 * smooth(t / 3.4) - 0.023 * smooth((t - 8.8) / 4.2);
         let dx = 3 * Math.sin(t * 0.32);
         let dy = 2 * Math.sin(t * 0.31);
         if (t > 4.5 && t < 4.9) {

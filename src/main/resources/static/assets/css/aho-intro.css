@@ -56,6 +56,17 @@ body:has(.aho-intro[open]) {
 
 .aho-intro-art {
     object-fit: cover;
+    filter: blur(12px);
+    transform: scale(1.05);
+}
+
+.aho-intro-plate {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    mask-image: linear-gradient(90deg, transparent, #000 3.75%, #000 96.25%, transparent),
+        linear-gradient(transparent, #000 3.75%, #000 96.25%, transparent);
+    mask-composite: intersect;
 }
 
 .aho-intro-glow {
