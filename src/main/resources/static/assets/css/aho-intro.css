@@ -6,8 +6,7 @@ body:has(.aho-intro[open]) {
 .aho-intro[open] {
     position: fixed;
     inset: 0;
-    display: grid;
-    place-items: center;
+    display: block;
     box-sizing: border-box;
     width: 100vw;
     height: 100vh;
@@ -26,11 +25,9 @@ body:has(.aho-intro[open]) {
     background: #02070a;
 }
 
-.aho-intro-film {
-    position: relative;
-    width: min(100%, 177.777778vh);
-    width: min(100%, 177.777778dvh);
-    aspect-ratio: 16 / 9;
+.aho-intro-viewport {
+    position: absolute;
+    inset: 0;
 }
 
 .aho-intro-stage {
@@ -67,10 +64,7 @@ body:has(.aho-intro[open]) {
 
 .aho-intro .aho-intro-enter {
     position: absolute;
-    top: 84%;
     left: 50%;
-    width: 35.5%;
-    height: 9.5%;
     min-height: 44px;
     transform: translate(-50%, -50%);
     padding: 0;

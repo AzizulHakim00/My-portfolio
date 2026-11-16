@@ -4,7 +4,7 @@ const enter = dialog?.querySelector(".aho-intro-enter");
 const skip = dialog?.querySelector(".aho-intro-skip");
 const sound = dialog?.querySelector(".aho-intro-sound");
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const sessionKey = "aho-optic-burn-seen";
+const sessionKey = "aho-responsive-intro-seen";
 
 function alreadySeen() {
     try {
@@ -93,26 +93,31 @@ async function playIntro() {
     window.addEventListener("keydown", cancelPending, { ...options, capture: true });
 
     try {
-        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=optic-1");
+        const { INTRO_LENGTH, loadIntroScene } = await import("./aho-intro-scene.js?v=optic-2");
         if (listeners.signal.aborted) return;
-        const { render, setResolution } = await loadIntroScene(canvas, listeners.signal);
+        const { render, setViewport } = await loadIntroScene(canvas, listeners.signal);
         if (listeners.signal.aborted) return;
 
+        let lastFrame = -1;
         function sizeForViewport() {
-            const stageWidth = Math.min(window.innerWidth, window.innerHeight * 16 / 9);
-            setResolution(stageWidth * Math.min(window.devicePixelRatio || 1, 1.5));
+            const { width, height } = canvas.getBoundingClientRect();
+            if (!width || !height) return;
+            const button = setViewport(width, height, window.devicePixelRatio);
+            enter.style.top = button.top * 100 + "%";
+            enter.style.width = button.width * 100 + "%";
+            enter.style.height = button.height * 100 + "%";
+            render(Math.max(0, lastFrame));
         }
-        sizeForViewport();
-        render(0);
         dialog.showModal();
+        sizeForViewport();
         window.addEventListener("resize", sizeForViewport, options);
+        window.visualViewport?.addEventListener("resize", sizeForViewport, options);
         try {
             sessionStorage.setItem(sessionKey, "1");
         } catch {
             // Some browsing modes disable session storage.
         }
 
-        let lastFrame = -1;
         function tick(now) {
             const t = Math.floor(Math.max(0, now - started) * 0.06) / 60;
             if (t >= INTRO_LENGTH) {

@@ -77,43 +77,70 @@ export async function loadIntroScene(canvas, signal) {
     const figureLayer = surface(data.figure[2], data.figure[3]);
     const [,, LW, LH] = data.logo;
     const metalLayer = surface(LW, LH);
-    function setResolution(target) {
-        const width = Math.round(Math.min(W, Math.max(640, target)));
-        const height = Math.round(width * H / W);
+    let view;
+
+    function setViewport(cssWidth, cssHeight, deviceDensity) {
+        const density = Math.min(deviceDensity || 1, 1.5,
+            Math.sqrt(1250000 / (cssWidth * cssHeight)));
+        const width = Math.max(1, Math.round(cssWidth * density));
+        const height = Math.max(1, Math.round(cssHeight * density));
+        const fit = Math.min(width / W, height / H);
+        const x = (width - W * fit) / 2;
+        const y = (height - H * fit) / 2;
+        const cover = Math.max(width / W, height / H);
+        view = { width, height, fit, x, y, cover, left: -x / fit, top: -y / fit };
+
         for (const ctx of [scene, overlay, output]) {
             if (ctx.canvas.width !== width || ctx.canvas.height !== height) {
                 ctx.canvas.width = width;
                 ctx.canvas.height = height;
             }
-            ctx.setTransform(width / W, 0, 0, height / H, 0, 0);
             ctx.lineCap = "round";
             ctx.lineJoin = "round";
         }
+        const glowWidth = Math.ceil(width * glowScale);
+        const glowHeight = Math.ceil(height * glowScale);
+        if (filtered.canvas.width !== glowWidth || filtered.canvas.height !== glowHeight) {
+            filtered.canvas.width = glowWidth;
+            filtered.canvas.height = glowHeight;
+        }
+
+        return {
+            top: (y + 605 * fit) / height,
+            width: 454 * fit / width,
+            height: 68 * fit / height
+        };
     }
-    setResolution(W);
+
+    function project(ctx) {
+        ctx.setTransform(view.fit, 0, 0, view.fit, view.x, view.y);
+    }
 
     function sprite(ctx, source, x, y, width = source[2], height = source[3]) {
         ctx.drawImage(atlas, ...source, point(x), point(y), width, height);
     }
 
     function bloom(paint, blur, power, core = 0) {
-        overlay.clearRect(0, 0, W, H);
+        overlay.resetTransform();
+        overlay.clearRect(0, 0, view.width, view.height);
+        project(overlay);
         paint(overlay);
         scene.save();
+        scene.resetTransform();
         scene.globalCompositeOperation = "lighter";
         if (power > 0) {
             const w = filtered.canvas.width;
             const h = filtered.canvas.height;
             filtered.clearRect(0, 0, w, h);
-            filtered.filter = "blur(" + blur * glowScale + "px)";
+            filtered.filter = "blur(" + blur * view.fit * glowScale + "px)";
             filtered.drawImage(overlay.canvas, 0, 0, w, h);
             filtered.filter = "none";
             scene.globalAlpha = power;
-            scene.drawImage(filtered.canvas, 0, 0, W, H);
+            scene.drawImage(filtered.canvas, 0, 0, view.width, view.height);
         }
         if (core > 0) {
             scene.globalAlpha = core;
-            scene.drawImage(overlay.canvas, 0, 0, W, H);
+            scene.drawImage(overlay.canvas, 0, 0, view.width, view.height);
         }
         scene.restore();
     }
@@ -136,9 +163,10 @@ export async function loadIntroScene(canvas, signal) {
 
     function wash(color, alpha) {
         scene.save();
+        scene.resetTransform();
         scene.fillStyle = color;
         scene.globalAlpha = alpha;
-        scene.fillRect(0, 0, W, H);
+        scene.fillRect(0, 0, view.width, view.height);
         scene.restore();
     }
 
@@ -150,7 +178,7 @@ export async function loadIntroScene(canvas, signal) {
             bloom((layer) => {
                 layer.beginPath();
                 data.storm[i].forEach(([x, y], j) => {
-                    if (j === 0) layer.moveTo(x, y);
+                    if (j === 0) layer.moveTo(x, Math.min(y, view.top - 4));
                     else layer.lineTo(x, y);
                 });
                 layer.strokeStyle = "rgb(210,241,244)";
@@ -162,10 +190,12 @@ export async function loadIntroScene(canvas, signal) {
     }
 
     function ambient(t) {
+        const width = view.width / view.fit;
+        const height = view.height / view.fit;
         data.stars.forEach(([x, y, velocity, shade, phase], i) => {
-            const px = (x * W + 17 * Math.sin(t * 0.37 + phase * 6) + W) % W;
-            const py = (y * H - (12 + 39 * velocity) * t + H * 5) % H;
-            if (py > 80 && py < 690) {
+            const px = view.left + (x * width + 17 * Math.sin(t * 0.37 + phase * 6) + width) % width;
+            const py = view.top + (y * height - (12 + 39 * velocity) * t + height * 5) % height;
+            if (py > view.top + 80 && py < view.top + height - 30) {
                 dot(scene, px, py, i % 7 ? 1 : 2, rgb(65, 140 + point(70 * shade), 50));
             }
         });
@@ -191,8 +221,9 @@ export async function loadIntroScene(canvas, signal) {
 
         const beam = inOut(t, 1, 1.35, 2.17, 2.62);
         if (beam > 0.01) {
-            bloom((layer) => line(layer, 640, -50, 640, 535, "rgb(116,255,24)", 20), 32, 0.8 * beam);
-            line(scene, 640, -50, 640, 535, "rgb(180,245,115)", Math.max(1, point(4 * beam)));
+            const sky = Math.min(-50, view.top - 4);
+            bloom((layer) => line(layer, 640, sky, 640, 535, "rgb(116,255,24)", 20), 32, 0.8 * beam);
+            line(scene, 640, sky, 640, 535, "rgb(180,245,115)", Math.max(1, point(4 * beam)));
             circleGlow(640, 530, 180, "105,255,37", 0.35 * beam);
         }
         if (t > 1 && t < 3.4) {
@@ -367,19 +398,20 @@ export async function loadIntroScene(canvas, signal) {
         const front = smooth((t - 3.75) / 0.18);
         const tipX = point(-180 + (580 + 445 * smooth((t - 3.98) / 1.27)) * front);
         const tipY = 351 + point(0.9 * Math.sin(t * 10));
-        const end = Math.max(-65, tipX);
-        bloom((layer) => line(layer, -65, 352, end, tipY, "rgb(187,24,18)", 55), 31, 0.95 * fire);
-        bloom((layer) => line(layer, -65, 352, end, tipY, "rgb(252,30,24)", 27), 11, 0.86 * fire);
+        const source = Math.min(-65, view.left - 8);
+        const end = Math.max(source, tipX);
+        bloom((layer) => line(layer, source, 352, end, tipY, "rgb(187,24,18)", 55), 31, 0.95 * fire);
+        bloom((layer) => line(layer, source, 352, end, tipY, "rgb(252,30,24)", 27), 11, 0.86 * fire);
         const rails = [
             [22, "rgb(229,39,23)"], [12, "rgb(255,82,47)"],
             [6, "rgb(255,193,153)"], [3, "rgb(255,246,238)"]
         ];
         for (const [width, color] of rails) {
-            line(scene, -65, 352, end, tipY, color, Math.max(1, point(width * fire)));
+            line(scene, source, 352, end, tipY, color, Math.max(1, point(width * fire)));
         }
         for (const direction of [-1, 1]) {
             const y = point(352 + direction * (13 + 1.6 * Math.sin(t * 25 + direction)));
-            line(scene, -20, y, end, y, "rgb(160,40,14)");
+            line(scene, Math.min(-20, view.left - 4), y, end, y, "rgb(160,40,14)");
         }
         for (let j = 0; j < 23; j++) {
             const phase = (t * (3.4 + j * 0.016) + j * 0.037) % 1;
@@ -476,7 +508,10 @@ export async function loadIntroScene(canvas, signal) {
     }
 
     function render(t) {
-        scene.drawImage(backdrop, 0, 0, W, H);
+        const { width, height, fit, cover } = view;
+        scene.resetTransform();
+        scene.drawImage(backdrop, (width - W * cover) / 2, (height - H * cover) / 2, W * cover, H * cover);
+        project(scene);
         portal(t);
         ambient(t);
         sorcerer(t);
@@ -496,8 +531,9 @@ export async function loadIntroScene(canvas, signal) {
             dx += 5 * shake * Math.sin(t * 47);
             dy += 4 * shake * Math.sin(t * 62);
         }
-        output.drawImage(scene.canvas, (1 - z) * W / 2 + dx, (1 - z) * H / 2 + dy, W * z, H * z);
+        output.drawImage(scene.canvas, (1 - z) * width / 2 + dx * fit,
+            (1 - z) * height / 2 + dy * fit, width * z, height * z);
     }
 
-    return { render, setResolution };
+    return { render, setViewport };
 }
