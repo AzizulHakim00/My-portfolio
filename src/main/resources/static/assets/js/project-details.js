@@ -16,94 +16,9 @@
     document.head.appendChild(node);
   };
 
-  addStyle("/assets/css/upgrade.css?v=20260721-motion");
-  addScript("/assets/js/upgrade.js?v=20260721-motion");
+  addStyle("/assets/css/upgrade.css?v=20261116-portfolio");
+  addScript("/assets/js/upgrade.js?v=20261116-portfolio");
 
-  const grid = document.querySelector(".projects-grid");
-  if (!grid) return;
-  const findCard = (name) => [...grid.querySelectorAll(".project-card")]
-    .find((card) => card.querySelector(".project-body h3")?.textContent.trim() === name);
-
-  const makeCard = ({ category, title, type, description, tech, images, badge, links }) => {
-    const card = document.createElement("article");
-    card.className = "project-card reveal visible";
-    card.dataset.category = category;
-    card.innerHTML = `<figure class="project-gallery" data-gallery>${images.map((item, index) => `<img${index ? "" : ' class="active"'} src="${item.src}" alt="${item.alt}"${index ? ' loading="lazy"' : ""}>`).join("")}<span>${badge}</span><div class="gallery-controls"><button type="button" data-prev aria-label="Previous ${title} screenshot">←</button><b>1 / ${images.length}</b><button type="button" data-next aria-label="Next ${title} screenshot">→</button></div></figure><div class="project-body"><p class="project-type">${type}</p><h3>${title}</h3><p>${description}</p><ul>${tech.map((item) => `<li>${item}</li>`).join("")}</ul><div class="project-links">${links.map((item) => `<a href="${item.href}"${item.external ? ' target="_blank" rel="noreferrer"' : ""}>${item.label}</a>`).join("")}</div></div>`;
-    return card;
-  };
-
-  if (!findCard("BusBD Intelligence")) {
-    const card = makeCard({
-      category: "web",
-      title: "BusBD Intelligence",
-      type: "SPRING BOOT · REACT · POSTGRESQL · REDIS",
-      description: "An enterprise bus-booking and travel-intelligence platform with passenger profiles, advanced seat layouts, persistent bookings, Redis-compatible seat locking, mock payments, signed QR verification, cancellation, refunds and live route intelligence.",
-      tech: ["Java 21", "Spring Boot", "React", "PostgreSQL", "Redis"],
-      images: [
-        { src: "/assets/images/projects/busbd-intelligence/01-search-hero.svg", alt: "BusBD Intelligence deployed search and booking homepage" },
-        { src: "/assets/images/projects/busbd-intelligence/02-live-tracking.svg", alt: "BusBD Intelligence live tracking and AI arrival prediction interface" }
-      ],
-      badge: "LIVE ENTERPRISE PLATFORM",
-      links: [
-        { href: "https://busbd-intelligence.onrender.com/", label: "Live application ↗", external: true },
-        { href: "https://github.com/AzizulHakim00/BusBD-Intelligence", label: "GitHub repository ↗", external: true }
-      ]
-    });
-    findCard("TaskFlow")?.insertAdjacentElement("afterend", card);
-  }
-
-  if (!findCard("Neon Bay")) {
-    const card = makeCard({
-      category: "web",
-      title: "Neon Bay",
-      type: "THREE.JS · VITE · BROWSER 3D GAME",
-      description: "An original browser-based 3D open-city action game with five connected missions, driving, combat, police pursuit, shops, saving, dynamic weather, desktop and mobile controls, modular AI and distinct vehicle handling.",
-      tech: ["Three.js", "JavaScript", "Vite", "Game AI", "WebGL"],
-      images: [
-        { src: "/assets/images/projects/neon-bay/neon-bay-ocean-drive.svg", alt: "Neon Bay Ocean Drive promotional game visual" },
-        { src: "/assets/images/projects/neon-bay/neon-bay-driving-physics.svg", alt: "Neon Bay driving physics promotional visual" },
-        { src: "/assets/images/projects/neon-bay/neon-bay-shotgun-combat.svg", alt: "Neon Bay shotgun combat promotional visual" }
-      ],
-      badge: "PLAYABLE 3D WEB GAME",
-      links: [
-        { href: "https://neon-bay-gamma.vercel.app/", label: "Play live ↗", external: true },
-        { href: "https://github.com/AzizulHakim00/Neon-Bay", label: "GitHub repository ↗", external: true }
-      ]
-    });
-    findCard("BusBD Intelligence")?.insertAdjacentElement("afterend", card);
-  }
-
-  const food = findCard("FoodMoboChain");
-  if (food) {
-    food.querySelector(".project-type").textContent = "ANDROID · FIREBASE · SECURE MARKETPLACE";
-    food.querySelector("h3").textContent = "FoodMoboChain Firebase";
-    food.querySelector(".project-body > p:not(.project-type)").textContent = "A Java/XML Android marketplace MVP with buyer, vendor, student and administrator roles, Firebase Authentication, Realtime Database, server-enforced Security Rules, protected ordering, rentals, reviews, moderation and App Check.";
-    food.querySelector("ul")?.replaceChildren(...["Android", "Java", "Firebase Auth", "Realtime DB", "Security Rules"].map((text) => Object.assign(document.createElement("li"), { textContent: text })));
-    food.querySelector(".project-links").innerHTML = '<a href="https://github.com/AzizulHakim00/FoodMoboChain_Firebase" target="_blank" rel="noreferrer">GitHub repository ↗</a>';
-    food.querySelector("figure > span").textContent = "FIREBASE MARKETPLACE";
-  }
-
-  const ice = findCard("ICE Penetration-Testing Lab");
-  if (ice) {
-    ice.replaceWith(makeCard({
-      category: "security",
-      title: "DVWA Security Casebook",
-      type: "CYBERSECURITY · WEB APPLICATION SECURITY",
-      description: "An evidence-led, controlled DVWA penetration-testing casebook covering ten vulnerability modules, 25 payload and command records, 38 lab-evidence screenshots, security-level observations and developer-focused remediation guidance.",
-      tech: ["DVWA", "Burp Suite", "SQL Injection", "XSS", "CSRF", "Remediation"],
-      images: [
-        { src: "/assets/images/projects/dvwa-casebook/01-hero-terminal.svg", alt: "DVWA Security Casebook evidence-led assessment overview" },
-        { src: "/assets/images/projects/dvwa-casebook/02-module-ledger.svg", alt: "DVWA Security Casebook vulnerability module ledger" }
-      ],
-      badge: "AUTHORIZED SECURITY CASEBOOK",
-      links: [
-        { href: "https://azizulhakim00.github.io/dvwa-security-casebook/", label: "Live casebook ↗", external: true },
-        { href: "https://github.com/AzizulHakim00/dvwa-security-casebook", label: "GitHub repository ↗", external: true }
-      ]
-    }));
-  }
-
-  addScript("/assets/js/runtime-projects.js?v=20260721-projects");
   addStyle("/assets/css/project-details.css?v=20260719");
 
   const cards = [...document.querySelectorAll(".project-card[data-category]")];
@@ -124,26 +39,31 @@
   let returnFocus = null;
 
   const highlights = {
+    "BusBD Intelligence": ["PostgreSQL persistence and Flyway migrations","Redis-compatible seat locking and idempotent booking","Signed QR ticket verification and mock payments","Live GPS tracking and a journey planner with fare, time, and carbon estimates"],
+    "JerseySee": ["JWT authentication with customer and staff roles","Product variants and SKU-level inventory","Transaction-aware Caffeine cache and optional Cloudinary uploads","Simulated checkout and payment workflows"],
+    "Food Mobo Chain": ["Spring Security with JWT cookies and CSRF protection","Spring Data MongoDB and a cached public catalog","Server-signed Cloudinary image upload support","Render staging with a MongoDB readiness endpoint"],
+    "Ase Naki?": ["Power Grid Bangladesh and IODA status feeds","Optional Cloudflare Radar integration","Signed-in reporting with image evidence","Persisted snapshots with clear unavailable states"],
+    "IncidentCommander AI": ["Plain text, JSON Lines, and CSV log ingestion","TF-IDF, K-Means, and Isolation Forest","Request traces, service dependencies, and evidence-backed cause ranking","Replayable scenarios and optional sensitive-data redaction"],
+    "CreatorOS Studio": ["Publishing queue with calendar export","Transcript import, editing, and SRT export","Campaign planning, creator CRM, and approval queues","IndexedDB workspace storage with D1 and R2 support"],
+    "StreamNova": ["TMDB discovery for movies, TV, and anime","Regional streaming, rental, and purchase provider links","Watchlist, Continue Watching, ratings, and reviews","HTML5 media playback, HLS, and official trailer embeds"],
+    "Neon Bay": ["Five purchasable properties and eight replayable contracts","Adaptive enemy AI and five-star police escalation","Vehicle upgrades, contract rewards, and persistent location data","Multi-slot saves, backups, and legacy-save migration"],
+    "Expense Tracker": ["Authenticated expense creation and browsing","Category breakdowns and personal dashboards","MongoDB persistence","Spring Security sessions, CSRF protection, and BCrypt passwords"],
+    "Maze Bank Management System": ["Client and administrator workflows backed by SQLite","Atomic transfers with balance validation and rollback","PBKDF2 password hashing","Transaction history and client account management"],
+    "Monthly Cost Planner": ["Monthly income, planned spending, and remaining budget","Editable expense categories and amounts","Visual breakdown of budget allocations"],
+    "PrintPulse": ["Request form with print options and estimated costs","Campus print queue with job status","Completed jobs and charge history"],
     "TaskFlow": ["Registration, authentication and user-scoped dashboards", "Tasks with priority, status, due dates, search and filtering", "Profile editing and password management", "Deployed full-stack Django application"],
-    "BusBD Intelligence": ["Passenger registration, profiles and multi-point journeys", "Persistent bookings and Redis-compatible seat locking", "Advanced seat layouts, mock payment and signed QR verification", "Cancellation, refund and deployment-ready environment profiles"],
-    "Neon Bay": ["Five connected story missions", "Vehicle-specific handling and articulated player movement", "Pistol and shotgun combat with tactical enemy states", "Police pursuit, weather, saving and mobile controls"],
     "Assignment Writer Hire": ["Student and administrator stakeholder workflows", "Requests, writer selection, orders and history", "Administration screens for users and writers", "JavaFX, FXML and MySQL architecture"],
     "Real Madrid Club Management": ["Players, matches, transfers and training management", "Formation editing and performance records", "FXML controllers and database persistence", "Six documented working screens"],
-    "FoodMoboChain Firebase": ["Buyer, vendor, student and administrator roles", "Firebase Authentication, Realtime Database and App Check", "Server-enforced prices, ownership and status transitions", "Orders, rentals, reviews, newsfeed and moderation"],
-    "Bank Management": ["Administrator and client dashboards", "Accounts, deposits and transaction records", "Persistent SQLite data", "JavaFX coursework system"],
+    "CareerPilot AI": ["Explainable ATS scoring and skills-gap analysis", "Role matching and a 90-day roadmap", "Interview practice and private application tracking"],
+    "CivicLens AI": ["Road hazard reports with location and evidence", "Severity, duplicate warnings, and an authority dashboard", "Rule-based demo inference and an optional FastAPI / ONNX service"],
     "Firebase CRUD App": ["Firebase Authentication", "Realtime Database create, update and delete operations", "Restaurant, food and order screens", "Android learning project"],
-    "Movie Management System": ["Collaborative coursework archive", "Desktop management and database direction", "Authorship presented honestly", "Full case study planned after verified evidence"],
-    "Café Shop Management": ["Inventory and order-management direction", "JavaFX and FXML structure", "SQL-backed reporting scope", "Upcoming verified case study"],
-    "Fruit Market": ["Product cards and storefront layout", "Selection and cart interactions", "Delivery-oriented visual components", "JavaFX, FXML and CSS interface"],
+    "CPU Scheduling Visualizer": ["Six CPU scheduling algorithms", "Editable process inputs and Round Robin quantum", "Gantt charts and per-process metrics", "Side-by-side comparisons with independent inputs"],
     "DVWA Security Casebook": ["Ten controlled-lab vulnerability modules", "Twenty-five payload and command records", "Thirty-eight indexed evidence screenshots", "Search, severity filters, fullscreen evidence and remediation guidance"]
   };
   const studies = {
     "TaskFlow": "/projects/taskflow",
-    "BusBD Intelligence": "/projects/busbd-intelligence",
-    "Neon Bay": "/projects/neon-bay",
     "Assignment Writer Hire": "/projects/assignment-writer-hire",
     "Real Madrid Club Management": "/projects/real-madrid-management",
-    "FoodMoboChain Firebase": "/projects/foodmobochain-firebase",
     "DVWA Security Casebook": "/projects/dvwa-security-casebook"
   };
 
@@ -164,7 +84,7 @@
     const description = card.querySelector(".project-body > p:not(.project-type)")?.textContent.trim() || "";
     const technologies = [...card.querySelectorAll(".project-body li")].map((item) => item.textContent.trim());
     const links = [...card.querySelectorAll(".project-links a")];
-    images = [...card.querySelectorAll("figure img")].map((image) => ({ src: image.currentSrc || image.src, alt: image.alt }));
+    images = [...card.querySelectorAll("figure img")].map((image) => ({ src: image.dataset.src || image.currentSrc || image.src, alt: image.alt }));
     if (!images.length) images = [{ src: "/assets/images/projects/project-fallback.svg", alt: `${name} project visual` }];
 
     q("[data-type]").textContent = type;
@@ -173,7 +93,18 @@
     q("[data-tech]").replaceChildren(...technologies.map((text) => Object.assign(document.createElement("li"), { textContent: text })));
     q("[data-highlights]").replaceChildren(...(highlights[name] || ["Portfolio project summary", `${images.length} project visuals`, "Verified links are shown below"]).map((text) => Object.assign(document.createElement("li"), { textContent: text })));
     q("[data-actions]").replaceChildren(...links.map((link) => { const clone = link.cloneNode(true); clone.className = "project-details-action"; return clone; }));
-    thumbs.replaceChildren(...images.map((data, index) => { const button = document.createElement("button"); button.type = "button"; button.setAttribute("aria-label", `Show screenshot ${index + 1}`); const image = document.createElement("img"); image.src = data.src; image.alt = ""; button.appendChild(image); button.addEventListener("click", () => show(index)); return button; }));
+    thumbs.replaceChildren(...images.map((data, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.setAttribute("aria-label", `Show screenshot ${index + 1}`);
+      const image = document.createElement("img");
+      image.src = data.src;
+      image.alt = "";
+      image.loading = "lazy";
+      button.appendChild(image);
+      button.addEventListener("click", () => show(index));
+      return button;
+    }));
     imageIndex = 0;
     show(0);
     modal.showModal();

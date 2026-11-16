@@ -34,7 +34,9 @@ public class PortfolioController {
             "neon-bay",
             "assignment-writer-hire",
             "real-madrid-management",
-            "foodmobochain-firebase",
+            "jersey-see",
+            "food-mobo-chain",
+            "cpu-scheduling-visualizer",
             "dvwa-security-casebook"
     );
     private static final long RATE_WINDOW_MS = 60L * 60L * 1000L;
@@ -46,7 +48,7 @@ public class PortfolioController {
     @Value("${portfolio.contact.enabled:false}")
     private boolean contactEnabled;
 
-    @Value("${portfolio.contact.recipient:mdomor01815@gmail.com}")
+    @Value("${portfolio.contact.recipient:azizulhakimomor@gmail.com}")
     private String contactRecipient;
 
     public PortfolioController(ObjectProvider<JavaMailSender> mailSenderProvider) {

@@ -52,14 +52,15 @@
   document.querySelector('[data-next]').innerHTML = data.next.map((item) => `<li>${item}</li>`).join("");
   document.querySelector('[data-architecture]').innerHTML = data.architecture.map((item, index) => `<div><span>${String(index + 1).padStart(2, "0")}</span><strong>${item}</strong></div>${index < data.architecture.length - 1 ? "<i>→</i>" : ""}`).join("");
 
+  const altFor = (index) => data.imageAlts?.[index] || data.title + " screenshot " + (index + 1);
   const gallery = document.querySelector('[data-gallery]');
-  gallery.innerHTML = data.images.map((src, index) => `<button type="button" class="${index === 0 ? "active" : ""}" aria-label="Show screenshot ${index + 1}"><img src="${src}" alt="${data.title} screenshot ${index + 1}" loading="${index === 0 ? "eager" : "lazy"}"></button>`).join("");
+  gallery.innerHTML = data.images.map((src, index) => `<button type="button" class="${index === 0 ? "active" : ""}" aria-label="Show screenshot ${index + 1}"><img src="${src}" alt="" loading="${index === 0 ? "eager" : "lazy"}"></button>`).join("");
   const stage = document.querySelector('[data-stage]');
   let imageIndex = 0;
   const show = (index) => {
     imageIndex = (index + data.images.length) % data.images.length;
     stage.src = data.images[imageIndex];
-    stage.alt = `${data.title} screenshot ${imageIndex + 1}`;
+    stage.alt = altFor(imageIndex);
     document.querySelector('[data-counter]').textContent = `${imageIndex + 1} / ${data.images.length}`;
     [...gallery.children].forEach((button, i) => button.classList.toggle("active", i === imageIndex));
   };

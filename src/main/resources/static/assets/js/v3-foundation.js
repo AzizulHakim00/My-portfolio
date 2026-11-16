@@ -32,7 +32,7 @@
   }
   const actions = document.querySelector(".hero-actions");
   if (actions && !document.querySelector(".hero-stats")) {
-    actions.insertAdjacentHTML("afterend", `<div class="hero-stats"><div><strong>10+</strong><span>Documented projects</span></div><div><strong>2</strong><span>Active research drafts</span></div><div><strong>94</strong><span>Security assessment</span></div></div>`);
+    actions.insertAdjacentHTML("afterend", `<div class="hero-stats"><div><strong>10+</strong><span>Documented projects</span></div><div><strong>2</strong><span>Active research drafts</span></div><div><strong>100</strong><span>Security assessment</span></div></div>`);
   }
 
   const meta = {

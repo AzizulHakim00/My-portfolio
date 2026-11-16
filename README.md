@@ -10,22 +10,22 @@ The homepage uses the cleaner pre-V3 visual system:
 - Animated network canvas and typing roles
 - Spacious project, research and certificate sections
 - Subtle pointer spotlights and scroll reveals
-- Collapsible archive for smaller coursework projects
+- Screenshot galleries and quick views for featured projects
 - Quick-view project dialogs
 - Responsive navigation and reduced-motion accessibility
 
 The dashboard-style terminal, statistics blocks, capability map, live repository dashboard, advanced search panel and research progress dashboard are intentionally not loaded on the homepage.
 
-## Featured project update
+## Featured and upcoming projects
+- **BusBD Intelligence** — trip planning, booking, signed tickets, and tracking
+- **Food Mobo Chain** — Spring Boot and MongoDB food ordering
+- **JerseySee** — football merchandise and inventory workflows
+- **Assignment Writer Hire** — JavaFX and MySQL student and administrator workflows
+- **Real Madrid Club Management** — JavaFX club operations and team management
+- **CreatorOS Studio** — content planning, editing, publishing, and analytics
+- **Ase Naki?** — community utility status reporting
 
-The current featured portfolio adds:
-
-- **BusBD Intelligence** — deployed Spring Boot, React, PostgreSQL and Redis-compatible travel platform
-- **Neon Bay** — deployed Three.js browser-based 3D action game
-- **FoodMoboChain Firebase** — Android marketplace MVP with Firebase Authentication, Realtime Database, Security Rules and App Check
-- **DVWA Security Casebook** — deployed, evidence-led controlled web-security casebook
-
-The older ICE penetration-testing project is no longer presented in the portfolio.
+The homepage also includes more projects behind an expandable gallery and a pair of upcoming projects, CareerPilot AI and CivicLens AI. The research section links to conference venues and identifies the latest verified submission status.
 
 ## Dedicated project case studies
 
@@ -34,7 +34,8 @@ The older ICE penetration-testing project is no longer presented in the portfoli
 - `/projects/neon-bay`
 - `/projects/assignment-writer-hire`
 - `/projects/real-madrid-management`
-- `/projects/foodmobochain-firebase`
+- `/projects/jersey-see`
+- `/projects/food-mobo-chain`
 - `/projects/dvwa-security-casebook`
 
 Each case study includes architecture, screenshots, challenges, results and planned improvements.
@@ -78,7 +79,7 @@ The Spring application can send email through SMTP. Keep credentials in hosting 
 
 ```text
 PORTFOLIO_CONTACT_ENABLED=true
-PORTFOLIO_CONTACT_RECIPIENT=mdomor01815@gmail.com
+PORTFOLIO_CONTACT_RECIPIENT=azizulhakimomor@gmail.com
 SMTP_HOST=smtp.example.com
 SMTP_PORT=587
 SMTP_USERNAME=your-smtp-user
@@ -116,7 +117,7 @@ The thresholds are stored in `lighthouserc.json`.
 
 ## Content accuracy
 
-Research drafts are not described as accepted publications. Coursework or reference archives with uncertain authorship remain labeled accordingly. The future-dated CPTE issue date is hidden until the source date is confirmed.
+The research section records author order, venue, and the documented status of each conference submission. Presentation certificates are available for MARSCON 2026 and IEEE WIECON-ECE 2026.
 
 ## Public-download policy
 
