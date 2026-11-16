@@ -90,12 +90,11 @@ function loadImage(url) {
 
 const media = (name) => new URL("../images/" + name, import.meta.url);
 export async function loadIntroScene(canvas, signal) {
-    const [backdrop, atlas, logo, shardArt, data] = await Promise.all([
+    const [backdrop, atlas, logo, data] = await Promise.all([
         loadImage(media("aho-intro-storm-hd.webp")).catch(() => loadImage(media("aho-intro-storm.webp"))),
         loadImage(media("aho-intro-art.webp")),
-        loadImage(media("aho-ring-intro.webp")),
-        loadImage(media("aho-ring-shards.webp")).catch(() => null),
-        fetch(media("aho-intro-scene.json?v=ring-1"), { signal }).then((response) => {
+        loadImage(media("aho-intro-logo-hd.webp")),
+        fetch(media("aho-intro-scene.json?v=original-aho-1"), { signal }).then((response) => {
             if (!response.ok) throw new Error("Intro scene unavailable");
             return response.json();
         })
@@ -398,7 +397,7 @@ export async function loadIntroScene(canvas, signal) {
     }
 
     function shards(t) {
-        if (shardArt && t > 4.15 && t < 10.85) {
+        if (t > 4.15 && t < 10.85) {
             const returnHome = smooth((t - 7.96) / 2.82);
             const assembled = smooth((t - 8.63) / 2.15);
             const density = data.shardDensity;
@@ -420,7 +419,7 @@ export async function loadIntroScene(canvas, signal) {
                 scene.rotate(-spin * amount * DEG);
                 scene.scale(turn * depth, depth);
                 scene.globalAlpha = opacity * (0.77 + 0.20 * Math.cos(phase + amount));
-                scene.drawImage(shardArt, atlasX, atlasY, w, h, -width / 2, -height / 2, width, height);
+                scene.drawImage(atlas, atlasX, atlasY, w, h, -width / 2, -height / 2, width, height);
                 scene.restore();
             }
         }
