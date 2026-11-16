@@ -2,9 +2,8 @@ const dialog = document.querySelector("#aho-intro");
 const canvas = dialog?.querySelector(".aho-intro-stage");
 const enter = dialog?.querySelector(".aho-intro-enter");
 const skip = dialog?.querySelector(".aho-intro-skip");
-const sound = dialog?.querySelector(".aho-intro-sound");
 const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const sessionKey = "aho-responsive-intro-seen";
+const sessionKey = "aho-silent-intro-seen";
 
 function alreadySeen() {
     try {
@@ -16,7 +15,7 @@ function alreadySeen() {
 
 async function playIntro() {
     const { pathname, search, hash } = window.location;
-    if (!canvas || !enter || !skip || !sound || typeof dialog.showModal !== "function" ||
+    if (!canvas || !enter || !skip || typeof dialog.showModal !== "function" ||
         motion.matches || document.hidden || pathname !== "/" || search ||
         (hash && hash !== "#home") || alreadySeen()) return;
 
@@ -25,49 +24,13 @@ async function playIntro() {
     let frame = 0;
     let deadline = window.setTimeout(finish, 3500);
     let started = 0;
-    let audio;
-    let soundOn = false;
 
     function finish() {
         listeners.abort();
         window.clearTimeout(deadline);
         window.cancelAnimationFrame(frame);
-        audio?.pause();
         if (dialog.open) dialog.close();
     }
-
-    function setSound(enabled) {
-        soundOn = enabled;
-        sound.setAttribute("aria-pressed", String(enabled));
-        sound.textContent = enabled ? "Sound on" : "Sound off";
-    }
-
-    function syncSound() {
-        if (audio && audio.readyState > 0) {
-            audio.currentTime = Math.min(audio.duration, (performance.now() - started) / 1000);
-        }
-    }
-
-    sound.addEventListener("click", async () => {
-        if (soundOn) {
-            setSound(false);
-            audio?.pause();
-            return;
-        }
-        if (!audio) {
-            const url = new URL("../audio/aho-intro-score.m4a", import.meta.url);
-            audio = new Audio(url);
-            audio.preload = "none";
-            audio.addEventListener("loadedmetadata", syncSound, options);
-        }
-        setSound(true);
-        syncSound();
-        try {
-            await audio.play();
-        } catch {
-            if (dialog.open) setSound(false);
-        }
-    }, options);
 
     skip.addEventListener("click", finish, options);
     enter.addEventListener("click", () => {

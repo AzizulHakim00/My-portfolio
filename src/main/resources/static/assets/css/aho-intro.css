@@ -17,7 +17,7 @@ body:has(.aho-intro[open]) {
     padding: 0;
     overflow: hidden;
     border: 0;
-    background: #02070a;
+    background: #061713;
     color: #f0fff7;
 }
 
@@ -38,9 +38,9 @@ body:has(.aho-intro[open]) {
     height: 100%;
 }
 
-.aho-intro .aho-intro-skip,
-.aho-intro .aho-intro-sound {
+.aho-intro .aho-intro-skip {
     position: absolute;
+    right: calc(1rem + env(safe-area-inset-right, 0px));
     bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
     min-height: 44px;
     padding: 0.58rem 0.95rem;
@@ -54,13 +54,6 @@ body:has(.aho-intro[open]) {
     cursor: pointer;
 }
 
-.aho-intro .aho-intro-skip {
-    right: calc(1rem + env(safe-area-inset-right, 0px));
-}
-
-.aho-intro .aho-intro-sound {
-    left: calc(1rem + env(safe-area-inset-left, 0px));
-}
 
 .aho-intro .aho-intro-enter {
     position: absolute;

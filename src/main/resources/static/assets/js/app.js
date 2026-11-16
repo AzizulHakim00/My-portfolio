@@ -284,7 +284,7 @@
                     vy: (Math.random() - .5) * 15,
                     radius: .55 + Math.random() * 1.25,
                     phase: Math.random() * Math.PI * 2,
-                    color: index % 8 === 0 ? "255, 151, 117" : "84, 226, 211"
+                    color: index % 8 === 0 ? "255, 154, 126" : "92, 230, 167"
                 }));
             };
 
@@ -317,7 +317,7 @@
                         context.moveTo(particle.x, particle.y);
                         context.lineTo(other.x, other.y);
                         context.lineWidth = .8;
-                        context.strokeStyle = `rgba(76, 198, 190, ${connection * .22})`;
+                        context.strokeStyle = `rgba(75, 198, 139, ${connection * .22})`;
                         context.stroke();
 
                         if (index % 11 === 0 && !carriedSignal && connection > .3) {
@@ -325,7 +325,7 @@
                             carriedSignal = true;
                             context.beginPath();
                             context.arc(particle.x + dx * phase, particle.y + dy * phase, 1.25, 0, Math.PI * 2);
-                            context.fillStyle = `rgba(147, 255, 232, ${connection * Math.sin(phase * Math.PI) * .92})`;
+                            context.fillStyle = `rgba(147, 255, 205, ${connection * Math.sin(phase * Math.PI) * .92})`;
                             context.fill();
                         }
                     }

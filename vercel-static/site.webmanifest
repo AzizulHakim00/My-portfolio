@@ -4,13 +4,13 @@
   "description": "AI, XAI, cybersecurity, IoT, RF sensing and software portfolio.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#061523",
-  "theme_color": "#061523",
+  "background_color": "#061713",
+  "theme_color": "#061713",
   "icons": [
     {
-      "src": "/assets/images/aho-emblem.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/assets/images/aho-metal-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ]
