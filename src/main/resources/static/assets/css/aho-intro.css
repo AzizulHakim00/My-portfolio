@@ -6,7 +6,8 @@ body:has(.aho-intro[open]) {
 .aho-intro[open] {
     position: fixed;
     inset: 0;
-    display: block;
+    display: grid;
+    place-items: center;
     box-sizing: border-box;
     width: 100vw;
     height: 100vh;
@@ -17,113 +18,70 @@ body:has(.aho-intro[open]) {
     padding: 0;
     overflow: hidden;
     border: 0;
-    isolation: isolate;
-    background: radial-gradient(ellipse at 50% 62%, #06362b, #02070a 72%);
-    color: #effff7;
-    transition: opacity 550ms ease;
+    background: #02070a;
+    color: #f0fff7;
 }
 
 .aho-intro::backdrop {
-    background: transparent;
+    background: #02070a;
 }
 
-.aho-intro.aho-intro-leaving {
-    opacity: 0;
+.aho-intro-film {
+    position: relative;
+    width: min(100%, 177.777778vh);
+    width: min(100%, 177.777778dvh);
+    aspect-ratio: 16 / 9;
 }
 
-.aho-intro-art,
-.aho-intro-stage,
-.aho-intro::after {
+.aho-intro-stage {
     position: absolute;
     inset: 0;
+    display: block;
     width: 100%;
     height: 100%;
-    pointer-events: none;
 }
 
-.aho-intro-art {
-    object-fit: cover;
-    object-position: center 54%;
-    transform: scale(1.045);
-    animation: aho-storm-drift 11.4s ease-in-out both;
-}
-
-.aho-intro::after {
-    z-index: 1;
-    background: radial-gradient(ellipse at 50% 51%, transparent 36%, #0009 100%);
-    content: "";
-}
-
-.aho-intro button {
+.aho-intro .aho-intro-skip,
+.aho-intro .aho-intro-sound {
     position: absolute;
-    z-index: 2;
+    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
     min-height: 44px;
-    padding: 0.68rem 1rem;
-    border: 1px solid #a0d3c4aa;
+    padding: 0.58rem 0.95rem;
+    border: 1px solid #b8e5d59c;
+    border-radius: 999px;
     background: #061713eb;
     color: #f2fff9;
     font: inherit;
+    font-size: 0.875rem;
     font-weight: 700;
     cursor: pointer;
-    transition: background-color 150ms ease, border-color 150ms ease;
 }
 
-.aho-intro button:hover,
-.aho-intro button:focus-visible {
-    border-color: #b9ffe2;
-    background: #12372c;
+.aho-intro .aho-intro-skip {
+    right: calc(1rem + env(safe-area-inset-right, 0px));
+}
+
+.aho-intro .aho-intro-sound {
+    left: calc(1rem + env(safe-area-inset-left, 0px));
+}
+
+.aho-intro .aho-intro-enter {
+    position: absolute;
+    top: 84%;
+    left: 50%;
+    width: 35.5%;
+    height: 9.5%;
+    min-height: 44px;
+    transform: translate(-50%, -50%);
+    padding: 0;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
 }
 
 .aho-intro button:focus-visible {
     outline: 2px solid #a7ffdb;
     outline-offset: 4px;
-}
-
-.aho-intro .aho-intro-skip {
-    right: calc(1rem + env(safe-area-inset-right, 0px));
-    bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
-    border-radius: 999px;
-    font-size: 0.875rem;
-}
-
-.aho-intro .aho-intro-enter {
-    top: 77%;
-    left: 50%;
-    max-width: calc(100% - 2rem);
-    padding-inline: 1.35rem;
-    transform: translateX(-50%);
-    border-radius: 5px;
-    border-color: #68bc9d;
-    box-shadow: inset 0 0 15px #53e9ab24, 0 0 24px #41e8a147;
-    white-space: nowrap;
-    letter-spacing: 0.045em;
-}
-
-.aho-intro-enter:not([hidden]) {
-    animation: aho-enter-in 420ms ease both;
-}
-
-@media (orientation: portrait) {
-    .aho-intro-art {
-        object-position: center 55%;
-        -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 84%, transparent);
-        mask-image: linear-gradient(transparent, #000 14%, #000 84%, transparent);
-    }
-}
-
-@media (max-height: 480px) and (orientation: landscape) {
-    .aho-intro .aho-intro-enter {
-        top: 74%;
-    }
-}
-
-@keyframes aho-storm-drift {
-    0% { transform: scale(1.045) translate(-0.45%, 0.4%); }
-    47% { transform: scale(1.087) translate(0.65%, -0.7%); }
-    100% { transform: scale(1.05) translate(-0.25%, 0.1%); }
-}
-
-@keyframes aho-enter-in {
-    from { opacity: 0; transform: translate(-50%, 0.4rem); }
-    to { opacity: 1; transform: translate(-50%, 0); }
 }
