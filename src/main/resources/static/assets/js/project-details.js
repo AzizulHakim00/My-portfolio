@@ -19,7 +19,7 @@
   addStyle("/assets/css/upgrade.css?v=20261116-portfolio");
   addScript("/assets/js/upgrade.js?v=20261116-portfolio");
 
-  addStyle("/assets/css/project-details.css?v=20260719");
+  addStyle("/assets/css/project-details.css?v=single-logo-1");
 
   const cards = [...document.querySelectorAll(".project-card[data-category]")];
   const modal = document.createElement("dialog");
